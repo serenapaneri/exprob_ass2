@@ -1,9 +1,8 @@
 <?xml version="1.0" ?>
 <robot name="cluedo_robot" xmlns:xacro="https://www.ros.org/wiki/xacro" >
-    
 
- <xacro:include filename="$(find robot_urdf)/urdf/materials.xacro" />
- <xacro:include filename="$(find robot_urdf)/urdf/cluedo_robot.gazebo" />
+ <xacro:include filename="$(find exprob_ass2)/urdf/materials.xacro" />
+ <xacro:include filename="$(find exprob_ass2)/urdf/cluedo_robot.gazebo" />
 
  <xacro:macro name="cylinder_inertia" params="mass r l"> 
     <inertia ixx="${mass*(3*r*r+l*l)/12}" ixy = "0" ixz = "0"
@@ -136,7 +135,7 @@
 
   <link name="arm_base_link">
   	<inertial>
-  		<mass value="0.1"/>
+  		<mass value="0.5"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
   		<inertia ixx="0.0000416666667" ixy="0" ixz="0" iyy="0.0000416666667" iyz="0" izz="0.0000416666667"/>
   	</inertial>
@@ -169,13 +168,13 @@
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
   	<collision>
-  	  <origin xyz="0 0 0" rpy="0 0 0"/>
+  	  <origin xyz="0 0 0.25" rpy="0 0 0"/>
       <geometry>
         <cylinder radius="0.04" length="0.5"/>
       </geometry>
   	</collision>
   	<visual>
-  	  <origin xyz="0 0 0" rpy="0 0 0"/>
+  	  <origin xyz="0 0 0.25" rpy="0 0 0"/>
       <geometry>
         <cylinder radius="0.04" length="0.5"/>
       </geometry>
@@ -186,7 +185,7 @@
   <joint name="arm_joint_01" type="revolute">
   	<axis xyz="0 0 1"/>
   	<limit effort="1000.0" lower="-3.14" upper="3.14" velocity="0.2"/>
-  	<origin rpy="0 0 0" xyz="0 0 0.09"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.05"/>
   	<parent link="arm_base_link"/>
   	<child link="arm_link_01"/>
   </joint>
@@ -252,7 +251,7 @@
 
     <link name="cluedo_link">
   	<inertial>
-  		<mass value="0.025"/>
+  		<mass value="0.01"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
@@ -274,7 +273,7 @@
   <joint name="arm_joint_04" type="revolute">
   	<axis xyz="1 0 0"/>
   	<limit effort="1000.0" lower="-1.8" upper="1.8" velocity="0.5"/>
-  	<origin rpy="0 0 0" xyz="0 0 0.08"/>
+  	<origin rpy="0 0 0" xyz="0 0 0.5"/>
   	<parent link="arm_link_03"/>
   	<child link="cluedo_link"/>
   </joint>
