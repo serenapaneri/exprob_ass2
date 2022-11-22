@@ -13,7 +13,7 @@
   <arg name="debug" default="false"/>
   <arg name="physics" default="ode"/>
   <arg name="verbose" default="false"/>
-  <arg name="world_name" value="$(find erl2)/world/$(arg world).world"/>
+  <arg name="world_name" value="$(find exprob_ass2)/world/$(arg world).world"/>
   <arg name="respawn_gazebo" default="false"/>
   <arg name="use_clock_frequency" default="false"/>
   <arg name="pub_clock_frequency" default="100"/>
@@ -43,9 +43,9 @@
     <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen"/>
   </group>
 
-  <node name="simulation" pkg ="erl2" type="simulation" output="screen" /> 
+  <node name="simulation" pkg ="exprob_ass2" type="simulation" output="screen" /> 
 	
-  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find erl2)/config/sim.rviz" /> 
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find exprob_ass2)/config/sim.rviz" /> 
 	
 
 </launch>
