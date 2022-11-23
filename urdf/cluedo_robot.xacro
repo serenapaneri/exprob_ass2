@@ -49,7 +49,7 @@
     <pose>0 0 0.1 0 0 0</pose>
     
     <inertial>
-      <mass value="5"/>
+      <mass value="7"/>
       <origin rpy="0 0 0" xyz="0 0 0.1"/>
       <inertia ixx="0.0395416666667" ixy="0" ixz="0" iyy="0.106208333333" iyz="0" izz="0.106208333333"/>
     </inertial>
@@ -163,7 +163,7 @@
 
   <link name="arm_link_01">
   	<inertial>
-  		<mass value="0.05"/>
+  		<mass value="0.015"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
@@ -193,12 +193,12 @@
 
     <link name="arm_link_02">
   	<inertial>
-  		<mass value="0.05"/>
+  		<mass value="0.015"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
   	<collision>
-  	  <origin xyz="0 0 0.25" rpy="0 0 0"/>
+  	  <origin xyz="0 0 0.2" rpy="0 0 0"/>
       <geometry>
         <cylinder radius="0.04" length="0.5"/>
       </geometry>
@@ -222,12 +222,12 @@
 
       <link name="arm_link_03">
   	<inertial>
-  		<mass value="0.05"/>
+  		<mass value="0.015"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
   	<collision>
-  	  <origin xyz="0 0 0.25" rpy="0 0 0"/>
+  	  <origin xyz="0 0 0.2" rpy="0 0 0"/>
       <geometry>
         <cylinder radius="0.04" length="0.5"/>
       </geometry>
@@ -256,7 +256,7 @@
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
   	<collision>
-  	  <origin xyz="0 0 0.04" rpy="0 0 1.57"/>
+  	  <origin xyz="0 0 0" rpy="0 0 1.57"/>
       <geometry>
         <box size="0.034 0.2 0.08"/>
       </geometry>
@@ -281,7 +281,7 @@
 
 <link name="right_grip_link">
   	<inertial>
-  		<mass value="0.005"/>
+  		<mass value="0.001"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
@@ -310,7 +310,7 @@
 
   <link name="left_grip_link">
   	<inertial>
-  		<mass value="0.005"/>
+  		<mass value="0.001"/>
   		<origin xyz="0 0 0" rpy="0 0 0" />
   		<inertia ixx="0.000010279" ixy="0" ixz="0" iyy="0.000010279" iyz="0" izz="0.000007225"/>
   	</inertial>
