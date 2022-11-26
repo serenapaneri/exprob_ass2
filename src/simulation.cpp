@@ -25,9 +25,14 @@
 *     None
 *
 * Description: <BR>
-*
-* 
-* 
+* In this node is implemented the behavior of the simulation environment. Indeed there is a subscriber to know the position of the
+* robot's links. There is a publisher that allows to visualize the spheric markers in the simulation environment, and those markers
+* corresponds to the place where the hints are recieved. There is another publisher that sends the hint message if and only if the 
+* cluedo_link of the robot is closed enough to the spheric marker. And finally there is a service whose aim is to check if the 
+* current ID coincides with the winning ID of the game. 
+* This node handles both the generation of hints, both malformed and correct one, that are generated randomly from arrays containing
+* the individuals of the game, and also the creation of the simulated environment composed of spheric markers, that are places in 
+* four specific places in the simulation environment and that can be found (randomly) at two different z coordinates. 
 */
 
 
