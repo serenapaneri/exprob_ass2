@@ -1,53 +1,126 @@
+/** @package exprob_ass2
+*
+* \file simulation.cpp
+* \brief this node implements
+*
+* \author Serena Paneri
+* \version 1.0
+* \date 26/11/2022
+* \details
+*
+* Subscribes to: <BR>
+*     /gazebo/link_states
+*
+* Publishes to: <BR>
+*     /visualization_marker
+*     /oracle_hint
+*
+* Serivces: <BR>
+*     /oracle_solution
+*
+* Client Services: <BR>
+*     None
+*
+* Action Services: <BR>
+*     None
+*
+* Description: <BR>
+*
+* 
+* 
+*/
+
+
 #include <ros/ros.h>
 #include <gazebo_msgs/LinkStates.h>
 #include <visualization_msgs/MarkerArray.h>
-#include <erl2/ErlOracle.h>
-#include <erl2/Oracle.h>
+#include <exprob_ass2/ErlOracle.h>
+#include <exprob_ass2/Oracle.h>
 
 #include <iostream>
 #include <stdlib.h>
 #include <time.h>
 #include <vector>
 
+// publisher for oracle_hint
 ros::Publisher oracle_pub;
 
+// coordinates of the 4 sources of hints in the environment
 double markx[4];
 double marky[4];
 double markz[4];
 
+// x and y coordinates of the last marker visited
 double lastmarkx = 0.0;
 double lastmarky = 0.0;
 
+// constant arrays containing all the types of individuals
 const std::string key[3] = {"who", "what", "where"};
+// constant arrays containing all the individuals of the game
 const std::string person[6] = {"missScarlett", "colonelMustard", "mrsWhite", "mrGreen", "mrsPeacock", "profPlum"};
 const std::string object[6] = {"candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"};
 const std::string place[9] = {"conservatory", "lounge", "kitchen", "library", "hall", "study", "bathroom", "diningRoom", "billiardRoom"}; 
 
 int uIDs[3]={-1,-1,-1};
+// winning ID
 int winID = -1;
- 
-std::vector<erl2::ErlOracle> oracle_msgs;
 
+// vector of oracle_msgs
+std::vector<exprob_ass2::ErlOracle> oracle_msgs;
+
+
+/**
+* \brief compute the distance between 3D points
+* \param x: x coordinate of the actual position
+* \param y: y coordinate of the actual position
+* \param z: z coordinate of the actual position
+* \param x1: x coordinate of the target position
+* \param y1: y coordinate of the target position
+* \param z1: z coordinate of the target position
+* \return dist: distance computed between 3D points
+*
+* This function computes the distance between the actual 3D position and the 3D position of the target.
+*/
 double distfromtarget (double x, double y, double z, double x1, double y1, double z1){
 	double dist = sqrt((x-x1)*(x-x1)+(y-y1)*(y-y1)+(z-z1)*(z-z1));
-	return dist;
-	
+	return dist;	
 }
 
-bool oracleService(erl2::Oracle::Request &req, erl2::Oracle::Response &res)
+
+/**
+* \brief provides a service to check the winning ID
+* \param req: request from the client
+* \param res: response from the service oracle_solution
+* \return true
+*
+* This function checks if the ID of the current hypothesis is the winning one.
+*/
+bool oracleService(exprob_ass2::Oracle::Request &req, exprob_ass2::Oracle::Response &res)
 	{
 		res.ID = winID;
 		return true;
 	}
 
+
+/**
+* \brief callback for the subscriber to gazebo/link_states
+* \param msg: message from the /gazebo/link_states
+* \return None
+*
+* This is the callback function for the subscriber to the gazebo/link_states topic. If the link of the robot cluedo_link is closed enough
+* to the 'hint generator', so the distance between the cluedo_link and the 'hint generator' is less than a certain threshold, that in this case
+* is of 0,25 m, it generates a random hint that could be a malformed hint, or it could contain a correct hint composed by the ID, the key (so,
+* who, what, where), and the value (so, the individual).
+*/
 void oracleCallback(const gazebo_msgs::LinkStates::ConstPtr& msg)
 {
    for(int i=0; i< msg->name.size(); i++){
 	   if (msg->name[i].find("cluedo_link")!= std::string::npos){
 		   for(int j=0; j<4;j++){
 				if ((distfromtarget(msg->pose[i].position.x, msg->pose[i].position.y, msg->pose[i].position.z, markx[j],marky[j],markz[j])<0.25) && ((lastmarkx !=markx[j]) || (lastmarky != marky[j]))){
-				erl2::ErlOracle oracle_msg;
+				exprob_ass2::ErlOracle oracle_msg;
 				oracle_msg.ID = rand() % 6;
+				// malformed hint
 				if(rand()%4==1){
 					int a = rand()%5;
 					if(a==0){
@@ -71,7 +144,9 @@ void oracleCallback(const gazebo_msgs::LinkStates::ConstPtr& msg)
 						oracle_msg.value="-1";
 					}
 				}
+				// correct hint
 				else {
+				        // select a random key from the array and, depending on the value, select a corresponding random individual
 					oracle_msg.key = key[rand()%3];
 					bool existing = false;
 					for(int k=0; k<oracle_msgs.size();k++){
@@ -90,7 +165,9 @@ void oracleCallback(const gazebo_msgs::LinkStates::ConstPtr& msg)
 						oracle_msgs.push_back(oracle_msg);
 					}
 				}
+				// publish the msg containing the hint
 				oracle_pub.publish(oracle_msg);
+				// keeping track of the 'hint generator' visited
 				lastmarkx = markx[j];
 				lastmarky = marky[j];
 		   }
@@ -99,17 +176,38 @@ void oracleCallback(const gazebo_msgs::LinkStates::ConstPtr& msg)
 	}
 } 
 
+
+/**
+* \brief main function of the simulation.cpp node
+* \param argc
+* \param argv
+* \return 0
+*
+* This is the main function of the node where the node itself is initialized. Moreover, here are implemented a publisher, in order
+* to visualize through spheric markers the sources points where the hints are generated, another publisher which is in charge of 
+* publishing the hints of the game when the cluedo_link of the robot approaches the spheric marker, a subscriber to know the links'
+* position of the robot and a service that has top check if the ID of the current hypothesis coincides with the winning one. 
+* In addition the markers in the environment are imlplemented and displayed in the simulated enviornment, and the winning ID is
+* chosen.
+*/
 int main(int argc, char **argv)
 {
 
+// initialization of the node
 ros::init(argc, argv, "assignment2");
 ros::NodeHandle nh;
+// publisher for displaying the markers in the environment
 ros::Publisher vis_pub = nh.advertise<visualization_msgs::MarkerArray>( "/visualization_marker", 0 );
-oracle_pub = nh.advertise<erl2::ErlOracle>( "/oracle_hint", 0 );
+// publisher for the hints
+oracle_pub = nh.advertise<exprob_ass2::ErlOracle>( "/oracle_hint", 0 );
+// service to check the winning ID
 ros::ServiceServer service= nh.advertiseService("/oracle_solution", oracleService);
+// subscriber to know the position of the robot's links
 ros::Subscriber sub = nh.subscribe("/gazebo/link_states", 10, oracleCallback);
+
 visualization_msgs::MarkerArray markers;
 srand (time(NULL));
+// these are the possible z coordinates in which the marker sphere can be found 
 const double zpos[2] = {0.75, 1.25};
 int RandIndex;
 
@@ -117,6 +215,8 @@ int RandIndex;
 visualization_msgs::Marker marker;
 marker.header.frame_id = "odom";
 marker.header.stamp = ros::Time();
+
+// spheric marker in the position (-3,0)
 marker.id = 0;
 marker.type = visualization_msgs::Marker::SPHERE;
 marker.action = visualization_msgs::Marker::ADD;
@@ -140,6 +240,7 @@ marker.color.g = 1.0;
 marker.color.b = 0.0;
 markers.markers.push_back(marker);
 
+// spheric marker in the position (3,0)
 marker.id = 1;
 marker.pose.position.x = 3.0;
 markx[1]=3.0;
@@ -150,6 +251,7 @@ marker.pose.position.z = zpos[RandIndex];
 markz[1]=marker.pose.position.z;
 markers.markers.push_back(marker);
 
+// spheric marker in the position (0,-3)
 marker.id = 2;
 marker.pose.position.x = 0.0;
 markx[2]=0.0;
@@ -160,6 +262,7 @@ marker.pose.position.z = zpos[RandIndex];
 markz[2]=marker.pose.position.z;
 markers.markers.push_back(marker);
 
+// spheric marker in the position (0,3)
 marker.id = 3;
 marker.pose.position.x = 0.0;
 markx[3]=0.0;
