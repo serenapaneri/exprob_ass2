@@ -1,33 +1,61 @@
-(define (domain cluedo_robot)
+(define (domain cluedo)
 
-    (:requirements :strips :typing :fluents :disjunctive-preconditions :durative-actions  :negative-preconditions :duration-inequalities)
+    (:requirements :strips :typing :fluents :disjunctive-preconditions :durative-actions :duration-inequalities)
 
     (:types 
         robot
-        oracle
         waypoint
-        home
     )
     
     (:predicates
         (robot_at ?obj - robot ?wp -waypoint)
-        (robot_at ?obj - robot ?loc - home)
         (visited ?wp - waypoint)
-        (move_to ?from ?to - waypoint)
+        (gripper_on ?wp - waypoint)
         (check_hypo)
-        (try_guess)
+        (game_finished)
     )
     
-    (:durative-action goto_waypoint
+    (:durative-action motion
 	:parameters (?obj - robot ?from ?to - waypoint)
-	:duration ( = ?duration 60)
+	:duration ( = ?duration 5)
 	:condition (and
-		(at start (robot_at ?v ?from))
-		(at start (localised ?v))
-		(over all (undocked ?v)))
+		(at start (robot_at ?obj ?from))
+		(at start (visited ?from))
+		(at start (not(visited ?to))))
 	:effect (and
+	        (at end (robot_at ?obj ?to))
 		(at end (visited ?to))
-		(at end (robot_at ?v ?to))
-		(at start (not (robot_at ?v ?from))))
-)
+		(at start (not(robot_at ?obj ?from)))
+    )
+    
+    (:durative-action move_arm
+        :parameters (?obj - robot ?wp - waypoint)
+	:duration ( = ?duration 3)
+	:condition (and
+		(at start (robot_at ?obj ?wp))
+		(at start (gripper_on ?wp)))
+	:effect (and
+	        (at end (not(gripper_on ?wp))))
+    )
+    
+    (:durative-action check_hypothesis
+        :parameters (?obj - robot ?wp - waypoint)
+	:duration ( = ?duration 1)
+	:condition (and
+		(at start (robot_at ?obj ?wp))
+		(at start (not(check_hypo))))
+	:effect (and
+	        (at end (check_hypo)))
+    )
+    
+    (:durative-action oracle
+        :parameters (?obj - robot ?wp - waypoint)
+	:duration ( = ?duration 1)
+	:condition (and
+		(at start (robot_at ?obj ?wp))
+		(at start (check_hypo))
+	:effect (and
+	        (at end (game_finished)))
+    )
+   
 )

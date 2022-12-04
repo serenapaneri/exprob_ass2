@@ -24,7 +24,8 @@
 #     go_to_point
 #
 # Description: <BR>
-#
+# This node allows to move the robot within a simulation environment making the robot reach a certain point in the
+# environment that corresponds to the goal position and orientation. 
 
 import rospy
 import math
@@ -63,8 +64,8 @@ ub_d = 0.6
 # \param: msg
 # \return: None
 #
-# This is the callback function of the subscriber to the topic odom and it is used to know the
-# actual position and orientation of the robot in the space.
+# This is the callback function of the subscriber to the topic odom and it is used to know the actual position
+# and orientation of the robot in the space.
 def clbk_odom(msg):
 
     global position_
@@ -88,8 +89,8 @@ def clbk_odom(msg):
 # \param: state
 # \return: None
 #
-# This is function allows to switch between the different states in which the robot could be
-# during the execution of its behavior to reach the desired point in the space.
+# This is function allows to switch between the different states in which the robot could be during the execution of
+# its behavior to reach the desired point in the space.
 def change_state(state):
 
     global state_
@@ -115,8 +116,8 @@ def normalize_angle(angle):
 # \param: des_pos
 # \return: None
 #
-# This function is used to adjust the yaw angle of the robot in a way that it is directly
-# alligned with the target position to be reached.
+# This function is used to adjust the yaw angle of the robot in a way that it is directly alligned with the target
+# position to be reached.
 def fix_yaw(des_pos):
 
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
@@ -141,8 +142,7 @@ def fix_yaw(des_pos):
 # \param: des_pos
 # \return: None
 #
-# This function is used to make the robot going on a straight line to reach the target
-# point in the environment
+# This function is used to make the robot going on a straight line to reach the target point in the envioronment.
 def go_straight_ahead(des_pos):
 
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
@@ -199,8 +199,7 @@ def fix_final_yaw(des_yaw):
 # \param: None
 # \return: None
 #
-# This function is used to stop the robot from its behavior zeroing both linear and angular 
-# velocity.       
+# This function is used to stop the robot from its behavior zeroing both linear and angular velocities.      
 def done():
 
     twist_msg = Twist()
@@ -214,8 +213,8 @@ def done():
 # \param: None
 # \return: None
 #
-# This function is used to regulate the different states in which the roto could be, in a way
-# to make it achieve the correct behavior to be followed in order to reach the goal.   
+# This function is used to regulate the different states in which the roto could be, in a way to make it achieve the
+# correct behavior to be followed in order to reach the goal.   
 def go_to_point(goal):
 
     desired_position = Point()
@@ -266,10 +265,8 @@ def go_to_point(goal):
 # \param: None
 # \return: None
 #
-# This is the main function of the node in which the node is initialized. Moreover here are 
-# implemented the publisher of the cmd_vel topic, in order to make the robot move, the
-# subscriber to the odom topic that allows to know the position of the robot in the environment 
-# and an action server 
+# This is the main function of the node in which the node is initialized. Moreover here are implemented a publisher,
+# a subscriber and an action service.
 def main():
 
     global pub_, act_s

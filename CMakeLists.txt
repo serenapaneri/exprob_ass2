@@ -16,8 +16,8 @@ find_package(catkin REQUIRED COMPONENTS
   gazebo_msgs
   urdf
   moveit_ros_planning_interface
-  moveit_commander
-  moveit_msgs
+  # moveit_commander
+  # moveit_msgs
   rosplan_planning_system
 )
 
@@ -157,6 +157,9 @@ add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTE
  target_link_libraries(simulation
    ${catkin_LIBRARIES}
  )
+ 
+add_executable(move_to_pose src/move_arm.cpp)
+target_link_libraries(move_to_pose ${catkin_LIBRARIES})
 
 #############
 ## Install ##
@@ -167,10 +170,11 @@ add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTE
 
 ## Mark executable scripts (Python etc.) for installation
 ## in contrast to setup.py, you can choose the destination
-# catkin_install_python(PROGRAMS
-#   scripts/my_python_script
-#   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
-# )
+catkin_install_python(PROGRAMS
+  scripts/go_to_point.py
+  scripts/hint_reciever.py
+  DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
+)
 
 ## Mark executables for installation
 ## See http://docs.ros.org/melodic/api/catkin/html/howto/format1/building_executables.html
