@@ -1,6 +1,6 @@
 (define (domain cluedo)
 
-    (:requirements :strips :typing :fluents :disjunctive-preconditions :durative-actions :duration-inequalities)
+    (:requirements :strips :typing :fluents :disjunctive-preconditions :durative-actions :adl :duration-inequalities)
 
     (:types 
         robot
@@ -13,20 +13,21 @@
         (robot_at_wp ?obj - robot ?wp -waypoint)
         (robot_at_home ?obj - robot ?h - home)
         (robot_at_oracle ?obj -robot ?o - oracle)
-        (gripper_on ?wp - waypoint)
-        (hint_percieved)
+        (gripper_up)
+        (gripper_down)
+        (hint_percieved ?wp - waypoint)
         (complete_consistent_hypo)
         (game_finished)
     ) 
     
-    (:durative-action away_home
+    (:durative-action leave_home
 	:parameters (?obj - robot ?from - home ?to - waypoint)
 	:duration ( = ?duration 10)
 	:condition (and
-		(at start (robot_at_home ?obj ?from)))
+	        (at start (robot_at_home ?obj ?from)))
 	:effect (and
 	        (at end (robot_at_wp ?obj ?to))
-		(at start (not(robot_at_home ?obj ?from))))
+	        (at start (not(robot_at_home ?obj ?from))))
     )
     
     (:durative-action move_arm
@@ -34,13 +35,14 @@
 	:duration ( = ?duration 5)
 	:condition (and
 		(at start (robot_at_wp ?obj ?wp))
-		(at start (gripper_on ?wp)))
+		(at start (gripper_up)))
 	:effect (and
-	        (at end (not(gripper_on ?wp)))
-	        (at end (hint_percieved)))
+	        (at end (gripper down))
+	        (at start (not(gripper_up)))
+	        (at end (hint_percieved ?wp)))
     )
      
-    (:durative-action goto_waypoint
+    (:durative-action go_to_waypoint
 	:parameters (?obj - robot ?from ?to - waypoint)
 	:duration ( = ?duration 10)
 	:condition (and
@@ -54,28 +56,28 @@
         :parameters (?obj - robot ?from - waypoint ?to - home)
 	:duration ( = ?duration 10)
 	:condition (and
-		(at start (robot_at_wp ?obj ?from)))
+		(at start (robot_at_wp ?obj ?from))
+		(at start (visited ?from)))
 	:effect (and
 	        (at end (robot_at_home ?obj ?to))
 		(at start (not(robot_at_wp ?obj ?from))))
     )
     
     (:durative-action check_hypothesis
-        :parameters (?obj - robot ?h - home)
+        :parameters (?wp - waypoint)
 	:duration ( = ?duration 5)
 	:condition (and
-		(at start (robot_at_home ?obj ?h))
-		(at start (hint_percieved)))
+		(at start (forall (?wp - waypoint) (hint_percieved ?wp))))
 	:effect (and
 	        (at end (complete_consistent_hypo))
-	        (at start (not(hint_percieved))))
+	       )
     )
     
     (:durative-action go_oracle
-        :parameters (?obj - robot ?from - home ?to - oracle)
+        :parameters (?obj - robot ?from - wp ?to - oracle)
 	:duration ( = ?duration 10)
 	:condition (and
-		(at start (robot_at_home ?obj ?from)))
+		(at start (robot_at_wp ?obj ?from)))
 	:effect (and
 	        (at end (robot_at_oralce ?obj ?to))
 		(at start (not(robot_at_home ?obj ?from))))
@@ -88,8 +90,17 @@
 		(at start (robot_at_oracle ?obj ?o))
 		(at start (complete_consistent_hypo)))
 	:effect (and
-	        (at end (game_finished))
-	        (at start (not(complete_consistent_hypo))))
+	        (at end (game_finished)))
+    )
+    
+    (:durative-action leave_oracle
+	:parameters (?obj - robot ?from - oracle ?to - waypoint)
+	:duration ( = ?duration 10)
+	:condition (and
+		(at start (robot_at_oracle ?obj ?from)))
+	:effect (and
+	        (at end (robot_at_wp ?obj ?to))
+		(at start (not(robot_at_oracle ?obj ?from))))
     )
    
 )

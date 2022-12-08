@@ -8,9 +8,12 @@
         )
           
         (:init
-            (robot_at_home robot home)
-            (gripper_on home)
-            (not (hint_percieved))
+            (robot_at_home cluedo_robot home)
+            (gripper_up)
+            (not (hint_percieved wp1))
+            (not (hint_percieved wp2))
+            (not (hint_percieved wp3))
+            (not (hint_percieved wp4))
         )
 
         (:goal (and
