@@ -13,8 +13,6 @@
         (robot_at_wp ?obj - robot ?wp -waypoint)
         (robot_at_home ?obj - robot ?h - home)
         (robot_at_oracle ?obj -robot ?o - oracle)
-        (gripper_up)
-        (gripper_down)
         (hint_percieved ?wp - waypoint)
         (complete_consistent_hypo)
         (game_finished)
@@ -34,11 +32,8 @@
         :parameters (?obj - robot ?wp - waypoint)
 	:duration ( = ?duration 5)
 	:condition (and
-		(at start (robot_at_wp ?obj ?wp))
-		(at start (gripper_up)))
+		(at start (robot_at_wp ?obj ?wp)))
 	:effect (and
-	        (at end (gripper down))
-	        (at start (not(gripper_up)))
 	        (at end (hint_percieved ?wp)))
     )
      
@@ -56,8 +51,7 @@
         :parameters (?obj - robot ?from - waypoint ?to - home)
 	:duration ( = ?duration 10)
 	:condition (and
-		(at start (robot_at_wp ?obj ?from))
-		(at start (visited ?from)))
+		(at start (robot_at_wp ?obj ?from)))
 	:effect (and
 	        (at end (robot_at_home ?obj ?to))
 		(at start (not(robot_at_wp ?obj ?from))))
@@ -74,12 +68,12 @@
     )
     
     (:durative-action go_oracle
-        :parameters (?obj - robot ?from - wp ?to - oracle)
+        :parameters (?obj - robot ?from - home ?to - oracle)
 	:duration ( = ?duration 10)
 	:condition (and
-		(at start (robot_at_wp ?obj ?from)))
+		(at start (robot_at_home ?obj ?from)))
 	:effect (and
-	        (at end (robot_at_oralce ?obj ?to))
+	        (at end (robot_at_oracle ?obj ?to))
 		(at start (not(robot_at_home ?obj ?from))))
     )
     
