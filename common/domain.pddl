@@ -58,9 +58,10 @@
     )
     
     (:durative-action check_hypothesis
-        :parameters (?wp - waypoint)
+        :parameters (?obj - robot ?h - home)
 	:duration ( = ?duration 5)
 	:condition (and
+	        (at start (robot_at_home ?obj ?h))
 		(at start (forall (?wp - waypoint) (hint_percieved ?wp))))
 	:effect (and
 	        (at end (complete_consistent_hypo))

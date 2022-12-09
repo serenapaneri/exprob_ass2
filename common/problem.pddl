@@ -9,7 +9,6 @@
           
         (:init
             (robot_at_home cluedo_robot home)
-            (gripper_up)
         )
 
         (:goal (and
