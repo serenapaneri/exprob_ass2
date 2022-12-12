@@ -1,5 +1,7 @@
 <?xml version="1.0"?>
 <launch>
+            <node name="go_to_point" pkg="motion_plan" type="go_to_point_action.py" respawn="false"/>
+            
             <!-- arguments -->
             <arg name="domain_path" default="$(find exprob_ass2)/common/domain.pddl" />
             <arg name="problem_path" default="$(find exprob_ass2)/common/problem.pddl" />
@@ -25,13 +27,12 @@
                     <arg name="problem_topic" value="/rosplan_problem_interface/problem_instance" />
                     <arg name="planner_topic" value="planner_output" />
                     <arg name="domain_path" value="$(arg domain_path)" />
-                    <arg name="data_path" value="$(find rosplan_demos)/common/" />
+                    <arg name="data_path" value="$(find exprob_ass2)/common/" />
                     <arg name="planner_command" value="timeout 10 $(find rosplan_planning_system)/common/bin/popf DOMAIN PROBLEM" />
             </include>
             
             <!-- parsing interface -->
-            <node name="rosplan_parsing_interface" pkg="rosplan_planning_system" type="pddl_simple_plan_parser" respawn="false"
-output="screen">
+            <node name="rosplan_parsing_interface" pkg="rosplan_planning_system" type="pddl_simple_plan_parser" respawn="false" output="screen">
                     <param name="knowledge_base" value="rosplan_knowledge_base" />
                     <param name="planner_topic" value="/rosplan_planner_interface/planner_output" />
                     <param name="plan_topic" value="complete_plan" />
@@ -47,26 +48,40 @@ output="screen">
             
             <!-- simulated actions -->
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
+                         <arg name="pddl_action_name" value="start_game" />
+            </include>
+            
+            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                          <arg name="pddl_action_name" value="leave_home" />
             </include>
+            
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                     <arg name="pddl_action_name" value="move_arm" />
             </include>
-            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-                    <arg name="pddl_action_name" value="go_to_waypoint" />
-            </include>
+            
+            <node name="rosplan_interface_go_to_waypoint" pkg="cluedo_rosplan_interface" type="go_to_waypoint_action" respawn="false" output="screen">
+                <param name="knowledge_base" value="rosplan_knowledge_base" />
+                <param name="pddl_action_name" value="go_to_waypoint" />
+                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+            </node>
+            
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                          <arg name="pddl_action_name" value="go_home" />
             </include>
+            
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                          <arg name="pddl_action_name" value="check_hypothesis" />
             </include>
+            
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                     <arg name="pddl_action_name" value="go_oracle" />
             </include>
+            
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                     <arg name="pddl_action_name" value="oracle" />
             </include>
+            
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                          <arg name="pddl_action_name" value="leave_oracle" />
             </include>

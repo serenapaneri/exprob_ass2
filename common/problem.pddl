@@ -8,7 +8,7 @@
         )
           
         (:init
-            (robot_at_home cluedo_robot home)
+            (initialization)
         )
 
         (:goal (and
