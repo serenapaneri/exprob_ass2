@@ -48,9 +48,13 @@
             </node>
             
             <!-- simulated actions -->
-            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-                         <arg name="pddl_action_name" value="start_game" />
-            </include>
+            
+            <node name="rosplan_interface_start_game" pkg="cluedo_rosplan_interface" type="start_game_action" respawn="false" output="screen">
+                <param name="knowledge_base" value="rosplan_knowledge_base" />
+                <param name="pddl_action_name" value="start_game" />
+                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+            </node>
             
             <node name="rosplan_interface_leave_home" pkg="cluedo_rosplan_interface" type="leave_home_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
