@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <launch>
+            
             <node name="go_to_point" pkg="motion_plan" type="go_to_point_action.py" respawn="false"/>
             
             <!-- arguments -->
@@ -51,9 +52,12 @@
                          <arg name="pddl_action_name" value="start_game" />
             </include>
             
-            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-                         <arg name="pddl_action_name" value="leave_home" />
-            </include>
+            <node name="rosplan_interface_leave_home" pkg="cluedo_rosplan_interface" type="leave_home_action" respawn="false" output="screen">
+                <param name="knowledge_base" value="rosplan_knowledge_base" />
+                <param name="pddl_action_name" value="leave_home" />
+                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+            </node>
             
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                     <arg name="pddl_action_name" value="move_arm" />
@@ -66,24 +70,33 @@
                 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
             </node>
             
-            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-                         <arg name="pddl_action_name" value="go_home" />
-            </include>
+            <node name="rosplan_interface_go_home" pkg="cluedo_rosplan_interface" type="go_home_action" respawn="false" output="screen">
+                <param name="knowledge_base" value="rosplan_knowledge_base" />
+                <param name="pddl_action_name" value="go_home" />
+                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+            </node>
             
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                          <arg name="pddl_action_name" value="check_hypothesis" />
             </include>
             
-            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-                    <arg name="pddl_action_name" value="go_oracle" />
-            </include>
+            <node name="rosplan_interface_go_oracle" pkg="cluedo_rosplan_interface" type="go_oracle_action" respawn="false" output="screen">
+                <param name="knowledge_base" value="rosplan_knowledge_base" />
+                <param name="pddl_action_name" value="go_oracle" />
+                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+            </node>
             
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                     <arg name="pddl_action_name" value="oracle" />
             </include>
             
-            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-                         <arg name="pddl_action_name" value="leave_oracle" />
-            </include>
+            <node name="rosplan_interface_leave_oracle" pkg="cluedo_rosplan_interface" type="leave_oracle_action" respawn="false" output="screen">
+                <param name="knowledge_base" value="rosplan_knowledge_base" />
+                <param name="pddl_action_name" value="leave_oracle" />
+                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+            </node>
             
 </launch>
