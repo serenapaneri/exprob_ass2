@@ -7,7 +7,7 @@ Initial heuristic = 12.000
 b (11.000 | 5.000)b (10.000 | 20.002)b (9.000 | 25.003)b (8.000 | 30.004)b (7.000 | 35.005)b (6.000 | 40.006)b (5.000 | 45.007)b (4.000 | 50.008)b (3.000 | 55.009)b (2.000 | 60.010)b (1.000 | 65.011);;;; Solution Found
 ; States evaluated: 18
 ; Cost: 70.012
-; Time 0.00
+; Time 0.01
 0.000: (start_game cluedo_robot home)  [5.000]
 5.001: (leave_home cluedo_robot home wp1)  [10.000]
 15.002: (move_arm cluedo_robot wp1)  [5.000]

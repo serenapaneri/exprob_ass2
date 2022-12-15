@@ -1,8 +1,6 @@
 <?xml version="1.0"?>
 <launch>
             
-            <node name="go_to_point" pkg="motion_plan" type="go_to_point_action.py" respawn="false"/>
-            
             <!-- arguments -->
             <arg name="domain_path" default="$(find exprob_ass2)/common/domain.pddl" />
             <arg name="problem_path" default="$(find exprob_ass2)/common/problem.pddl" />
@@ -47,8 +45,8 @@
                     <param name="action_feedback_topic" value="action_feedback" />
             </node>
             
-            <!-- simulated actions -->
             
+            <!-- actions -->
             <node name="rosplan_interface_start_game" pkg="cluedo_rosplan_interface" type="start_game_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
                 <param name="pddl_action_name" value="start_game" />
@@ -63,9 +61,12 @@
                 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
             </node>
             
-            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-                    <arg name="pddl_action_name" value="move_arm" />
-            </include>
+            <node name="rosplan_interface_move_arm" pkg="cluedo_rosplan_interface" type="move_arm_action" respawn="false" output="screen">
+                <param name="knowledge_base" value="rosplan_knowledge_base" />
+                <param name="pddl_action_name" value="move_arm" />
+                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+            </node>
             
             <node name="rosplan_interface_go_to_waypoint" pkg="cluedo_rosplan_interface" type="go_to_waypoint_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
