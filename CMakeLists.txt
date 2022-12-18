@@ -144,6 +144,7 @@ include_directories(
 ## The recommended prefix ensures that target names across packages don't collide
  add_executable(simulation src/simulation.cpp)
  add_executable(move_arm2 src/move_arm2.cpp)
+ add_executable(go_to_waypoint_action src/go_to_waypoint.cpp)
 
 ## Rename C++ executable without prefix
 ## The above recommended prefix causes long target names, the following renames the
@@ -155,6 +156,7 @@ include_directories(
 ## same as for the library above
 add_dependencies(simulation ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(move_arm2 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(go_to_waypoint_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 ## Specify libraries to link a library or executable target against
  target_link_libraries(simulation
@@ -162,6 +164,10 @@ add_dependencies(move_arm2 ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED
  )
  
  target_link_libraries(move_arm2
+   ${catkin_LIBRARIES}
+ )
+ 
+ target_link_libraries(go_to_waypoint_action
    ${catkin_LIBRARIES}
  )
 

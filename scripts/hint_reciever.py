@@ -5,28 +5,32 @@ import time
 from exprob_ass2.msg import ErlOracle
 
 hint_sub = None
-percieved = False
-hints = []
+hint = ErlOracle
 
 def hint_callback(msg):
 
-    global hints, percieved
-    hints.append(msg.ID)
-    hints.append(msg.key)
-    hints.append(msg.value)
-    percieved = True
-    print(hints)
-    print(percieved)
-    return hints
-    
+    global hint
+    hint = msg
+    return hint
+      
 def main():
-    global hints, hint_sub, percieved
+    global hint, hint_sub
     rospy.init_node('hint_reciever', anonymous = True)
-    # while percieved == True:
+    hints = [[] for _ in range(6)]
     hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, hint_callback)
     rospy.wait_for_message('/oracle_hint', ErlOracle)
-    print(hints)
-    print(percieved)
+    ID = hint.ID
+    key = hint.key
+    value = hint.value
+    print(ID)
+    print(key)
+    print(value)
+    if key == '' or value == '' or key == 'when' or value == -1:
+        print('Malformed hint, the robot will discard this')
+    else:
+        print('Hint collected: {}, {}, {}'.format(ID, key, value))
+        hints[ID].append(value)
+        print(hints)
     rospy.spin()
 
 if __name__ == '__main__':

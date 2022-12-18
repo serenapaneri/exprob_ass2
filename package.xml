@@ -57,8 +57,8 @@
   <build_depend>gazebo_msgs</build_depend>
   <build_depend>visualization_msgs</build_depend>    
   <build_depend>urdf</build_depend>
-  <build_depend>moveit_commander</build_depend>
-  <build_depend>moveit_msgs</build_depend>
+  <build_depend>moveit_ros_planning_interface</build_depend>
+  <build_depend>rosplan_planning_system</build_depend>
   <build_export_depend>roscpp</build_export_depend>
   <build_export_depend>rosplan_planning_system</build_export_depend>
   <build_export_depend>rospy</build_export_depend>
@@ -67,8 +67,8 @@
   <build_export_depend>gazebo_msgs</build_export_depend>
   <build_export_depend>visualization_msgs</build_export_depend>
   <build_export_depend>urdf</build_export_depend>
-  <build_export_depend>moveit_commander</build_export_depend>
-  <build_export_depend>moveit_msgs</build_export_depend>
+  <build_export_depend>moveit_ros_planning_interface</build_export_depend>
+  <build_export_depend>rosplan_planning_system</build_export_depend>
   <exec_depend>roscpp</exec_depend>
   <exec_depend>rosplan_planning_system</exec_depend>
   <exec_depend>rospy</exec_depend>
@@ -77,8 +77,8 @@
   <exec_depend>gazebo_msgs</exec_depend>
   <exec_depend>visualization_msgs</exec_depend>
   <exec_depend>urdf</exec_depend>
-  <exec_depend>moveit_commander</exec_depend>
-  <exec_depend>moveit_msgs</exec_depend>
+  <exec_depend>moveit_ros_planning_interface</exec_depend>
+  <exec_depend>rosplan_planning_system</exec_depend>
 
 
   <!-- The export tag contains other, unspecified, tags -->
