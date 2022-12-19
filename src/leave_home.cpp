@@ -13,10 +13,7 @@ namespace KCL_rosplan {
     
     bool LeaveHomeInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
         // here the implementation of the action
-        
-        std::cout << msg->parameters[0].value << std::endl;
-        std::cout << msg->parameters[1].value << std::endl;
-        std::cout << msg->parameters[2].value << std::endl;
+
         std::cout << "Leaving  " << msg->parameters[1].value << " for going to " << msg->parameters[2].value << std::endl;
         
         actionlib::SimpleActionClient<exprob_ass2::TargetAction> ac("/go_to_point", true);

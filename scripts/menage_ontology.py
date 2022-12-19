@@ -1,6 +1,6 @@
 #!/usr/bin/env python2
 
-## @package exprob_ass1
+## @package exprob_ass2
 #
 # \file menage_ontology.py
 # \brief script to load the cluedo_ontology, to upload the TBox and to disjoint all individuals.
@@ -42,18 +42,9 @@ from armor_msgs.srv import *
 from armor_msgs.msg import * 
 
 # lists of the individuals of the cluedo game
-people = ['Rev. Green', 'Prof. Plum', 'Col. Mustard','Msr. Peacock', 'Miss. Scarlett', 'Mrs. White']
-weapons = ['Candlestick', 'Dagger', 'Lead Pipe', 'Revolver', 'Rope', 'Spanner']
-places = ['Conservatory', 'Lounge', 'Kitchen', 'Library', 'Hall', 'Study', 'Ballroom', 'Dining room', 'Billiard room']
-
-# list of the ID associated to each hypothesis of the game
-ID = ['0000', '0001', '0002', '0003', '0004', '0005', '0006', '0007', '0008', '0009']
-
-# setting the ros parameters of the lists above
-rospy.set_param('people', people)
-rospy.set_param('weapons', weapons)
-rospy.set_param('places', places)
-rospy.set_param('ID', ID)
+people = ["missScarlett", "colonelMustard", "mrsWhite", "mrGreen", "mrsPeacock", "profPlum"]
+weapons = ["candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"]
+places = ["conservatory", "lounge", "kitchen", "library", "hall", "study", "bathroom", "diningRoom", "billiardRoom"]
 
 armor_interface = None
 

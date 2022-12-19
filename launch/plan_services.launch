@@ -3,7 +3,7 @@
 
     <node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
     <node name="menage_ontology" pkg="exprob_ass2" type="menage_ontology.py"/>
-    <node name="hint_reciever" pkg="exprob_ass2" type="hint_reciever.py" output="screen"/>
+    <node name="hints" pkg="exprob_ass2" type="hints.py" output="screen"/>
     <node name="go_to_point" pkg="exprob_ass2" type="go_to_point.py"/>
             
 </launch>

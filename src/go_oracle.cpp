@@ -21,7 +21,7 @@ namespace KCL_rosplan {
         
         goal.x = 2.5;
         goal.y = - 2.5;
-        goal.theha = - M_PI/4;
+        goal.theta = - M_PI/4;
         
         ac.sendGoal(goal);
         ac.waitForResult();

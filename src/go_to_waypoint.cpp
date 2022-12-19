@@ -29,10 +29,7 @@ namespace KCL_rosplan {
         group.setNamedTarget("default");
 	group.move();
 	sleep(3.0);
-        
-        std::cout << msg->parameters[0].value << std::endl;
-        std::cout << msg->parameters[1].value << std::endl;
-        std::cout << msg->parameters[2].value << std::endl;
+
         std::cout << "Going from " << msg->parameters[1].value << " to " << msg->parameters[2].value << std::endl;
         
         actionlib::SimpleActionClient<exprob_ass2::TargetAction> ac("/go_to_point", true);

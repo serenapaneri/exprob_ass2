@@ -61,4 +61,5 @@ namespace KCL_rosplan {
     
     void hint_callback(const exprob_ass2::ErlOracle msg) {
         collected = 1;
+        std::cout << collected << std::endl; 
     }
