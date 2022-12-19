@@ -47,35 +47,35 @@
             
             
             <!-- actions -->
-            <node name="rosplan_interface_start_game" pkg="cluedo_rosplan_interface" type="start_game_action" respawn="false" output="screen">
+            <node name="rosplan_interface_start_game" pkg="exprob_ass2" type="start_game_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
                 <param name="pddl_action_name" value="start_game" />
                 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
                 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
             </node>
             
-            <node name="rosplan_interface_leave_home" pkg="cluedo_rosplan_interface" type="leave_home_action" respawn="false" output="screen">
+            <node name="rosplan_interface_leave_home" pkg="exprob_ass2" type="leave_home_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
                 <param name="pddl_action_name" value="leave_home" />
                 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
                 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
             </node>
             
-            <node name="rosplan_interface_move_arm" pkg="cluedo_rosplan_interface" type="move_arm_action" respawn="false" output="screen">
+            <node name="rosplan_interface_move_arm" pkg="exprob_ass2" type="move_arm_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
                 <param name="pddl_action_name" value="move_arm" />
                 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
                 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
             </node>
             
-            <node name="rosplan_interface_go_to_waypoint" pkg="cluedo_rosplan_interface" type="go_to_waypoint_action" respawn="false" output="screen">
+            <node name="rosplan_interface_go_to_waypoint" pkg="exprob_ass2" type="go_to_waypoint_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
                 <param name="pddl_action_name" value="go_to_waypoint" />
                 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
                 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
             </node>
             
-            <node name="rosplan_interface_go_home" pkg="cluedo_rosplan_interface" type="go_home_action" respawn="false" output="screen">
+            <node name="rosplan_interface_go_home" pkg="exprob_ass2" type="go_home_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
                 <param name="pddl_action_name" value="go_home" />
                 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
@@ -86,7 +86,7 @@
                          <arg name="pddl_action_name" value="check_hypothesis" />
             </include>
             
-            <node name="rosplan_interface_go_oracle" pkg="cluedo_rosplan_interface" type="go_oracle_action" respawn="false" output="screen">
+            <node name="rosplan_interface_go_oracle" pkg="exprob_ass2" type="go_oracle_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
                 <param name="pddl_action_name" value="go_oracle" />
                 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
@@ -97,7 +97,7 @@
                     <arg name="pddl_action_name" value="oracle" />
             </include>
             
-            <node name="rosplan_interface_leave_oracle" pkg="cluedo_rosplan_interface" type="leave_oracle_action" respawn="false" output="screen">
+            <node name="rosplan_interface_leave_oracle" pkg="exprob_ass2" type="leave_oracle_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
                 <param name="pddl_action_name" value="leave_oracle" />
                 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />

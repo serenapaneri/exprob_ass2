@@ -1,5 +1,6 @@
 #include "exprob_ass2/go_oracle.h"
 #include <unistd.h>
+#include <math.h>
 #include <actionlib/client/simple_action_client.h>
 #include <actionlib/client/terminal_state.h>
 #include <exprob_ass2/TargetAction.h>
@@ -20,6 +21,7 @@ namespace KCL_rosplan {
         
         goal.x = 2.5;
         goal.y = - 2.5;
+        goal.theha = - M_PI/4;
         
         ac.sendGoal(goal);
         ac.waitForResult();

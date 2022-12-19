@@ -1,6 +1,6 @@
 #include "exprob_ass2/start_game.h"
 #include <unistd.h>
-// #include <moveit/move_group_interface/move_group_interface.h>
+#include <moveit/move_group_interface/move_group_interface.h>
 
 namespace KCL_rosplan {
 
@@ -11,22 +11,22 @@ namespace KCL_rosplan {
     bool StartGameInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
         // here the implementation of the action
         
-        // moveit::planning_interface::MoveGroupInterface group("arm");
-        // group.setEndEffectorLink("cluedo_link");
-        // group.setPoseReferenceFrame("base_link");
-        // group.setPlannerId("RRTstar");
-        // group.setNumPlanningAttempts(10);
-        // group.setPlanningTime(10.0);
-        // group.allowReplanning(true);
-        // group.setGoalJointTolerance(0.0001);
-        // group.setGoalPositionTolerance(0.0001);
-        // group.setGoalOrientationTolerance(0.001);
+        moveit::planning_interface::MoveGroupInterface group("arm");
+        group.setEndEffectorLink("cluedo_link");
+        group.setPoseReferenceFrame("base_link");
+        group.setPlannerId("RRTstar");
+        group.setNumPlanningAttempts(10);
+        group.setPlanningTime(10.0);
+        group.allowReplanning(true);
+        group.setGoalJointTolerance(0.0001);
+        group.setGoalPositionTolerance(0.0001);
+        group.setGoalOrientationTolerance(0.001);
         
         std::cout << "The robot is powering on" << std::endl;
         
-        // group.setNamedTarget("default");
-	// group.move();
-	// sleep(3.0);
+        group.setNamedTarget("default");
+	group.move();
+	sleep(3.0);
 
         std::cout << "Initializing ARMOR" << std::endl;
         sleep(3);

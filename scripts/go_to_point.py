@@ -38,12 +38,18 @@ from tf import transformations
 
 # robot state variables
 position_ = Point()
+position_.x = 0
+position_.y = 0
 yaw_ = 0
 position_ = 0
 state_ = 0
 
 #publisher used for cmd_vel
 pub_ = None
+
+# linear and angular velocities
+lin = 0.4
+ang = 1
 
 #action server
 act_s = None
@@ -122,7 +128,7 @@ def fix_yaw(des_pos):
 
     desired_yaw = math.atan2(des_pos.y - position_.y, des_pos.x - position_.x)
     err_yaw = normalize_angle(desired_yaw - yaw_)
-    rospy.loginfo(err_yaw)
+    # rospy.loginfo(err_yaw)
     twist_msg = Twist()
     if math.fabs(err_yaw) > yaw_precision_2_:
         twist_msg.angular.z = kp_a*err_yaw
@@ -246,6 +252,10 @@ def go_to_point(goal):
             act_s.publish_feedback(feedback)
             go_straight_ahead(desired_position)
         elif state_ == 2:
+            feedback.stat = "Angle aligned"
+            act_s.publish_feedback(feedback)
+            fix_final_yaw(des_yaw)
+        elif state_ == 3:
             feedback.stat = "Target reached!"
             act_s.publish_feedback(feedback)
             done()

@@ -4,7 +4,7 @@
 #include <exprob_ass2/ErlOracle.h>
 
 void hint_callback(const exprob_ass2::ErlOracle msg);
-bool collected = false;
+int collected = 0;
 
 namespace KCL_rosplan {
 
@@ -27,13 +27,15 @@ namespace KCL_rosplan {
         group.setGoalPositionTolerance(0.0001);
         group.setGoalOrientationTolerance(0.001);
         
-        group.setNamedTarget("low");
+        group.setNamedTarget("high");
 	group.move();
-	sleep(3.0);
+	// sleep(3.0);
+	
+	std::cout << collected << std::endl;
 	
 	//if the hint has not been collected try another pose
-	if (collected == false){
-	    group.setNamedTarget("high");
+	if (collected == 0){
+	    group.setNamedTarget("low");
 	    group.move();
 	    sleep(3.0);
 	    }
@@ -58,5 +60,5 @@ namespace KCL_rosplan {
     }
     
     void hint_callback(const exprob_ass2::ErlOracle msg) {
-        collected = true;
+        collected = 1;
     }
