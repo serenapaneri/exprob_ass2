@@ -1,5 +1,6 @@
 #include "exprob_ass2/check_hypothesis.h"
 #include <unistd.h>
+#include <exprob_ass2/Command.h>
 
 namespace KCL_rosplan {
 
@@ -9,11 +10,27 @@ namespace KCL_rosplan {
     
     bool CheckHypoInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
         // here the implementation of the action
-        std::cout << "The robot is going to the " << msg->parameters[2].value << " room from " << msg->parameters[1].value << std::endl;
+        std::cout << "Checking the completeness and the consistency " << std::endl;
         
+        ros::NodeHandle n;
+        ros::ServiceClient comm_client = n.serviceClient<exprob_ass2::Command>("comm");
+        exprob_ass2::Command srv;
+        srv.request.command == "start";
+        comm_client.call(srv);
         
-        ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
-        return true;
+        if (srv.response.answer == true) {
+        
+            ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
+            srv.request.command == "stop";
+            return true; 
+        }
+        
+        else {
+            ROS_INFO("Action (%s) not performed!", msg->name.c_str());
+            srv.request.command == "stop";
+            return false;
+        }
+        
     }
 }
 

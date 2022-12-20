@@ -65,6 +65,8 @@ find_package(catkin REQUIRED COMPONENTS
 add_service_files(
    FILES
    Oracle.srv
+   HypoFound.srv
+   Command.srv
  )
 
 ## Generate actions in the 'action' folder

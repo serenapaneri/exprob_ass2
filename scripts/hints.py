@@ -5,6 +5,7 @@ import time
 from armor_msgs.srv import * 
 from armor_msgs.msg import * 
 from exprob_ass2.msg import ErlOracle
+from exprob_ass2.srv import HypoFound
 
 ID = 0
 key = ''
@@ -13,6 +14,12 @@ hint_sub = None
 # armor client
 armor_interface = None
 
+hypo_found = None
+
+def hypo_handle(req):
+    
+
+
 def hint_callback(msg):
 
     global ID, key, value
@@ -20,7 +27,8 @@ def hint_callback(msg):
     key = msg.key
     value = msg.value
     return ID, key, value 
-        
+
+   
 def upload_hint(ID_, key_, value_):
 
     req = ArmorDirectiveReq()
@@ -52,6 +60,7 @@ def upload_hint(ID_, key_, value_):
         res = msg.armor_response 
     
     print("The hint has been uploaded")
+
     
 ##
 # \brief The reasoner of the ontology.
@@ -72,13 +81,15 @@ def reasoner():
     res = msg.armor_response
       
 def main():
-    global ID, key, value, hint_sub, armor_interface
+    global ID, key, value, hint_sub, armor_interface, hypo_found
     rospy.init_node('hints', anonymous = True)
     
     rospy.wait_for_service('armor_interface_srv')
     print('Waiting for the armor service')
     # armor client
     armor_interface = rospy.ServiceProxy('armor_interface_srv', ArmorDirective)
+    # send ID service
+    hypo_found = rospy.Service('hypo_ID', HypoFound, hypo_handle)
     # hints subscriber
     hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, hint_callback)
     rate = rospy.Rate(1)
