@@ -34,11 +34,11 @@ namespace KCL_rosplan {
 	std::cout << collected << std::endl;
 	
 	//if the hint has not been collected try another pose
-	if (collected == 0){
-	    group.setNamedTarget("low");
-	    group.move();
-	    sleep(3.0);
-	    }
+	// if (collected == 0){
+	group.setNamedTarget("low");
+	group.move();
+	sleep(3.0);
+	//    }
 	    
 	std::cout << "A new hint has been collected!" << std::endl;
         
