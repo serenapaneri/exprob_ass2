@@ -5,22 +5,15 @@ import time
 from armor_msgs.srv import * 
 from armor_msgs.msg import * 
 from exprob_ass2.msg import ErlOracle
-from exprob_ass2.srv import HypoFound, HypoFoundResponse
 
 ID = 0
 key = ''
 value = ''
-IDs = []
 hint_sub = None
 # armor client
 armor_interface = None
-# ID hypothesis service
-hypo_found_service = None
-
-def hypo_handle(req):
-    global IDs
-    print(IDs)
-    return HypoFoundResponse(IDs)
+hint = [] 
+hypotheses = [[] for _ in range(6)] 
 
 def hint_callback(msg):
 
@@ -99,7 +92,7 @@ def reasoner():
 
       
 def main():
-    global ID, key, value, hint_sub, armor_interface, hypo_found_service, IDs
+    global ID, key, value, hint_sub, armor_interface, hint, hypotheses
     rospy.init_node('hints', anonymous = True)
     
     rospy.wait_for_service('armor_interface_srv')
@@ -116,19 +109,21 @@ def main():
             print('Malformed hint, the robot will discard this')
         else:
             print('Hint collected: {}, {}, {}'.format(ID, key, value))
+            hint.clear()
             # uploading the hint in the ontology 
             upload_hint(ID, key, value)
-            # checking if the current ID's already coming out
-            found = search(IDs, ID)
-            if found == True: 
-                print('This ID is already present')
-            elif found == False:
-                IDs.append(ID)
             
-            print(IDs)   
-            # send ID service
-        hypo_found_service = rospy.Service('hypo_ID', HypoFound, hypo_handle)
-        hypo_found_service.shutdown()
+            hint.append(ID)
+            hint.append(key)
+            hint.append(value)
+            
+            print(hint)
+            
+            # hypotheses[ID].append(hint)
+            hypotheses.insert(hint, ID)
+            
+            print(hypotheses)
+
         reasoner()
         rate.sleep()
 
