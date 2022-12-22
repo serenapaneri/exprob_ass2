@@ -5,6 +5,7 @@ import time
 from armor_msgs.srv import * 
 from armor_msgs.msg import * 
 from exprob_ass2.msg import ErlOracle
+from exprob_ass2.srv import Complete
 
 ID = 0
 key = ''
@@ -12,6 +13,8 @@ value = ''
 hint_sub = None
 # armor client
 armor_interface = None
+# complete client
+complete_client = None
 complete_hypotheses = [] 
 
 def hint_callback(msg):
@@ -111,7 +114,7 @@ def complete():
 
       
 def main():
-    global ID, key, value, hint_sub, armor_interface, complete_hypotheses
+    global ID, key, value, hint_sub, armor_interface, complete_client, complete_hypotheses
     rospy.init_node('hints', anonymous = True)
     
     rospy.wait_for_service('armor_interface_srv')
@@ -120,6 +123,8 @@ def main():
     armor_interface = rospy.ServiceProxy('armor_interface_srv', ArmorDirective)
     # hints subscriber
     hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, hint_callback)
+    # complete client
+    complete_client = rospy.ServiceProxy('complete_hypo', Complete)
     rate = rospy.Rate(1)
     
     while not rospy.is_shutdown():
@@ -142,14 +147,16 @@ def main():
                 print(complete_hypotheses)
                 print(complete_hypotheses[-1])
                 if len(complete_hypotheses) < 2 :
-                    time.sleep(1)
+                    complete_client('complete')
                 else:
                     if complete_hypotheses[-1] == complete_hypotheses[-2]:
                         print('No new complete hypotheses')
                         # advertise check_hypothesis not to start 
+                        complete_client('notcomplete')
                     else:
                         print('A new complete hypotheses has been added')
                         # advertise check_hypothesis to start
+                        complete_client('complete')
                     
                 
             

@@ -44,8 +44,10 @@ namespace KCL_rosplan {
         
         ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
         return true;
+        
     }
 }
+
 
     int main(int argc, char **argv) {
         ros::init(argc, argv, "go_home_action", ros::init_options::AnonymousName);

@@ -67,6 +67,7 @@ add_service_files(
    Oracle.srv
    HypoFound.srv
    Command.srv
+   Complete.srv
  )
 
 ## Generate actions in the 'action' folder
