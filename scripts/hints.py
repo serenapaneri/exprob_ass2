@@ -12,8 +12,7 @@ value = ''
 hint_sub = None
 # armor client
 armor_interface = None
-hint = [] 
-hypotheses = [[] for _ in range(6)] 
+complete_hypotheses = [] 
 
 def hint_callback(msg):
 
@@ -89,10 +88,30 @@ def reasoner():
     req.secondary_command_spec = ''
     msg = armor_interface(req)
     res = msg.armor_response
+    
+    
+##
+# \brief It is the query command to retrieve an individual from a class.
+# \param: None
+# \return: res
+#
+# This functions returns, if there are any, the individuals of the class COMPLETED of the ontology.
+def complete():
+
+    req = ArmorDirectiveReq()
+    req.client_name = 'state_machine'
+    req.reference_name = 'cluedontology'
+    req.command = 'QUERY'
+    req.primary_command_spec = 'IND'
+    req.secondary_command_spec = 'CLASS'
+    req.args = ['COMPLETED']
+    msg = armor_interface(req)
+    res = msg.armor_response
+    return res
 
       
 def main():
-    global ID, key, value, hint_sub, armor_interface, hint, hypotheses
+    global ID, key, value, hint_sub, armor_interface, complete_hypotheses
     rospy.init_node('hints', anonymous = True)
     
     rospy.wait_for_service('armor_interface_srv')
@@ -109,22 +128,31 @@ def main():
             print('Malformed hint, the robot will discard this')
         else:
             print('Hint collected: {}, {}, {}'.format(ID, key, value))
-            hint.clear()
             # uploading the hint in the ontology 
             upload_hint(ID, key, value)
+            # reason
+            reasoner()
+            # check if completed hypotheses have been loaded in the ontology 
+            iscomplete = complete()
+            print('Checking now the completeness')
+            if len(iscomplete.queried_objects) == 0:
+                print('There are not complete hypotheses yet')
+            elif len(iscomplete.queried_objects) != 0:
+                complete_hypotheses.append(iscomplete.queried_objects)
+                print(complete_hypotheses)
+                print(complete_hypotheses[-1])
+                if len(complete_hypotheses) < 2 :
+                    time.sleep(1)
+                else:
+                    if complete_hypotheses[-1] == complete_hypotheses[-2]:
+                        print('No new complete hypotheses')
+                        # advertise check_hypothesis not to start 
+                    else:
+                        print('A new complete hypotheses has been added')
+                        # advertise check_hypothesis to start
+                    
+                
             
-            hint.append(ID)
-            hint.append(key)
-            hint.append(value)
-            
-            print(hint)
-            
-            # hypotheses[ID].append(hint)
-            hypotheses.insert(hint, ID)
-            
-            print(hypotheses)
-
-        reasoner()
         rate.sleep()
 
 if __name__ == '__main__':
