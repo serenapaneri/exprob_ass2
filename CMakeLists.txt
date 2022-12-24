@@ -152,6 +152,7 @@ include_directories(
  add_executable(go_home_action src/go_home.cpp)
  add_executable(check_hypothesis_action src/check_hypothesis.cpp)
  add_executable(go_oracle_action src/go_oracle.cpp)
+ add_executable(oracle_action src/oracle.cpp)
  add_executable(leave_oracle_action src/leave_oracle.cpp)
 
 ## Rename C++ executable without prefix
@@ -171,6 +172,7 @@ add_dependencies(move_arm_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EX
 add_dependencies(go_home_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(check_hypothesis_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(go_oracle_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(oracle_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(leave_oracle_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 
 
@@ -208,6 +210,10 @@ add_dependencies(leave_oracle_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catki
  )
  
  target_link_libraries(go_oracle_action
+   ${catkin_LIBRARIES}
+ )
+ 
+ target_link_libraries(oracle_action
    ${catkin_LIBRARIES}
  )
  

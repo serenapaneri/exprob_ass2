@@ -96,7 +96,8 @@
 		(at start (robot_at_oracle ?obj ?o))
 		(at start (complete_consistent_hypo)))
 	:effect (and
-	        (at end (game_finished)))
+	        (at end (game_finished))
+	        (at start (not(complete_consistent_hypo))))
     )
     
     (:durative-action leave_oracle

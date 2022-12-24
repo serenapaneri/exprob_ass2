@@ -93,9 +93,12 @@
                 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
             </node>
             
-            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-                    <arg name="pddl_action_name" value="oracle" />
-            </include>
+            <node name="rosplan_interface_oracle" pkg="exprob_ass2" type="oracle_action" respawn="false" output="screen">
+                <param name="knowledge_base" value="rosplan_knowledge_base" />
+                <param name="pddl_action_name" value="oracle" />
+                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+            </node>
             
             <node name="rosplan_interface_leave_oracle" pkg="exprob_ass2" type="leave_oracle_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
