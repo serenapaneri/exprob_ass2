@@ -15,6 +15,7 @@
         (robot_at_oracle ?obj -robot ?o - oracle)
         (hint_percieved ?wp - waypoint)
         (initialization)
+        (complete_hypo)
         (complete_consistent_hypo)
         (game_finished)
     )
@@ -58,6 +59,17 @@
 		(at start (not(robot_at_wp ?obj ?from))))
     )
     
+    (:durative-action check_complete
+	:parameters (?obj - robot ?wp - waypoint)
+	:duration ( = ?duration 5)
+	:condition (and
+		(at start (robot_at_wp ?obj ?wp))
+		(at start (hint_percieved ?wp)))
+	:effect (and
+	        (at end (complete_hypo))
+		(at start (not(hint_percieved ?wp))))
+    )
+    
     (:durative-action go_home
         :parameters (?obj - robot ?from - waypoint ?to - home)
 	:duration ( = ?duration 10)
@@ -73,10 +85,10 @@
 	:duration ( = ?duration 5)
 	:condition (and
 	        (at start (robot_at_home ?obj ?h))
-		(at start (forall (?wp - waypoint) (hint_percieved ?wp))))
+		(at start (complete_hypo)))
 	:effect (and
 	        (at end (complete_consistent_hypo))
-	       )
+	        (at start (not(complete_hypo))))
     )
     
     (:durative-action go_oracle

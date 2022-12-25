@@ -9,12 +9,9 @@
 (:init
 
 
-    (robot_at_oracle cluedo_robot oracle)
 
-    (hint_percieved wp1)
-    (hint_percieved wp2)
-    (hint_percieved wp3)
-    (hint_percieved wp4)
+
+    (initialization)
 
 
 
