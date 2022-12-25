@@ -83,7 +83,7 @@
             </node>
             
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-                    <arg name="pddl_action_name" value="check_hypothesis" />
+                    <arg name="pddl_action_name" value="check_consistency" />
             </include>
             
             <node name="rosplan_interface_go_oracle" pkg="exprob_ass2" type="go_oracle_action" respawn="false" output="screen">

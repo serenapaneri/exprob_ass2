@@ -5,17 +5,19 @@ import time
 from armor_msgs.srv import * 
 from armor_msgs.msg import * 
 from exprob_ass2.msg import ErlOracle
-from exprob_ass2.srv import Complete
+from exprob_ass2.srv import HypoFound, HypoFoundResponse
 
 ID = 0
 key = ''
 value = ''
+IDs = 0
 hint_sub = None
 # armor client
 armor_interface = None
-# complete client
-complete_client = None
+# hypo found service
+hypo_found_srv = None
 complete_hypotheses = [] 
+
 
 def hint_callback(msg):
 
@@ -24,7 +26,14 @@ def hint_callback(msg):
     key = msg.key
     value = msg.value
     return ID, key, value 
-    
+
+
+def hypo_found_handle(req):
+    global IDs
+    res.IDs = IDs
+    return res
+
+
 ##
 # \brief This function search an element in a list.
 # \param: list_, element
@@ -114,7 +123,7 @@ def complete():
 
       
 def main():
-    global ID, key, value, hint_sub, armor_interface, complete_client, complete_hypotheses
+    global ID, key, value, IDs, hint_sub, armor_interface, complete_hypotheses, hypo_found_srv
     rospy.init_node('hints', anonymous = True)
     
     rospy.wait_for_service('armor_interface_srv')
@@ -123,8 +132,6 @@ def main():
     armor_interface = rospy.ServiceProxy('armor_interface_srv', ArmorDirective)
     # hints subscriber
     hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, hint_callback)
-    # complete client
-    complete_client = rospy.ServiceProxy('complete_hypo', Complete)
     rate = rospy.Rate(1)
     
     while not rospy.is_shutdown():
@@ -147,19 +154,17 @@ def main():
                 print(complete_hypotheses)
                 print(complete_hypotheses[-1])
                 if len(complete_hypotheses) < 2 :
-                    complete_client('complete')
                 else:
                     if complete_hypotheses[-1] == complete_hypotheses[-2]:
                         print('No new complete hypotheses')
-                        # advertise check_hypothesis not to start 
-                        complete_client('notcomplete')
                     else:
                         print('A new complete hypotheses has been added')
-                        # advertise check_hypothesis to start
-                        complete_client('complete')
-                    
+                        IDs = ID
+                        # hypo found service
+                        hypo_found_srv = rospy.Service('hypo_ID', HypoFound, hypo_found_handle)
+                        print(IDs)
                 
-            
+        IDs = 0    
         rate.sleep()
 
 if __name__ == '__main__':

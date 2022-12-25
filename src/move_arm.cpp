@@ -1,9 +1,6 @@
 #include "exprob_ass2/move_arm.h"
 #include <unistd.h>
 #include <moveit/move_group_interface/move_group_interface.h>
-#include <exprob_ass2/Complete.h>
-
-bool complete = false;
 
 double marker_z1 = 0.0;
 double marker_z2 = 0.0;
@@ -94,24 +91,12 @@ namespace KCL_rosplan {
         return true;
     }
 }
-
-    bool complete_hypo(exprob_ass2::Complete::Request &req, exprob_ass2::Complete::Response &res) {
-    
-        if (req.verify == "complete") {
-            complete = true;
-            }
-        else if (req.verify == "notcomplete") {
-            complete = false;
-            }
-        return complete;
-        }
     
     int main(int argc, char **argv) {
         ros::init(argc, argv, "move_arm_action", ros::init_options::AnonymousName);
         ros::NodeHandle nh("~");
         KCL_rosplan::MoveArmInterface move_arm(nh);
         move_arm.runActionInterface();
-        ros::ServiceServer complete_service = nh.advertiseService("complete_hypo", complete_hypo);
         ros::AsyncSpinner spinner(1);
         spinner.start();
         sleep(2.0);

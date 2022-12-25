@@ -68,7 +68,7 @@
 		(at start (not(robot_at_wp ?obj ?from))))
     )
     
-    (:durative-action check_hypothesis
+    (:durative-action check_consistency
         :parameters (?obj - robot ?h - home)
 	:duration ( = ?duration 5)
 	:condition (and
