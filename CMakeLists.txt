@@ -67,6 +67,7 @@ add_service_files(
    Oracle.srv
    HypoFound.srv
    Command.srv
+   Complete.srv
  )
 
 ## Generate actions in the 'action' folder
@@ -148,6 +149,7 @@ include_directories(
  add_executable(leave_home_action src/leave_home.cpp)
  add_executable(go_to_waypoint_action src/go_to_waypoint.cpp)
  add_executable(move_arm_action src/move_arm.cpp)
+ add_executable(check_complete_action src/check_complete.cpp)
  add_executable(go_home_action src/go_home.cpp)
  add_executable(check_consistency_action src/check_consistency.cpp)
  add_executable(go_oracle_action src/go_oracle.cpp)
@@ -168,6 +170,7 @@ add_dependencies(start_game_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_
 add_dependencies(leave_home_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(go_to_waypoint_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(move_arm_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
+add_dependencies(check_complete_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(go_home_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(check_consistency_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
 add_dependencies(go_oracle_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catkin_EXPORTED_TARGETS})
@@ -197,6 +200,10 @@ add_dependencies(leave_oracle_action ${${PROJECT_NAME}_EXPORTED_TARGETS} ${catki
  )
  
  target_link_libraries(move_arm_action
+   ${catkin_LIBRARIES}
+ )
+ 
+ target_link_libraries(check_complete_action
    ${catkin_LIBRARIES}
  )
  

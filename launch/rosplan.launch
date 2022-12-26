@@ -68,6 +68,13 @@
                 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
             </node>
             
+            <node name="rosplan_interface_check_complete" pkg="exprob_ass2" type="check_complete_action" respawn="false" output="screen">
+                <param name="knowledge_base" value="rosplan_knowledge_base" />
+                <param name="pddl_action_name" value="check_complete" />
+                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+            </node>
+            
             <node name="rosplan_interface_go_to_waypoint" pkg="exprob_ass2" type="go_to_waypoint_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
                 <param name="pddl_action_name" value="go_to_waypoint" />
@@ -85,6 +92,13 @@
             <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
                     <arg name="pddl_action_name" value="check_consistency" />
             </include>
+            
+            <node name="rosplan_interface_check_consistency" pkg="exprob_ass2" type="check_consistency_action" respawn="false" output="screen">
+                <param name="knowledge_base" value="rosplan_knowledge_base" />
+                <param name="pddl_action_name" value="check_consistency" />
+                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
+                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
+            </node>
             
             <node name="rosplan_interface_go_oracle" pkg="exprob_ass2" type="go_oracle_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
