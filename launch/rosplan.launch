@@ -47,12 +47,10 @@
             
             
             <!-- actions -->
-            <node name="rosplan_interface_start_game" pkg="exprob_ass2" type="start_game_action" respawn="false" output="screen">
-                <param name="knowledge_base" value="rosplan_knowledge_base" />
-                <param name="pddl_action_name" value="start_game" />
-                <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
-                <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
-            </node>
+            
+            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
+                         <arg name="pddl_action_name" value="start_game" />
+            </include>
             
             <node name="rosplan_interface_leave_home" pkg="exprob_ass2" type="leave_home_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />
@@ -88,10 +86,6 @@
                 <param name="action_dispatch_topic" value="/rosplan_plan_dispatcher/action_dispatch" />
                 <param name="action_feedback_topic" value="/rosplan_plan_dispatcher/action_feedback" />
             </node>
-            
-            <include file="$(find rosplan_planning_system)/launch/includes/simulated_action.launch" >
-                    <arg name="pddl_action_name" value="check_consistency" />
-            </include>
             
             <node name="rosplan_interface_check_consistency" pkg="exprob_ass2" type="check_consistency_action" respawn="false" output="screen">
                 <param name="knowledge_base" value="rosplan_knowledge_base" />

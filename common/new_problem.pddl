@@ -16,6 +16,7 @@
 
 
 
+
 )
 (:goal (and
     (game_finished)

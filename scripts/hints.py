@@ -19,7 +19,7 @@ armor_interface = None
 hypo_found_srv = None
 # complete service
 complete_srv = None
-complete = False
+complete_ = False
 complete_hypotheses = [] 
 
 
@@ -38,8 +38,8 @@ def hypo_found_handle(req):
     return res
     
 def complete_handle(req):
-    global complete
-    res.complete = complete
+    global complete_
+    res.complete = complete_
     return res
 
 
@@ -141,13 +141,13 @@ def main():
     armor_interface = rospy.ServiceProxy('armor_interface_srv', ArmorDirective)
     # hints subscriber
     hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, hint_callback)
+    # complete service
+    complete_srv = rospy.Service('complete', Complete, complete_handle)
     rate = rospy.Rate(1)
     
     while not rospy.is_shutdown():
         rospy.wait_for_message('/oracle_hint', ErlOracle)
-        # complete service
-        complete = False
-        complete_srv = rospy.Service('complete', Complete, complete_handle)
+        complete_ = False
         if key == '' or value == '' or key == 'when' or value == '-1':
             print('Malformed hint, the robot will discard this')
         else:
@@ -161,23 +161,25 @@ def main():
             print('Checking now the completeness')
             if len(iscomplete.queried_objects) == 0:
                 print('There are not complete hypotheses yet')
-                complete = False
+                complete_ = False
             elif len(iscomplete.queried_objects) != 0:
                 complete_hypotheses.append(iscomplete.queried_objects)
                 print(complete_hypotheses)
                 print(complete_hypotheses[-1])
                 if len(complete_hypotheses) < 2 :
+                    print('No new complete hypotheses')
+                    complete_ = False
                 else:
                     if complete_hypotheses[-1] == complete_hypotheses[-2]:
                         print('No new complete hypotheses')
-                        complete = False
+                        complete_ = False
                     else:
                         print('A new complete hypotheses has been added')
                         IDs = ID
                         # hypo found service
                         hypo_found_srv = rospy.Service('hypo_ID', HypoFound, hypo_found_handle)
                         print(IDs)
-                        complete = True
+                        complete_ = True
                 
         IDs = 0    
         rate.sleep()
