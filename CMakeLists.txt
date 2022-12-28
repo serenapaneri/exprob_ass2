@@ -241,6 +241,7 @@ catkin_install_python(PROGRAMS
   scripts/go_to_point.py
   scripts/hints.py
   scripts/check_hypothesis.py
+  scripts/plan_execution.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

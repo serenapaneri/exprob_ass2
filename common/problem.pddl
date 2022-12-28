@@ -9,6 +9,10 @@
           
         (:init
             (initialization)
+            (move wp1 wp2)
+            (move wp2 wp3)
+            (move wp3 wp4)
+            (move wp4 wp1)
         )
 
         (:goal (and

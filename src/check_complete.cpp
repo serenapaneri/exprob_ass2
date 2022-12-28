@@ -14,6 +14,8 @@ namespace KCL_rosplan {
     bool CheckCompleteInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
         // here the implementation of the action
         std::cout << "Checking the consistency " << std::endl;
+        sleep(3.0);
+        
         
         complete_client.call(srv);
         
@@ -25,6 +27,7 @@ namespace KCL_rosplan {
         
         else {
             ROS_INFO("Action (%s) not performed!", msg->name.c_str());
+            std::cout << "Ti sarebbe piaciuto funzionasse" << std::endl;
             return false;
         }
         
