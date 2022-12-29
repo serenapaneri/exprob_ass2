@@ -11,7 +11,6 @@ namespace KCL_rosplan {
     bool CheckCompleteInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
         // here the implementation of the action
         std::cout << "Checking the completeness " << std::endl;
-        sleep(3.0);
         
         ros::NodeHandle n;
         ros::ServiceClient complete_client = n.serviceClient<exprob_ass2::Complete>("complete");

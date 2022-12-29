@@ -14,6 +14,7 @@
         (robot_at_home ?obj - robot ?h - home)
         (robot_at_oracle ?obj -robot ?o - oracle)
         (move ?from ?to - waypoint)
+        (move_h ?from - home ?to - waypoint)
         (hint_percieved ?wp - waypoint)
         (initialization)
         (gripper_up)
@@ -36,7 +37,8 @@
 	:parameters (?obj - robot ?from - home ?to - waypoint)
 	:duration ( = ?duration 10)
 	:condition (and
-	        (at start (robot_at_home ?obj ?from)))
+	        (at start (robot_at_home ?obj ?from))
+	        (at start (move_h ?from ?to)))
 	:effect (and
 	        (at end (robot_at_wp ?obj ?to))
 	        (at end (gripper_up))

@@ -129,6 +129,9 @@ def main():
     hint_sub = rospy.Subscriber('/oracle_hint', ErlOracle, hint_callback)
     # complete service
     complete_srv = rospy.Service('complete', Complete, complete_handle)
+    
+    # hypo found service
+    hypo_found_srv = rospy.Service('hypo_ID', HypoFound, hypo_found_handle)
     rate = rospy.Rate(1)
     
     while not rospy.is_shutdown():
@@ -138,8 +141,8 @@ def main():
         else:
             print('Hint collected: {}, {}, {}'.format(ID, key, value))
             # uploading the hint in the ontology 
-            print(complete_)
             complete_ = False 
+            IDs = 0
             upload_hint(ID, key, value)
             # reason
             reasoner()
@@ -155,9 +158,6 @@ def main():
                 print(complete_hypotheses[-1])
                 if len(complete_hypotheses) < 2 :
                     IDs = ID
-                    # hypo found service
-                    hypo_found_srv = rospy.Service('hypo_ID', HypoFound, hypo_found_handle)
-                    print(IDs)
                     complete_ = True
                 else:
                     if complete_hypotheses[-1] == complete_hypotheses[-2]:
@@ -166,12 +166,8 @@ def main():
                     else:
                         print('A new complete hypotheses has been added')
                         IDs = ID
-                        # hypo found service
-                        hypo_found_srv = rospy.Service('hypo_ID', HypoFound, hypo_found_handle)
-                        print(IDs)
                         complete_ = True
-                
-        IDs = 0    
+  
         rate.sleep()
 
 if __name__ == '__main__':

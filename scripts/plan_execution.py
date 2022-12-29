@@ -62,7 +62,7 @@ def main():
         
         print('Replanning')
      
-    print('Planning ..')
+    print('The plan has finished!')
         
 
 #   This function calls the knowledge base server to delete the predicate (hint_taken)

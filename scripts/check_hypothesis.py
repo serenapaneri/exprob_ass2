@@ -4,19 +4,20 @@ import rospy
 import time
 from armor_msgs.srv import *
 from armor_msgs.msg import *
-from exprob_ass2.srv import Command, CommandResponse, CommandRequest
+from exprob_ass2.srv import Command, CommandResponse
 from exprob_ass2.srv import HypoFound, HypoFoundRequest
 
 armor_interface = None
 comm_service = None
 hypo_found_client = None
+# start = True
 start = False
 IDs = 0
 
 
 def com(req):
+
     global start
-    req = CommandRequest()
     if (req.command == 'start'):
         start = True
     elif (req.command == 'stop'):
@@ -66,7 +67,7 @@ def inconsistent():
 def main():
 
     global armor_interface, comm_service, hypo_found_client, start, IDs
-    rospy.init_node('check_hypothesis')
+    rospy.init_node('check_consistency')
     
     rospy.wait_for_service('armor_interface_srv')
     print('Waiting for the armor service')
@@ -74,14 +75,14 @@ def main():
     armor_interface = rospy.ServiceProxy('armor_interface_srv', ArmorDirective)
     
     # command service
+    rospy.wait_for_service('comm')
     comm_service = rospy.Service('comm', Command, com)
     
     rate = rospy.Rate(1)
     
     while not rospy.is_shutdown():
-
+        # if the command recieved is 'start'
         if start == True: 
-
             # service to retrieve the ID of the current complete hypothesis just found
             rospy.wait_for_service('hypo_ID')
             hypo_found_client = rospy.ServiceProxy('hypo_ID', HypoFound)
@@ -90,6 +91,8 @@ def main():
             print(IDs)
             
             url = '<http://www.emarolab.it/cluedo-ontology#Hypothesis{}>'.format(IDs)
+            
+            res = CommandResponse()
         
             isinconsistent = inconsistent()
             print(isinconsistent.queried_objects)
@@ -97,13 +100,13 @@ def main():
             if len(isinconsistent.queried_objects) != 0:
                 if url in isinconsistent.queried_objects:
                     print('The Hypothesis{} is inconsistent'.format(IDs)) 
-                    CommandResponse(False)
+                    res = False
                 elif url not in isinconsistent.queried_objects:
                     print('The Hypothesis{} is complete and consistent'.format(IDs))
-                    CommandResponse(True)
+                    res = True
             elif len(isinconsistent.queried_objects) == 0:
                 print('The Hypothesis{} is complete and consistent'.format(IDs))
-                CommandResponse(True)
+                res = True
             rate.sleep()
         
         # implement a server that advertise the node check_hypothesis that a complete hypothesis has been found and it can go to the oracle.
