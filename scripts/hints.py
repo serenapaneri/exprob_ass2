@@ -34,30 +34,16 @@ def hint_callback(msg):
 
 def hypo_found_handle(req):
     global IDs
+    res = HypoFoundResponse()
     res.IDs = IDs
     return res
     
 def complete_handle(req):
     global complete_
+    res = CompleteResponse()
     res.complete = complete_
     return res
-
-
-##
-# \brief This function search an element in a list.
-# \param: list_, element
-# \return: True, False
-#
-# This functions checks if a specific element is present (True) or not (False) in a list.     
-def search(list_, element):
-    """
-      This function check if an element is present or not into a list
-    """
-    for i in range(len(list_)):
-        if list_[i] == element:
-            return True
-    return False
-
+    
    
 def upload_hint(ID_, key_, value_):
 
@@ -132,7 +118,7 @@ def complete():
 
       
 def main():
-    global ID, key, value, IDs, hint_sub, armor_interface, complete_hypotheses, hypo_found_srv, complete_srv, complete
+    global ID, key, value, IDs, hint_sub, armor_interface, complete_hypotheses, hypo_found_srv, complete_srv, complete_
     rospy.init_node('hints', anonymous = True)
     
     rospy.wait_for_service('armor_interface_srv')
@@ -147,12 +133,13 @@ def main():
     
     while not rospy.is_shutdown():
         rospy.wait_for_message('/oracle_hint', ErlOracle)
-        complete_ = False
         if key == '' or value == '' or key == 'when' or value == '-1':
             print('Malformed hint, the robot will discard this')
         else:
             print('Hint collected: {}, {}, {}'.format(ID, key, value))
             # uploading the hint in the ontology 
+            print(complete_)
+            complete_ = False 
             upload_hint(ID, key, value)
             # reason
             reasoner()
@@ -167,8 +154,11 @@ def main():
                 print(complete_hypotheses)
                 print(complete_hypotheses[-1])
                 if len(complete_hypotheses) < 2 :
-                    print('No new complete hypotheses')
-                    complete_ = False
+                    IDs = ID
+                    # hypo found service
+                    hypo_found_srv = rospy.Service('hypo_ID', HypoFound, hypo_found_handle)
+                    print(IDs)
+                    complete_ = True
                 else:
                     if complete_hypotheses[-1] == complete_hypotheses[-2]:
                         print('No new complete hypotheses')

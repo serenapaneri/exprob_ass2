@@ -4,7 +4,7 @@ import rospy
 import time
 from armor_msgs.srv import *
 from armor_msgs.msg import *
-from exprob_ass2.srv import Command, CommandResponse
+from exprob_ass2.srv import Command, CommandResponse, CommandRequest
 from exprob_ass2.srv import HypoFound, HypoFoundRequest
 
 armor_interface = None
@@ -16,6 +16,7 @@ IDs = 0
 
 def com(req):
     global start
+    req = CommandRequest()
     if (req.command == 'start'):
         start = True
     elif (req.command == 'stop'):

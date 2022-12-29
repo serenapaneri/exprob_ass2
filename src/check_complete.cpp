@@ -2,9 +2,6 @@
 #include <unistd.h>
 #include <exprob_ass2/Complete.h>
 
-ros::ServiceClient complete_client;
-exprob_ass2::Complete srv;
-
 namespace KCL_rosplan {
 
     CheckCompleteInterface::CheckCompleteInterface(ros::NodeHandle &nh) {
@@ -13,15 +10,22 @@ namespace KCL_rosplan {
     
     bool CheckCompleteInterface::concreteCallback(const rosplan_dispatch_msgs::ActionDispatch::ConstPtr& msg) {
         // here the implementation of the action
-        std::cout << "Checking the consistency " << std::endl;
+        std::cout << "Checking the completeness " << std::endl;
         sleep(3.0);
         
+        ros::NodeHandle n;
+        ros::ServiceClient complete_client = n.serviceClient<exprob_ass2::Complete>("complete");
+        
+        exprob_ass2::Complete srv;
         
         complete_client.call(srv);
+        
+        std::cout << srv.response.complete << std::endl;
         
         if (srv.response.complete == true) {
         
             ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
+            std::cout << "credo nei miracoli" << std::endl;
             return true; 
         }
         
@@ -37,7 +41,6 @@ namespace KCL_rosplan {
     int main(int argc, char **argv) {
         ros::init(argc, argv, "check_hypothesis_action", ros::init_options::AnonymousName);
         ros::NodeHandle nh("~");
-        complete_client = nh.serviceClient<exprob_ass2::Complete>("complete");
         KCL_rosplan::CheckCompleteInterface check_complete(nh);
         check_complete.runActionInterface();
         return 0;

@@ -7,20 +7,16 @@ from rosplan_knowledge_msgs.srv import *
 from rosplan_dispatch_msgs.srv import *
 from std_srvs.srv import Empty, EmptyResponse
 from diagnostic_msgs.msg import KeyValue
-# from rosplan_interface_mapping.srv import CreatePRM
-# from rosplan_knowledge_msgs.srv import KnowledgeUpdateService, KnowledgeUpdateServiceRequest
-# from rosplan_dispatch_msgs.srv import DispatchService, DispatchServiceResponse, PlanningService, PlanningServiceResponse
-# from rosplan_knowledge_msgs.srv import KnowledgeUpdateService, KnowledgeUpdateServiceRequest
-
 
 update_knowledge = None
-
+rosplan_success = False
+rosplan_goal = False
 
 #   This function initializes all of the needed services, then it calculates a new plan
 #   until the robot is able to fuòòy complete one. 
 def main():
 
-    global update_knowledge
+    global update_knowledge, rosplan_success, rosplan_goal
     rospy.init_node('plan_execution')
     
     # calling all the rosplan services 
@@ -42,35 +38,31 @@ def main():
     update_knowledge = rospy.ServiceProxy('/rosplan_knowledge_base/update', KnowledgeUpdateService)
     print("Start planning")
     
-
-    while not rospy.is_shutdown():
+    rosplan_success = False
+    rosplan_goal = False
+    
+    while (rosplan_success == False or rosplan_goal == False):
         
-        problem_interface()
-        
-        print('problem generates')
-        time.sleep(1)
-        
-        # generate the plan
+        print('Problem interface service')
+        problem_interface()        
+        print('Planning interface service')
         planning_interface()
-        
-        print('plan generates')
-        time.sleep(1)
-        
-        # parse the plan 
+        print('Parsing interface service')
         parsing_interface()
-        
-        print('parse generates')
-        time.sleep(1)
-        
-        # read the feedback
+        print('Plan dispatcher')
         feedback = plan_dispatcher()
         print(feedback)
+        
+        rosplan_success = feedback.success
+        rosplan_goal = feedback.goal_achieved
 
         # update the knowledge base
-        update_knowledgebase()
+        # update_knowledgebase()
         time.sleep(1)
         
-        print ( 'SUCCESS')
+        print('Replanning')
+     
+    print('Planning ..')
         
 
 #   This function calls the knowledge base server to delete the predicate (hint_taken)
@@ -98,8 +90,6 @@ def update_check_complete():
     req.knowledge.knowledge_type = 1
     req.knowledge.attribute_name= 'complete_hypo'
     res = update_knowledge(req)
-    print("funziona update_check_complete")
-
 
 #   This function looks at the parameter in the ros param server random.
 #   if random is set to true it finds a random waypoint ( different from the previously
@@ -113,8 +103,6 @@ def update_knowledgebase():
     waypoint_visited('wp2')
     waypoint_visited('wp3')
     waypoint_visited('wp4')
-    
-    print("funziona update_knowledgebase")
 
     update_check_complete()
 

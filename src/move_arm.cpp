@@ -83,10 +83,6 @@ namespace KCL_rosplan {
 	        sleep(3.0);
             }
         } */
-        
-        group.setNamedTarget("high");
-	group.move();
-	sleep(3.0);
 	
 	group.setNamedTarget("low");
 	group.move();

@@ -7,8 +7,8 @@
     oracle - oracle
 )
 (:init
-    (robot_at_wp cluedo_robot wp4)
 
+    (robot_at_home cluedo_robot home)
 
 
     (move wp1 wp2)
