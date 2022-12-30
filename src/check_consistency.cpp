@@ -25,12 +25,14 @@ namespace KCL_rosplan {
         
             ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
             srv.request.command = "stop";
+            comm_client.call(srv);
             return true; 
         }
         
         else if (srv.response.answer == false) {
             ROS_INFO("Action (%s) not performed!", msg->name.c_str());
             srv.request.command = "stop";
+            comm_client.call(srv);
             return false;
         }
         

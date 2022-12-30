@@ -10,7 +10,6 @@ from exprob_ass2.srv import HypoFound, HypoFoundRequest
 armor_interface = None
 comm_service = None
 hypo_found_client = None
-# start = True
 start = False
 IDs = 0
 
@@ -74,8 +73,11 @@ def main():
     # armor client
     armor_interface = rospy.ServiceProxy('armor_interface_srv', ArmorDirective)
     
+    # service to retrieve the ID of the current complete hypothesis just found
+    rospy.wait_for_service('hypo_ID')
+    hypo_found_client = rospy.ServiceProxy('hypo_ID', HypoFound)
+    
     # command service
-    rospy.wait_for_service('comm')
     comm_service = rospy.Service('comm', Command, com)
     
     rate = rospy.Rate(1)
@@ -83,16 +85,13 @@ def main():
     while not rospy.is_shutdown():
         # if the command recieved is 'start'
         if start == True: 
-            # service to retrieve the ID of the current complete hypothesis just found
-            rospy.wait_for_service('hypo_ID')
-            hypo_found_client = rospy.ServiceProxy('hypo_ID', HypoFound)
             res = hypo_found_client()
             IDs = res.IDs 
             print(IDs)
             
             url = '<http://www.emarolab.it/cluedo-ontology#Hypothesis{}>'.format(IDs)
             
-            res = CommandResponse()
+            response = CommandResponse()
         
             isinconsistent = inconsistent()
             print(isinconsistent.queried_objects)
@@ -100,13 +99,13 @@ def main():
             if len(isinconsistent.queried_objects) != 0:
                 if url in isinconsistent.queried_objects:
                     print('The Hypothesis{} is inconsistent'.format(IDs)) 
-                    res = False
+                    response = False
                 elif url not in isinconsistent.queried_objects:
                     print('The Hypothesis{} is complete and consistent'.format(IDs))
-                    res = True
+                    response = True
             elif len(isinconsistent.queried_objects) == 0:
                 print('The Hypothesis{} is complete and consistent'.format(IDs))
-                res = True
+                response = True
             rate.sleep()
         
         # implement a server that advertise the node check_hypothesis that a complete hypothesis has been found and it can go to the oracle.

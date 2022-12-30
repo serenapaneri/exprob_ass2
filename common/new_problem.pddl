@@ -7,19 +7,24 @@
     oracle - oracle
 )
 (:init
+    (robot_at_wp cluedo_robot wp1)
 
 
-    (robot_at_oracle cluedo_robot oracle)
 
-    (move wp1 wp2)
-    (move wp2 wp3)
-    (move wp3 wp4)
-    (move wp4 wp1)
+    (move_wp wp1 wp2)
+    (move_wp wp2 wp3)
+    (move_wp wp3 wp4)
+    (move_wp wp4 wp1)
 
     (move_h home wp1)
     (move_h home wp2)
     (move_h home wp3)
     (move_h home wp4)
+
+    (move_o oracle wp1)
+    (move_o oracle wp2)
+    (move_o oracle wp3)
+    (move_o oracle wp4)
 
 
 
