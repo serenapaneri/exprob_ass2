@@ -28,7 +28,7 @@ namespace KCL_rosplan {
         group.setGoalPositionTolerance(0.0001);
         group.setGoalOrientationTolerance(0.001);
         
-        /* if(msg->parameters[1].value == "wp1"){
+        if(msg->parameters[1].value == "wp1"){
             ros::param::get("wp1", marker_z1);
             if (marker_z1 == 0.75) {
                 group.setNamedTarget("low");
@@ -82,11 +82,11 @@ namespace KCL_rosplan {
 	        group.move();
 	        sleep(3.0);
             }
-        } */
+        } 
 	
-	group.setNamedTarget("low");
+	/*group.setNamedTarget("low");
 	group.move();
-	sleep(3.0);
+	sleep(3.0); */
 	    
 	std::cout << "A new hint has been collected!" << std::endl;
         

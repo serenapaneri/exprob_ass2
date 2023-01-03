@@ -16,16 +16,6 @@
     (move_wp wp3 wp4)
     (move_wp wp4 wp1)
 
-    (move_h home wp1)
-    (move_h home wp2)
-    (move_h home wp3)
-    (move_h home wp4)
-
-    (move_o oracle wp1)
-    (move_o oracle wp2)
-    (move_o oracle wp3)
-    (move_o oracle wp4)
-
 
 
 

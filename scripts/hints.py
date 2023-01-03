@@ -6,7 +6,7 @@ from armor_msgs.srv import *
 from armor_msgs.msg import * 
 from exprob_ass2.msg import ErlOracle
 from exprob_ass2.srv import HypoFound, HypoFoundResponse
-from exprob_ass2.srv import Complete, CompleteResponse
+from exprob_ass2.srv import Complete, CompleteResponse, CompleteRequest
 
 ID = 0
 key = ''
@@ -24,7 +24,6 @@ complete_hypotheses = []
 
 
 def hint_callback(msg):
-
     global ID, key, value
     ID = msg.ID
     key = msg.key
@@ -75,6 +74,8 @@ def upload_hint(ID_, key_, value_):
         msg = armor_interface(req)
         res = msg.armor_response 
     
+    apply_()
+    reasoner()
     print("The hint has been uploaded")
 
     
@@ -88,14 +89,32 @@ def upload_hint(ID_, key_, value_):
 def reasoner():
 
     req = ArmorDirectiveReq()
-    req.client_name = 'state_machine'
+    req.client_name = 'hints'
     req.reference_name = 'cluedontology'
     req.command = 'REASON'
     req.primary_command_spec = ''
     req.secondary_command_spec = ''
     msg = armor_interface(req)
     res = msg.armor_response
-    
+
+
+##
+# \brief It is the apply command of armor.
+# \param: None
+# \return: None
+#
+# This function apply the changes done to the ontology.  
+def apply_():
+
+    req = ArmorDirectiveReq()
+    req.client_name = 'state_machine'
+    req.reference_name = 'cluedontology'
+    req.command = 'APPLY'
+    req.primary_command_spec = ''
+    req.secondary_command_spec = ''
+    msg = armor_interface(req)
+    res = msg.armor_response
+   
     
 ##
 # \brief It is the query command to retrieve an individual from a class.
@@ -106,7 +125,7 @@ def reasoner():
 def complete():
 
     req = ArmorDirectiveReq()
-    req.client_name = 'state_machine'
+    req.client_name = 'hints'
     req.reference_name = 'cluedontology'
     req.command = 'QUERY'
     req.primary_command_spec = 'IND'
@@ -118,7 +137,7 @@ def complete():
 
       
 def main():
-    global ID, key, value, IDs, hint_sub, armor_interface, complete_hypotheses, hypo_found_srv, complete_srv, complete_
+    global ID, key, value, IDs, hint_sub, armor_interface, complete_hypotheses, hypo_found_srv, complete_srv, complete_, begin_
     rospy.init_node('hints', anonymous = True)
     
     rospy.wait_for_service('armor_interface_srv')
@@ -135,28 +154,28 @@ def main():
     rate = rospy.Rate(1)
     
     while not rospy.is_shutdown():
+    
         rospy.wait_for_message('/oracle_hint', ErlOracle)
         if key == '' or value == '' or key == 'when' or value == '-1':
             print('Malformed hint, the robot will discard this')
         else:
-            print('Hint collected: {}, {}, {}'.format(ID, key, value))
-            # uploading the hint in the ontology 
+            print('Hint collected: {}, {}, {}'.format(ID, key, value))   
             complete_ = False 
             IDs = 0
+            # uploading the hint in the ontology
             upload_hint(ID, key, value)
-            # reason
-            reasoner()
             # check if completed hypotheses have been loaded in the ontology 
             iscomplete = complete()
             print('Checking now the completeness')
+            print(iscomplete.queried_objects)
             if len(iscomplete.queried_objects) == 0:
                 print('There are not complete hypotheses yet')
                 complete_ = False
             elif len(iscomplete.queried_objects) != 0:
                 complete_hypotheses.append(iscomplete.queried_objects)
-                print(complete_hypotheses)
-                print(complete_hypotheses[-1])
+                # print(complete_hypotheses[-1])
                 if len(complete_hypotheses) < 2 :
+                    print('The fist complete hypothesis has been found')
                     IDs = ID
                     complete_ = True
                 else:
@@ -166,8 +185,9 @@ def main():
                     else:
                         print('A new complete hypotheses has been added')
                         IDs = ID
-                        complete_ = True
-  
+                        complete_ = True 
+
+        # complete_ = False 
         rate.sleep()
 
 if __name__ == '__main__':

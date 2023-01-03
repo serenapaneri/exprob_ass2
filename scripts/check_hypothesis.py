@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import rospy
 import time
@@ -6,16 +6,31 @@ from armor_msgs.srv import *
 from armor_msgs.msg import *
 from exprob_ass2.srv import Command, CommandResponse
 from exprob_ass2.srv import HypoFound, HypoFoundRequest
+from exprob_ass2.srv import WinHypo, WinHypoResponse
 
+# armor client
 armor_interface = None
+# command service
 comm_service = None
+# hypo_found client
 hypo_found_client = None
+# win_hypo service
+win_hypo_srv = None
+
 start = False
 IDs = 0
+who = ''
+what = ''
+where = ''
 
-
+##
+# \brief Callback of the comm_service.
+# \param: req, CommandRequest
+# \return: start
+#
+# This function recieves the command from the client in the check_consistency.cpp node. When the client commands to
+# start then the start variable is set to True and when it commands to stop the start variable is set to False. 
 def com(req):
-
     global start
     if (req.command == 'start'):
         start = True
@@ -23,6 +38,28 @@ def com(req):
         start = False
     return start
 
+    
+def winhypo_handle(req):
+    global who, what, where
+    res = WinHypoResponse()
+    res.who = who
+    res.what = what
+    res.where = where
+    return res
+    
+    
+def retrieve_hypo(prop_name, ind_name):
+    req = ArmorDirectiveReq()
+    req.client_name = 'check_hypothesis'
+    req.reference_name = 'cluedontology'
+    req.command = 'QUERY'
+    req.primary_command_spec = 'OBJECTPROP'
+    req.secondary_command_spec = 'IND'
+    req.args = [prop_name, ind_name]
+    msg = armor_interface(req)
+    res = msg.armor_response
+    return res
+    
 
 ##
 # \brief The reasoner of the ontology.
@@ -34,7 +71,7 @@ def com(req):
 def reasoner():
 
     req = ArmorDirectiveReq()
-    req.client_name = 'state_machine'
+    req.client_name = 'hints'
     req.reference_name = 'cluedontology'
     req.command = 'REASON'
     req.primary_command_spec = ''
@@ -50,9 +87,8 @@ def reasoner():
 #
 # This functions returns, if there are any, the individuals of the class INCONSISTENT of the ontology.  
 def inconsistent():
-
     req = ArmorDirectiveReq()
-    req.client_name = 'state_machine'
+    req.client_name = 'check_hypothesis'
     req.reference_name = 'cluedontology'
     req.command = 'QUERY'
     req.primary_command_spec = 'IND'
@@ -61,11 +97,17 @@ def inconsistent():
     msg = armor_interface(req)
     res = msg.armor_response
     return res
-    
 
+
+##
+# \brief Main function of the check_hypothesis node where the node is initialized and the armor client, the hypo_found_client and the comm_service are implemented.
+# \param: None
+# \return: None
+#
+# This is the main function of the check_hypothesis node 
 def main():
 
-    global armor_interface, comm_service, hypo_found_client, start, IDs
+    global armor_interface, comm_service, hypo_found_client, win_hypo_srv, start, IDs, who, what, where
     rospy.init_node('check_consistency')
     
     rospy.wait_for_service('armor_interface_srv')
@@ -80,6 +122,9 @@ def main():
     # command service
     comm_service = rospy.Service('comm', Command, com)
     
+    # win_hypo service
+    win_hypo_srv = rospy.Service('winhypo', WinHypo, winhypo_handle)
+    
     rate = rospy.Rate(1)
     
     while not rospy.is_shutdown():
@@ -89,29 +134,54 @@ def main():
             IDs = res.IDs 
             print(IDs)
             
-            url = '<http://www.emarolab.it/cluedo-ontology#Hypothesis{}>'.format(IDs)
+            # response = CommandResponse()
+            
+            reasoner()
+            
+            who_url = retrieve_hypo('who', 'Hypothesis' + str(IDs))
+            what_url = retrieve_hypo('what', 'Hypothesis' + str(IDs))
+            where_url = retrieve_hypo('where', 'Hypothesis' + str(IDs))
+            
+            who_queried = who_url.queried_objects
+            what_queried = what_url.queried_objects
+            where_queried = where_url.queried_objects
+            
+            print(who_queried)
+            print(what_queried)
+            print(where_queried)
             
             response = CommandResponse()
-        
-            isinconsistent = inconsistent()
-            print(isinconsistent.queried_objects)
-        
-            if len(isinconsistent.queried_objects) != 0:
-                if url in isinconsistent.queried_objects:
-                    print('The Hypothesis{} is inconsistent'.format(IDs)) 
-                    response = False
-                elif url not in isinconsistent.queried_objects:
-                    print('The Hypothesis{} is complete and consistent'.format(IDs))
-                    response = True
-            elif len(isinconsistent.queried_objects) == 0:
+            
+            url_ind = '<http://www.emarolab.it/cluedo-ontology#'
+            
+            if len(who_queried) > 1 or len(what_queried) > 1 or len(where_queried) > 1:
+                print('The Hypothesis{} is inconsistent'.format(IDs)) 
+                response.answer = False
+            else:
                 print('The Hypothesis{} is complete and consistent'.format(IDs))
-                response = True
+                _who_ = who_queried[0]
+                who_ = _who_.replace(url_ind, '')
+                who = who_.replace('>', '')
+                    
+                _what_ = what_queried[0]
+                what_ = _what_.replace(url_ind, '')
+                what = what_.replace('>', '')
+                    
+                _where_ = where_queried[0]
+                where_ = _where_.replace(url_ind, '')
+                where = where_.replace('>', '')
+                
+                response.answer = True
+            
+            print(who)
+            print(what)
+            print(where)
+                
+            
+            rospy.sleep(2)
             rate.sleep()
         
-        # implement a server that advertise the node check_hypothesis that a complete hypothesis has been found and it can go to the oracle.
-        
         elif start == False:
-            time.sleep(5)
             rate.sleep()
     
     

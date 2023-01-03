@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <exprob_ass2/Oracle.h>
 #include <exprob_ass2/HypoFound.h>
+#include <exprob_ass2/WinHypo.h>
 
 namespace KCL_rosplan {
 
@@ -20,12 +21,20 @@ namespace KCL_rosplan {
         ros::NodeHandle hn;
         ros::ServiceClient hypo_found_client = hn.serviceClient<exprob_ass2::HypoFound>("hypo_ID");
         exprob_ass2::HypoFound hypo_srv;
+        
+        ros::NodeHandle nhh;
+        ros::ServiceClient win_hypo_client = nhh.serviceClient<exprob_ass2::WinHypo>("winhypo");
+        exprob_ass2::WinHypo winhypo_srv;
 
         oracle_client.call(oracle_srv);
         hypo_found_client.call(hypo_srv);
+        win_hypo_client.call(winhypo_srv);
         
-        std::cout << "verifying service oracle_srv " << oracle_srv.response.ID << std::endl;
-        std::cout << "verifying service hypo_srv " << hypo_srv.response.IDs << std::endl;
+        sleep(1.0);
+        std::cout << "Name your guess" << std::endl;
+        sleep(1.0);
+        std::cout << winhypo_srv.response.who << " with the " << winhypo_srv.response.what << " in the " << winhypo_srv.response.where << std::endl;
+        sleep(1.0);
         
         if (oracle_srv.response.ID == hypo_srv.response.IDs) {
             ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
