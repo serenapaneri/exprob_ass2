@@ -208,13 +208,41 @@
     
 
 
+    <!-- http://www.emarolab.it/cluedo-ontology#Hypothesis0 -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#Hypothesis0">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <where rdf:resource="http://www.emarolab.it/cluedo-ontology#bathroom"/>
+        <where rdf:resource="http://www.emarolab.it/cluedo-ontology#lounge"/>
+        <who rdf:resource="http://www.emarolab.it/cluedo-ontology#mrsPeacock"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#Hypothesis1 -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#Hypothesis1">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <what rdf:resource="http://www.emarolab.it/cluedo-ontology#leadPipe"/>
+        <who rdf:resource="http://www.emarolab.it/cluedo-ontology#mrGreen"/>
+    </owl:Thing>
+    
+
+
     <!-- http://www.emarolab.it/cluedo-ontology#Hypothesis2 -->
 
 
     <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#Hypothesis2">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#COMPLETED"/>
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
-        <what rdf:resource="http://www.emarolab.it/cluedo-ontology#rope"/>
+        <what rdf:resource="http://www.emarolab.it/cluedo-ontology#candlestick"/>
+        <where rdf:resource="http://www.emarolab.it/cluedo-ontology#conservatory"/>
+        <who rdf:resource="http://www.emarolab.it/cluedo-ontology#mrsWhite"/>
     </owl:Thing>
     
 
@@ -224,12 +252,13 @@
 
     <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#Hypothesis3">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
-        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#COMPLETED"/>
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
-        <what rdf:resource="http://www.emarolab.it/cluedo-ontology#leadPipe"/>
+        <what rdf:resource="http://www.emarolab.it/cluedo-ontology#revolver"/>
         <what rdf:resource="http://www.emarolab.it/cluedo-ontology#spanner"/>
-        <where rdf:resource="http://www.emarolab.it/cluedo-ontology#study"/>
-        <who rdf:resource="http://www.emarolab.it/cluedo-ontology#profPlum"/>
+        <who rdf:resource="http://www.emarolab.it/cluedo-ontology#colonelMustard"/>
+        <who rdf:resource="http://www.emarolab.it/cluedo-ontology#missScarlett"/>
+        <who rdf:resource="http://www.emarolab.it/cluedo-ontology#mrGreen"/>
+        <who rdf:resource="http://www.emarolab.it/cluedo-ontology#mrsWhite"/>
     </owl:Thing>
     
 
@@ -239,7 +268,14 @@
 
     <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#Hypothesis4">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#COMPLETED"/>
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <what rdf:resource="http://www.emarolab.it/cluedo-ontology#candlestick"/>
+        <what rdf:resource="http://www.emarolab.it/cluedo-ontology#spanner"/>
+        <where rdf:resource="http://www.emarolab.it/cluedo-ontology#diningRoom"/>
+        <where rdf:resource="http://www.emarolab.it/cluedo-ontology#hall"/>
+        <where rdf:resource="http://www.emarolab.it/cluedo-ontology#study"/>
+        <who rdf:resource="http://www.emarolab.it/cluedo-ontology#mrGreen"/>
         <who rdf:resource="http://www.emarolab.it/cluedo-ontology#profPlum"/>
     </owl:Thing>
     
@@ -251,16 +287,82 @@
     <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#Hypothesis5">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
-        <where rdf:resource="http://www.emarolab.it/cluedo-ontology#billiardRoom"/>
-        <who rdf:resource="http://www.emarolab.it/cluedo-ontology#missScarlett"/>
+        <what rdf:resource="http://www.emarolab.it/cluedo-ontology#dagger"/>
+        <where rdf:resource="http://www.emarolab.it/cluedo-ontology#library"/>
     </owl:Thing>
     
 
 
-    <!-- http://www.emarolab.it/cluedo-ontology#billiardRoom -->
+    <!-- http://www.emarolab.it/cluedo-ontology#bathroom -->
 
 
-    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#billiardRoom">
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#bathroom">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PLACE"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#candlestick -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#candlestick">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#WEAPON"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#colonelMustard -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#colonelMustard">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PERSON"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#conservatory -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#conservatory">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PLACE"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#dagger -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#dagger">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#WEAPON"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#diningRoom -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#diningRoom">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PLACE"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#hall -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#hall">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PLACE"/>
@@ -279,10 +381,65 @@
     
 
 
+    <!-- http://www.emarolab.it/cluedo-ontology#library -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#library">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PLACE"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#lounge -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#lounge">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PLACE"/>
+    </owl:Thing>
+    
+
+
     <!-- http://www.emarolab.it/cluedo-ontology#missScarlett -->
 
 
     <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#missScarlett">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PERSON"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#mrGreen -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#mrGreen">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PERSON"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#mrsPeacock -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#mrsPeacock">
+        <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
+        <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PERSON"/>
+    </owl:Thing>
+    
+
+
+    <!-- http://www.emarolab.it/cluedo-ontology#mrsWhite -->
+
+
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#mrsWhite">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#PERSON"/>
@@ -301,10 +458,10 @@
     
 
 
-    <!-- http://www.emarolab.it/cluedo-ontology#rope -->
+    <!-- http://www.emarolab.it/cluedo-ontology#revolver -->
 
 
-    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#rope">
+    <owl:Thing rdf:about="http://www.emarolab.it/cluedo-ontology#revolver">
         <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#HYPOTHESIS"/>
         <rdf:type rdf:resource="http://www.emarolab.it/cluedo-ontology#WEAPON"/>

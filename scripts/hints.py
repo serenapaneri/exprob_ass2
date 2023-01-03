@@ -8,10 +8,12 @@ from exprob_ass2.msg import ErlOracle
 from exprob_ass2.srv import HypoFound, HypoFoundResponse
 from exprob_ass2.srv import Complete, CompleteResponse, CompleteRequest
 
+
 ID = 0
 key = ''
 value = ''
 IDs = 0
+collected = False 
 hint_sub = None
 # armor client
 armor_interface = None
@@ -24,11 +26,11 @@ complete_hypotheses = []
 
 
 def hint_callback(msg):
-    global ID, key, value
+    global ID, key, value, collected 
     ID = msg.ID
     key = msg.key
     value = msg.value
-    return ID, key, value 
+    collected = True 
 
 
 def hypo_found_handle(req):
@@ -137,7 +139,7 @@ def complete():
 
       
 def main():
-    global ID, key, value, IDs, hint_sub, armor_interface, complete_hypotheses, hypo_found_srv, complete_srv, complete_, begin_
+    global ID, key, value, IDs, hint_sub, armor_interface, complete_hypotheses, hypo_found_srv, complete_srv, complete_, collected
     rospy.init_node('hints', anonymous = True)
     
     rospy.wait_for_service('armor_interface_srv')
@@ -155,40 +157,44 @@ def main():
     
     while not rospy.is_shutdown():
     
-        rospy.wait_for_message('/oracle_hint', ErlOracle)
-        if key == '' or value == '' or key == 'when' or value == '-1':
-            print('Malformed hint, the robot will discard this')
-        else:
-            print('Hint collected: {}, {}, {}'.format(ID, key, value))   
-            complete_ = False 
-            IDs = 0
-            # uploading the hint in the ontology
-            upload_hint(ID, key, value)
-            # check if completed hypotheses have been loaded in the ontology 
-            iscomplete = complete()
-            print('Checking now the completeness')
-            print(iscomplete.queried_objects)
-            if len(iscomplete.queried_objects) == 0:
-                print('There are not complete hypotheses yet')
-                complete_ = False
-            elif len(iscomplete.queried_objects) != 0:
-                complete_hypotheses.append(iscomplete.queried_objects)
-                # print(complete_hypotheses[-1])
-                if len(complete_hypotheses) < 2 :
-                    print('The fist complete hypothesis has been found')
-                    IDs = ID
-                    complete_ = True
-                else:
-                    if complete_hypotheses[-1] == complete_hypotheses[-2]:
-                        print('No new complete hypotheses')
-                        complete_ = False
-                    else:
-                        print('A new complete hypotheses has been added')
+        if collected == True:
+            if key == '' or value == '' or key == 'when' or value == '-1':
+                print('Malformed hint, the robot will discard this')
+            else:
+                print('Hint collected: {}, {}, {}'.format(ID, key, value))   
+                complete_ = False 
+                IDs = 0
+                # uploading the hint in the ontology
+                upload_hint(ID, key, value)
+                # check if completed hypotheses have been loaded in the ontology 
+                iscomplete = complete()
+                print('Checking now the completeness')
+                print(iscomplete.queried_objects)
+                if len(iscomplete.queried_objects) == 0:
+                    print('There are not complete hypotheses yet')
+                    complete_ = False
+                elif len(iscomplete.queried_objects) != 0:
+                    complete_hypotheses.append(iscomplete.queried_objects)
+                    # print(complete_hypotheses[-1])
+                    if len(complete_hypotheses) < 2 :
+                        print('The fist complete hypothesis has been found')
                         IDs = ID
-                        complete_ = True 
+                        complete_ = True
+                    else:
+                        if complete_hypotheses[-1] == complete_hypotheses[-2]:
+                            print('No new complete hypotheses')
+                            complete_ = False
+                        else:
+                            print('A new complete hypotheses has been added')
+                            IDs = ID
+                            complete_ = True 
 
-        # complete_ = False 
-        rate.sleep()
+            collected = False
+            rate.sleep()
+            
+        elif collected == False:
+            complete_ = False
+            rate.sleep()
 
 if __name__ == '__main__':
     main()

@@ -7,7 +7,6 @@
     oracle - oracle
 )
 (:init
-    (robot_at_wp cluedo_robot wp1)
 
 
 
@@ -17,6 +16,7 @@
     (move_wp wp4 wp1)
 
 
+    (initialization)
 
 
 

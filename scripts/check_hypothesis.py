@@ -34,9 +34,11 @@ def com(req):
     global start
     if (req.command == 'start'):
         start = True
+        return True
     elif (req.command == 'stop'):
         start = False
-    return start
+        return True
+    return False
 
     
 def winhypo_handle(req):
