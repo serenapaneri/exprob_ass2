@@ -6,7 +6,7 @@ from armor_msgs.srv import *
 from armor_msgs.msg import * 
 from exprob_ass2.msg import ErlOracle
 from exprob_ass2.srv import HypoFound, HypoFoundResponse
-from exprob_ass2.srv import Complete, CompleteResponse, CompleteRequest
+from exprob_ass2.srv import Complete, CompleteResponse
 
 
 ID = 0
@@ -38,6 +38,7 @@ def hypo_found_handle(req):
     res = HypoFoundResponse()
     res.IDs = IDs
     return res
+  
     
 def complete_handle(req):
     global complete_
@@ -189,6 +190,7 @@ def main():
                             IDs = ID
                             complete_ = True 
 
+            rospy.sleep(5)
             collected = False
             rate.sleep()
             

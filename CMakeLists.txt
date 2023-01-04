@@ -68,6 +68,7 @@ add_service_files(
    HypoFound.srv
    Command.srv
    Complete.srv
+   Consistent.srv
    WinHypo.srv
  )
 

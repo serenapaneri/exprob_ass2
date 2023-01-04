@@ -1,6 +1,7 @@
 #include "exprob_ass2/check_consistency.h"
 #include <unistd.h>
 #include <exprob_ass2/Command.h>
+#include <exprob_ass2/Consistent.h>
 
 namespace KCL_rosplan {
 
@@ -14,25 +15,30 @@ namespace KCL_rosplan {
         
         ros::NodeHandle n;
         ros::ServiceClient comm_client = n.serviceClient<exprob_ass2::Command>("comm");
+        exprob_ass2::Command comm_srv;
         
-        exprob_ass2::Command srv;
+        ros::NodeHandle hn;
+        ros::ServiceClient cons_client = hn.serviceClient<exprob_ass2::Consistent>("consistent");
+        exprob_ass2::Consistent cons_srv;
         
-        srv.request.command = "start";
-        comm_client.call(srv);
-        sleep(3.0);
+        comm_srv.request.command = "start";
         
-        if (srv.response.answer == true) {
+        comm_client.call(comm_srv);
+        sleep(2.0);
+        cons_client.call(cons_srv);
+        
+        if (cons_srv.response.consistent == true) {
         
             ROS_INFO("Action (%s) performed: completed!", msg->name.c_str());
-            srv.request.command = "stop";
-            comm_client.call(srv);
+            comm_srv.request.command = "stop";
+            comm_client.call(comm_srv);
             return true; 
         }
         
-        else if (srv.response.answer == false) {
+        else if (cons_srv.response.consistent == false) {
             ROS_INFO("Action (%s) not performed!", msg->name.c_str());
-            srv.request.command = "stop";
-            comm_client.call(srv);
+            comm_srv.request.command = "stop";
+            comm_client.call(comm_srv);
             return false;
         }
         
