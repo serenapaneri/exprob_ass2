@@ -1,0 +1,242 @@
+\hypertarget{hints_8py}{}\doxysection{scripts/hints.py File Reference}
+\label{hints_8py}\index{scripts/hints.py@{scripts/hints.py}}
+
+
+script that recieves all the hints and load them in to the ontology, moreover the completeness is evaluated.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{hints_8py_acd19fdd674f73112f0bd7efc8168d5d6}{hints.\+hint\+\_\+callback}} (msg)
+\begin{DoxyCompactList}\small\item\em Callback function of the hint\+\_\+sub subscriber. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hints_8py_a1079649c591db2be6ec82b396f11a061}{hints.\+hypo\+\_\+found\+\_\+handle}} (req)
+\begin{DoxyCompactList}\small\item\em Callback function of the hypo\+\_\+found\+\_\+srv service. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hints_8py_add1958cc73fb682182e720521de3acc9}{hints.\+complete\+\_\+handle}} (req)
+\begin{DoxyCompactList}\small\item\em Callback function of the complete\+\_\+srv service. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hints_8py_ad0e7dd524527dad771a1b3ae8ebd27f8}{hints.\+upload\+\_\+hint}} (I\+D\+\_\+, key\+\_\+, value\+\_\+)
+\begin{DoxyCompactList}\small\item\em Function to upload the hints recieved in the cluedo\+\_\+ontology. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hints_8py_a1aea3fa144bb17a5d81394e8af5158c1}{hints.\+reasoner}} ()
+\begin{DoxyCompactList}\small\item\em The reasoner of the ontology. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hints_8py_a13974fb07eab51b0a053f48c6faed3c2}{hints.\+apply\+\_\+}} ()
+\begin{DoxyCompactList}\small\item\em It is the apply command of armor. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hints_8py_afb0e3e969137941b29b77d62c62a877d}{hints.\+complete}} ()
+\begin{DoxyCompactList}\small\item\em It is the query command to retrieve an individual from a class. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{hints_8py_aef6aba64ed2648976f2dadd9df18e313}{hints.\+main}} ()
+\begin{DoxyCompactList}\small\item\em The main function initializes the node and handles the client of the A\+R\+M\+OR service, the hint subscriber, the complete service and the hypo\+\_\+found service. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{hints_8py_a3399c595794cc9ee8d1c08762e81bc4b}\label{hints_8py_a3399c595794cc9ee8d1c08762e81bc4b}} 
+{\bfseries hints.\+hint\+\_\+sub} = None
+\item 
+\mbox{\Hypertarget{hints_8py_a3e2b246e4447c83c133b937757d97927}\label{hints_8py_a3e2b246e4447c83c133b937757d97927}} 
+{\bfseries hints.\+armor\+\_\+interface} = None
+\item 
+\mbox{\Hypertarget{hints_8py_a00b63f3ed30752cce24f911c3309d770}\label{hints_8py_a00b63f3ed30752cce24f911c3309d770}} 
+{\bfseries hints.\+hypo\+\_\+found\+\_\+srv} = None
+\item 
+\mbox{\Hypertarget{hints_8py_ae7a1c14fd78d3768e5cd439105666670}\label{hints_8py_ae7a1c14fd78d3768e5cd439105666670}} 
+{\bfseries hints.\+complete\+\_\+srv} = None
+\item 
+\mbox{\Hypertarget{hints_8py_aeae0c7764b5aab08838c79254cee7a36}\label{hints_8py_aeae0c7764b5aab08838c79254cee7a36}} 
+int {\bfseries hints.\+ID} = 0
+\item 
+\mbox{\Hypertarget{hints_8py_afdc3cb858497c036e467377adbd5d3d9}\label{hints_8py_afdc3cb858497c036e467377adbd5d3d9}} 
+string {\bfseries hints.\+key} = \textquotesingle{}\textquotesingle{}
+\item 
+\mbox{\Hypertarget{hints_8py_a4a0b71ccb223cb6bacbef93f6755dfff}\label{hints_8py_a4a0b71ccb223cb6bacbef93f6755dfff}} 
+string {\bfseries hints.\+value} = \textquotesingle{}\textquotesingle{}
+\item 
+\mbox{\Hypertarget{hints_8py_a27861f5cb2b978b2a6cbd9b49523ce04}\label{hints_8py_a27861f5cb2b978b2a6cbd9b49523ce04}} 
+int {\bfseries hints.\+I\+Ds} = 0
+\item 
+\mbox{\Hypertarget{hints_8py_a3edb1c1f68e550554da6e1206e4d3d01}\label{hints_8py_a3edb1c1f68e550554da6e1206e4d3d01}} 
+bool {\bfseries hints.\+collected} = False
+\item 
+\mbox{\Hypertarget{hints_8py_af7f20d4b2cc7e453da583c58eaef96af}\label{hints_8py_af7f20d4b2cc7e453da583c58eaef96af}} 
+bool {\bfseries hints.\+complete\+\_\+} = False
+\item 
+\mbox{\Hypertarget{hints_8py_a05c77c1a547cbcc1b1ad12b110f3db70}\label{hints_8py_a05c77c1a547cbcc1b1ad12b110f3db70}} 
+list {\bfseries hints.\+complete\+\_\+hypotheses} = \mbox{[}$\,$\mbox{]}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+script that recieves all the hints and load them in to the ontology, moreover the completeness is evaluated. 
+
+\begin{DoxyAuthor}{Author}
+Serena Paneri 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+5/1/2023
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ /oracle\+\_\+hint
+
+Publishes to\+: ~\newline
+ None
+
+Serivces\+: ~\newline
+ hypo\+\_\+\+ID complete
+
+Client Services\+: ~\newline
+ armor\+\_\+interface\+\_\+srv
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ In this node are handled the client of the A\+R\+M\+OR service, the hint subscriber, the complete service and the hypo\+\_\+found service. It menages the flow of hints recieved, evaluating if they are malformed hints, and in this case they will be discarded and not uploaded in the ontology, and check the completeness of the current hypothesis that have been found till that moment. With the complete service it communicates with the complete client in the check\+\_\+complete node to see if a replanning is needed Indeed at every waypoint the completeness is checked and if there are not complete hypotheses yet, or new complete hypotheses the rosplan perform a replanning. Instead if a new complete hypothesis is found it keeps going with the current plan. There are also the reasoner and the apply function that directly communicate with the ontology in order to apply the changes and update the knowledge everytime that a new hint is uploaded. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{hints_8py_a13974fb07eab51b0a053f48c6faed3c2}\label{hints_8py_a13974fb07eab51b0a053f48c6faed3c2}} 
+\index{hints.py@{hints.py}!apply\_@{apply\_}}
+\index{apply\_@{apply\_}!hints.py@{hints.py}}
+\doxysubsubsection{\texorpdfstring{apply\_()}{apply\_()}}
+{\footnotesize\ttfamily def hints.\+apply\+\_\+ (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+It is the apply command of armor. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None
+\end{DoxyReturn}
+This function apply the changes done to the ontology. ~\newline
+ \mbox{\Hypertarget{hints_8py_afb0e3e969137941b29b77d62c62a877d}\label{hints_8py_afb0e3e969137941b29b77d62c62a877d}} 
+\index{hints.py@{hints.py}!complete@{complete}}
+\index{complete@{complete}!hints.py@{hints.py}}
+\doxysubsubsection{\texorpdfstring{complete()}{complete()}}
+{\footnotesize\ttfamily def hints.\+complete (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+It is the query command to retrieve an individual from a class. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: res
+\end{DoxyReturn}
+This functions returns, if there are any, the individuals of the class C\+O\+M\+P\+L\+E\+T\+ED of the ontology. \mbox{\Hypertarget{hints_8py_add1958cc73fb682182e720521de3acc9}\label{hints_8py_add1958cc73fb682182e720521de3acc9}} 
+\index{hints.py@{hints.py}!complete\_handle@{complete\_handle}}
+\index{complete\_handle@{complete\_handle}!hints.py@{hints.py}}
+\doxysubsubsection{\texorpdfstring{complete\_handle()}{complete\_handle()}}
+{\footnotesize\ttfamily def hints.\+complete\+\_\+handle (\begin{DoxyParamCaption}\item[{}]{req }\end{DoxyParamCaption})}
+
+
+
+Callback function of the complete\+\_\+srv service. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & req, Complete\+Request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: res, Complete\+Response
+\end{DoxyReturn}
+This function is the callback function of the complete\+\_\+srv service. It simply send a boolean value everytime a new hint is recieved. It will be set equal to true onlty when a new complete hypothesis is found, advertising the client node \mbox{\hyperlink{check__complete_8cpp}{check\+\_\+complete.\+cpp}} to see if a replanning is needed or not. \mbox{\Hypertarget{hints_8py_acd19fdd674f73112f0bd7efc8168d5d6}\label{hints_8py_acd19fdd674f73112f0bd7efc8168d5d6}} 
+\index{hints.py@{hints.py}!hint\_callback@{hint\_callback}}
+\index{hint\_callback@{hint\_callback}!hints.py@{hints.py}}
+\doxysubsubsection{\texorpdfstring{hint\_callback()}{hint\_callback()}}
+{\footnotesize\ttfamily def hints.\+hint\+\_\+callback (\begin{DoxyParamCaption}\item[{}]{msg }\end{DoxyParamCaption})}
+
+
+
+Callback function of the hint\+\_\+sub subscriber. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & msg \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None
+\end{DoxyReturn}
+This function is the callback function of the subscriber hint\+\_\+sub. It collects and store all the fields of the message recieved and also set the global variable \char`\"{}collected\char`\"{} to true when a new message is recieved. \mbox{\Hypertarget{hints_8py_a1079649c591db2be6ec82b396f11a061}\label{hints_8py_a1079649c591db2be6ec82b396f11a061}} 
+\index{hints.py@{hints.py}!hypo\_found\_handle@{hypo\_found\_handle}}
+\index{hypo\_found\_handle@{hypo\_found\_handle}!hints.py@{hints.py}}
+\doxysubsubsection{\texorpdfstring{hypo\_found\_handle()}{hypo\_found\_handle()}}
+{\footnotesize\ttfamily def hints.\+hypo\+\_\+found\+\_\+handle (\begin{DoxyParamCaption}\item[{}]{req }\end{DoxyParamCaption})}
+
+
+
+Callback function of the hypo\+\_\+found\+\_\+srv service. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & req, Hypo\+Found\+Request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: res, Hypo\+Found\+Response
+\end{DoxyReturn}
+This function is the callback function of the service hypo\+\_\+found\+\_\+srv. When called it simply send the ID of the hint just recieved. \mbox{\Hypertarget{hints_8py_aef6aba64ed2648976f2dadd9df18e313}\label{hints_8py_aef6aba64ed2648976f2dadd9df18e313}} 
+\index{hints.py@{hints.py}!main@{main}}
+\index{main@{main}!hints.py@{hints.py}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def hints.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The main function initializes the node and handles the client of the A\+R\+M\+OR service, the hint subscriber, the complete service and the hypo\+\_\+found service. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None
+\end{DoxyReturn}
+This is the main function of the node where the node is initialized and handles the client of the A\+R\+M\+OR service, the hint subscriber, the complete service and the hypo\+\_\+found service. Moreover it menages the flow of hints recieved, evaluating if they are malformed hints, and in this case they will be discarded and not uploaded in the ontology, and check the completeness of the current hypothesis that have been found till that moment. With the complete service it communicates with the complete client in the check\+\_\+complete node to see if a replanning is needed. Indeed at every waypoint the completeness is checked and if there are not complete hypotheses yet, or new complete hypotheses the rosplan perform a replanning. Instead if a new complete hypothesis is found it keeps going with the actual plan. \mbox{\Hypertarget{hints_8py_a1aea3fa144bb17a5d81394e8af5158c1}\label{hints_8py_a1aea3fa144bb17a5d81394e8af5158c1}} 
+\index{hints.py@{hints.py}!reasoner@{reasoner}}
+\index{reasoner@{reasoner}!hints.py@{hints.py}}
+\doxysubsubsection{\texorpdfstring{reasoner()}{reasoner()}}
+{\footnotesize\ttfamily def hints.\+reasoner (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+The reasoner of the ontology. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None
+\end{DoxyReturn}
+This function implements the reasoner of the ontology that needs to be started in order to update the knowledge of the ontology. \mbox{\Hypertarget{hints_8py_ad0e7dd524527dad771a1b3ae8ebd27f8}\label{hints_8py_ad0e7dd524527dad771a1b3ae8ebd27f8}} 
+\index{hints.py@{hints.py}!upload\_hint@{upload\_hint}}
+\index{upload\_hint@{upload\_hint}!hints.py@{hints.py}}
+\doxysubsubsection{\texorpdfstring{upload\_hint()}{upload\_hint()}}
+{\footnotesize\ttfamily def hints.\+upload\+\_\+hint (\begin{DoxyParamCaption}\item[{}]{I\+D\+\_\+,  }\item[{}]{key\+\_\+,  }\item[{}]{value\+\_\+ }\end{DoxyParamCaption})}
+
+
+
+Function to upload the hints recieved in the cluedo\+\_\+ontology. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & I\+D\+\_\+, key\+\_\+, value\+\_\+ \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None
+\end{DoxyReturn}
+This function is used to upload every hints recieved from the environment in the cluedo\+\_\+ontology. ~\newline
+ 

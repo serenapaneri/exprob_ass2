@@ -8,10 +8,10 @@ b (6.000 | 10.000)b (5.000 | 15.001)b (4.000 | 20.002)b (3.000 | 25.003)b (2.000
 ; States evaluated: 8
 ; Cost: 40.006
 ; Time 0.00
-0.000: (go_to_waypoint cluedo_robot wp3 wp4)  [10.000]
-10.001: (move_arm cluedo_robot wp4)  [5.000]
-15.002: (check_complete cluedo_robot wp4)  [5.000]
-15.003: (go_home cluedo_robot wp4 home)  [10.000]
+0.000: (go_to_waypoint cluedo_robot wp2 wp3)  [10.000]
+10.001: (move_arm cluedo_robot wp3)  [5.000]
+15.002: (check_complete cluedo_robot wp3)  [5.000]
+15.003: (go_home cluedo_robot wp3 home)  [10.000]
 25.004: (check_consistency cluedo_robot home)  [5.000]
 25.005: (go_oracle cluedo_robot home oracle)  [10.000]
 35.006: (oracle cluedo_robot oracle)  [5.000]

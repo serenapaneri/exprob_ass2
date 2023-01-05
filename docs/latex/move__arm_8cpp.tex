@@ -1,0 +1,90 @@
+\hypertarget{move__arm_8cpp}{}\doxysection{src/move\+\_\+arm.cpp File Reference}
+\label{move__arm_8cpp}\index{src/move\_arm.cpp@{src/move\_arm.cpp}}
+
+
+this node implements the move\+\_\+arm action.  
+
+
+{\ttfamily \#include \char`\"{}exprob\+\_\+ass2/move\+\_\+arm.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/move\+\_\+group\+\_\+interface/move\+\_\+group\+\_\+interface.\+h$>$}\newline
+Include dependency graph for move\+\_\+arm.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{move__arm_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{move__arm_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Main function of the move\+\_\+arm action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{move__arm_8cpp_adc463dcceedde7867915f81c8218c9cc}\label{move__arm_8cpp_adc463dcceedde7867915f81c8218c9cc}} 
+double {\bfseries marker\+\_\+z1} = 0.\+0
+\item 
+\mbox{\Hypertarget{move__arm_8cpp_a4e548a1c14afb5771ccec66772c00a6f}\label{move__arm_8cpp_a4e548a1c14afb5771ccec66772c00a6f}} 
+double {\bfseries marker\+\_\+z2} = 0.\+0
+\item 
+\mbox{\Hypertarget{move__arm_8cpp_a0c5c09eda0d71980588665ffeba32306}\label{move__arm_8cpp_a0c5c09eda0d71980588665ffeba32306}} 
+double {\bfseries marker\+\_\+z3} = 0.\+0
+\item 
+\mbox{\Hypertarget{move__arm_8cpp_a1a19c13fedd8eff486df6f10d472422a}\label{move__arm_8cpp_a1a19c13fedd8eff486df6f10d472422a}} 
+double {\bfseries marker\+\_\+z4} = 0.\+0
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+this node implements the move\+\_\+arm action. 
+
+\begin{DoxyAuthor}{Author}
+Serena Paneri 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+5/1/2023
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ None
+
+Publishes to\+: ~\newline
+ None
+
+Serivces\+: ~\newline
+ None
+
+Client Services\+: ~\newline
+ None
+
+Action Client\+: ~\newline
+ None
+
+Description\+: ~\newline
+ In this node is implemented the move\+\_\+arm action of the rosplan. This node makes the arm of the robot robot move in a high or a low pose, depending on the value retrieved by the parameter server, that way previously set in the start\+\_\+game action. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{move__arm_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{move__arm_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{move\_arm.cpp@{move\_arm.cpp}!main@{main}}
+\index{main@{main}!move\_arm.cpp@{move\_arm.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Main function of the move\+\_\+arm action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This is the main function of the move\+\_\+arm action, where the node is initialized. Moreover there is the Move\+Arm\+Interface to execute the real action as an action of the rosplan. 

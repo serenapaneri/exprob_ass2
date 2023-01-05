@@ -1,0 +1,204 @@
+\hypertarget{start__game_8cpp}{}\doxysection{src/start\+\_\+game.cpp File Reference}
+\label{start__game_8cpp}\index{src/start\_game.cpp@{src/start\_game.cpp}}
+
+
+this node implements the start\+\_\+game action.  
+
+
+{\ttfamily \#include \char`\"{}exprob\+\_\+ass2/start\+\_\+game.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/move\+\_\+group\+\_\+interface/move\+\_\+group\+\_\+interface.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$exprob\+\_\+ass2/\+Target\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$exprob\+\_\+ass2/\+Erl\+Oracle.\+h$>$}\newline
+Include dependency graph for start\+\_\+game.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{start__game_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+void \mbox{\hyperlink{start__game_8cpp_ae8742f55cc6fb01cc646b1646808b1c7}{hint\+\_\+callback}} (const exprob\+\_\+ass2\+::\+Erl\+Oracle\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em Callback function of the subscriber to the /oracle\+\_\+hint topic. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{start__game_8cpp_ac0eda1ee290b35c91ae3e8a4224c3083}{move\+\_\+to}} (double xpos, double ypos, double orientation)
+\begin{DoxyCompactList}\small\item\em Function to make the robot move in the enviornment. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{start__game_8cpp_aba68c5d88b43bf85a3b20441ba370229}{default\+\_\+pose}} ()
+\begin{DoxyCompactList}\small\item\em Function to move the arm in the default position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{start__game_8cpp_ada5a3bd00aa0de489085f99334d22d68}{high\+\_\+pose}} ()
+\begin{DoxyCompactList}\small\item\em Function to move the arm in the high position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{start__game_8cpp_aaab7523dc18170184179915b180cd87a}{low\+\_\+pose}} ()
+\begin{DoxyCompactList}\small\item\em Function to move the arm in the low position. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{start__game_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Main function of the start\+\_\+game action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{start__game_8cpp_a0b272e217c5e30fa3cbfc54c7cf34cb2}\label{start__game_8cpp_a0b272e217c5e30fa3cbfc54c7cf34cb2}} 
+ros\+::\+Subscriber {\bfseries hint\+\_\+sub}
+\item 
+\mbox{\Hypertarget{start__game_8cpp_adc463dcceedde7867915f81c8218c9cc}\label{start__game_8cpp_adc463dcceedde7867915f81c8218c9cc}} 
+double {\bfseries marker\+\_\+z1} = 0.\+0
+\item 
+\mbox{\Hypertarget{start__game_8cpp_a4e548a1c14afb5771ccec66772c00a6f}\label{start__game_8cpp_a4e548a1c14afb5771ccec66772c00a6f}} 
+double {\bfseries marker\+\_\+z2} = 0.\+0
+\item 
+\mbox{\Hypertarget{start__game_8cpp_a0c5c09eda0d71980588665ffeba32306}\label{start__game_8cpp_a0c5c09eda0d71980588665ffeba32306}} 
+double {\bfseries marker\+\_\+z3} = 0.\+0
+\item 
+\mbox{\Hypertarget{start__game_8cpp_a1a19c13fedd8eff486df6f10d472422a}\label{start__game_8cpp_a1a19c13fedd8eff486df6f10d472422a}} 
+double {\bfseries marker\+\_\+z4} = 0.\+0
+\item 
+\mbox{\Hypertarget{start__game_8cpp_a9823843215c625c9eb29b35b7f153c98}\label{start__game_8cpp_a9823843215c625c9eb29b35b7f153c98}} 
+bool {\bfseries collected} = false
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+this node implements the start\+\_\+game action. 
+
+\begin{DoxyAuthor}{Author}
+Serena Paneri 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+5/1/2023
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ /oracle\+\_\+hint
+
+Publishes to\+: ~\newline
+ None
+
+Serivces\+: ~\newline
+ None
+
+Client Services\+: ~\newline
+ None
+
+Action Client\+: ~\newline
+ /go\+\_\+to\+\_\+point
+
+Description\+: ~\newline
+ In this node is implemented the first action of the plan when the simulation starts. This node simply perform a complete first tour moving the arm both in the high position and then in the low position. This is done only to know the z poistion of the sphere in the environment, in a way that, in the following rounds the robot already knows the position of those spheres and positions directly in the right position. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{start__game_8cpp_aba68c5d88b43bf85a3b20441ba370229}\label{start__game_8cpp_aba68c5d88b43bf85a3b20441ba370229}} 
+\index{start\_game.cpp@{start\_game.cpp}!default\_pose@{default\_pose}}
+\index{default\_pose@{default\_pose}!start\_game.cpp@{start\_game.cpp}}
+\doxysubsubsection{\texorpdfstring{default\_pose()}{default\_pose()}}
+{\footnotesize\ttfamily int default\+\_\+pose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function to move the arm in the default position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function uses the output of the moveit setup assistant in order to set the robotic arm into the default position, that is a pose created with moveit. \mbox{\Hypertarget{start__game_8cpp_ada5a3bd00aa0de489085f99334d22d68}\label{start__game_8cpp_ada5a3bd00aa0de489085f99334d22d68}} 
+\index{start\_game.cpp@{start\_game.cpp}!high\_pose@{high\_pose}}
+\index{high\_pose@{high\_pose}!start\_game.cpp@{start\_game.cpp}}
+\doxysubsubsection{\texorpdfstring{high\_pose()}{high\_pose()}}
+{\footnotesize\ttfamily int high\+\_\+pose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function to move the arm in the high position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function uses the output of the moveit setup assistant in order to set the robotic arm into the high position, that is a pose created with moveit. \mbox{\Hypertarget{start__game_8cpp_ae8742f55cc6fb01cc646b1646808b1c7}\label{start__game_8cpp_ae8742f55cc6fb01cc646b1646808b1c7}} 
+\index{start\_game.cpp@{start\_game.cpp}!hint\_callback@{hint\_callback}}
+\index{hint\_callback@{hint\_callback}!start\_game.cpp@{start\_game.cpp}}
+\doxysubsubsection{\texorpdfstring{hint\_callback()}{hint\_callback()}}
+{\footnotesize\ttfamily void hint\+\_\+callback (\begin{DoxyParamCaption}\item[{const exprob\+\_\+ass2\+::\+Erl\+Oracle\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+Callback function of the subscriber to the /oracle\+\_\+hint topic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & message that contains the hint \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+This is the callback function of the subscriber to the /oracle\+\_\+hint topic. In this case the message is not collected but a variable is set to true when a message is recieved. \mbox{\Hypertarget{start__game_8cpp_aaab7523dc18170184179915b180cd87a}\label{start__game_8cpp_aaab7523dc18170184179915b180cd87a}} 
+\index{start\_game.cpp@{start\_game.cpp}!low\_pose@{low\_pose}}
+\index{low\_pose@{low\_pose}!start\_game.cpp@{start\_game.cpp}}
+\doxysubsubsection{\texorpdfstring{low\_pose()}{low\_pose()}}
+{\footnotesize\ttfamily int low\+\_\+pose (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Function to move the arm in the low position. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This function uses the output of the moveit setup assistant in order to set the robotic arm into the low position, that is a pose created with moveit. \mbox{\Hypertarget{start__game_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{start__game_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{start\_game.cpp@{start\_game.cpp}!main@{main}}
+\index{main@{main}!start\_game.cpp@{start\_game.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Main function of the start\+\_\+game action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This is the main function of the start game\+\_\+action, where the node is initialized and the subscriber of the oracle\+\_\+hint is implemented. Moreover there is the Start\+Game\+Interface to execute the real action as an action of the rosplan. \mbox{\Hypertarget{start__game_8cpp_ac0eda1ee290b35c91ae3e8a4224c3083}\label{start__game_8cpp_ac0eda1ee290b35c91ae3e8a4224c3083}} 
+\index{start\_game.cpp@{start\_game.cpp}!move\_to@{move\_to}}
+\index{move\_to@{move\_to}!start\_game.cpp@{start\_game.cpp}}
+\doxysubsubsection{\texorpdfstring{move\_to()}{move\_to()}}
+{\footnotesize\ttfamily void move\+\_\+to (\begin{DoxyParamCaption}\item[{double}]{xpos,  }\item[{double}]{ypos,  }\item[{double}]{orientation }\end{DoxyParamCaption})}
+
+
+
+Function to make the robot move in the enviornment. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xpos} & x position in the environment \\
+\hline
+{\em ypos} & y position in the environment \\
+\hline
+{\em orientation} & desired orientation in the environment \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+This function implement an action client in order to make the robot move within the environment that allows also to stop immediatly the behavior of the robot when this node is stopped. 

@@ -1,0 +1,57 @@
+\hypertarget{class_k_c_l__rosplan_1_1_go_to_waypoint_interface}{}\doxysection{K\+C\+L\+\_\+rosplan\+::Go\+To\+Waypoint\+Interface Class Reference}
+\label{class_k_c_l__rosplan_1_1_go_to_waypoint_interface}\index{KCL\_rosplan::GoToWaypointInterface@{KCL\_rosplan::GoToWaypointInterface}}
+
+
+Inheritance diagram for K\+C\+L\+\_\+rosplan\+::Go\+To\+Waypoint\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{class_k_c_l__rosplan_1_1_go_to_waypoint_interface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for K\+C\+L\+\_\+rosplan\+::Go\+To\+Waypoint\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=232pt]{class_k_c_l__rosplan_1_1_go_to_waypoint_interface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_go_to_waypoint_interface_a055abd18ad62962e0e269112631d6cb5}\label{class_k_c_l__rosplan_1_1_go_to_waypoint_interface_a055abd18ad62962e0e269112631d6cb5}} 
+{\bfseries Go\+To\+Waypoint\+Interface} (ros\+::\+Node\+Handle \&nh)
+\item 
+bool \mbox{\hyperlink{class_k_c_l__rosplan_1_1_go_to_waypoint_interface_a53cc059f56eafca75217adaf695b31d5}{concrete\+Callback}} (const rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em Callback of the go\+\_\+to\+\_\+waypoint action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_go_to_waypoint_interface_a53cc059f56eafca75217adaf695b31d5}\label{class_k_c_l__rosplan_1_1_go_to_waypoint_interface_a53cc059f56eafca75217adaf695b31d5}} 
+\index{KCL\_rosplan::GoToWaypointInterface@{KCL\_rosplan::GoToWaypointInterface}!concreteCallback@{concreteCallback}}
+\index{concreteCallback@{concreteCallback}!KCL\_rosplan::GoToWaypointInterface@{KCL\_rosplan::GoToWaypointInterface}}
+\doxysubsubsection{\texorpdfstring{concreteCallback()}{concreteCallback()}}
+{\footnotesize\ttfamily bool K\+C\+L\+\_\+rosplan\+::\+Go\+To\+Waypoint\+Interface\+::concrete\+Callback (\begin{DoxyParamCaption}\item[{const rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+Callback of the go\+\_\+to\+\_\+waypoint action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & message from the plan\+\_\+dispatcher \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true
+\end{DoxyReturn}
+This function implements the beahvior of the robot when the action go\+\_\+to\+\_\+waypointy is executed. This action allows the robot to move within the environment, in particular from one waypoint to another one. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/exprob\+\_\+ass2/go\+\_\+to\+\_\+waypoint.\+h\item 
+src/\mbox{\hyperlink{go__to__waypoint_8cpp}{go\+\_\+to\+\_\+waypoint.\+cpp}}\end{DoxyCompactItemize}

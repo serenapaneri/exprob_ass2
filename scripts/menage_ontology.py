@@ -7,7 +7,7 @@
 #
 # \author Serena Paneri
 # \version 1.0
-# \date 11/11/2022
+# \date 5/1/2023
 # \details
 #
 # Subscribes to: <BR>
@@ -26,9 +26,8 @@
 #     None
 #
 # Description: <BR>
-#    In this node are defined all the list of individuals, divided in people, weapons and places.
-#    In addition we also have a list that contains all the possible ID associated to each hypothesis
-#    of the game, and the values of all those lists are stored in a parameter server.
+#    In this node are defined all the list of individuals, divided in people, weapons and places, 
+#    the values of all those lists are stored in a parameter server.
 #    This node contains a client for the ARMOR service, to be able to menage the cluedo_ontology.
 #    In this node, in particular, the cluedo_ontology is loaded, all the individuals of the
 #    game are upload in the ontology, thus forming the TBox of the ontology, the individuals of each
@@ -37,7 +36,6 @@
 
 import rospy
 import random
-from random import randint
 from armor_msgs.srv import *
 from armor_msgs.msg import * 
 
@@ -46,6 +44,7 @@ people = ["missScarlett", "colonelMustard", "mrsWhite", "mrGreen", "mrsPeacock",
 weapons = ["candlestick", "dagger", "leadPipe", "revolver", "rope", "spanner"]
 places = ["conservatory", "lounge", "kitchen", "library", "hall", "study", "bathroom", "diningRoom", "billiardRoom"]
 
+# armor client
 armor_interface = None
 
 ##
@@ -186,6 +185,7 @@ def reasoner():
     req.secondary_command_spec = ''
     msg = armor_interface(req)
     res = msg.armor_response
+
     
 if __name__ == '__main__':
     main()

@@ -1,5 +1,40 @@
 #!/usr/bin/env python
 
+## @package exprob_ass2
+#
+# \file plan_execution.py
+# \brief script that menages the execution of the rosplan.
+#
+# \author Serena Paneri
+# \version 1.0
+# \date 5/1/2023
+# \details
+#
+# Subscribes to: <BR>
+#     None
+#
+# Publishes to: <BR>
+#     None
+#
+# Serivces: <BR>
+#     None
+#
+# Client Services: <BR>
+#     armor_interface_srv
+#     /rosplan_problem_interface/problem_generation_server
+#     /rosplan_planner_interface/planning_server
+#     /rosplan_parsing_interface/parse_plan
+#     /rosplan_plan_dispatcher/dispatch_plan
+#
+# Action Services: <BR>
+#     None
+#
+# Description: <BR>
+#     In this node all the services of the rosplan are called in order to execute the current plan generated
+#     automatically, thanks to those services, from the domain and the problem files provided. Since all those
+#     services are called within a loop, everytime that the plan_dispatcher service returns that the plan has
+#     failed, the replanning is automatically started. 
+
 import rospy
 import time
 from armor_msgs.srv import * 
@@ -28,14 +63,19 @@ def save():
     req.command = 'SAVE'
     req.primary_command_spec = 'INFERENCE'
     req.secondary_command_spec = ''
-    req.args = ['/root/ros_ws/src/exprob_ass2/aaaaaaa.owl']
+    req.args = ['/root/ros_ws/src/exprob_ass2/final_ontology_inferred.owl']
     msg = armor_interface(req)
     res = msg.armor_response
     print('The new ontology has been saved under the name final_ontology_inferred.owl')
     
 
-#   This function initializes all of the needed services, then it calculates a new plan
-#   until the robot is able to fuòòy complete one. 
+##
+# \brief Main function of the node in which the node is initialized and all the rosplan services are called.
+# \param: None
+# \return: None
+#
+# This is the main function of the node, where the node is initialized and all the rosplan services are called.
+# In case of the fail of the plan, the replanning is automatically started.
 def main():
 
     global rosplan_success, rosplan_goal, armor_interface

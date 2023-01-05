@@ -1,0 +1,57 @@
+\hypertarget{class_k_c_l__rosplan_1_1_check_complete_interface}{}\doxysection{K\+C\+L\+\_\+rosplan\+::Check\+Complete\+Interface Class Reference}
+\label{class_k_c_l__rosplan_1_1_check_complete_interface}\index{KCL\_rosplan::CheckCompleteInterface@{KCL\_rosplan::CheckCompleteInterface}}
+
+
+Inheritance diagram for K\+C\+L\+\_\+rosplan\+::Check\+Complete\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{class_k_c_l__rosplan_1_1_check_complete_interface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for K\+C\+L\+\_\+rosplan\+::Check\+Complete\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=239pt]{class_k_c_l__rosplan_1_1_check_complete_interface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_check_complete_interface_aca186442b25e14ae90cbe179d288cca1}\label{class_k_c_l__rosplan_1_1_check_complete_interface_aca186442b25e14ae90cbe179d288cca1}} 
+{\bfseries Check\+Complete\+Interface} (ros\+::\+Node\+Handle \&nh)
+\item 
+bool \mbox{\hyperlink{class_k_c_l__rosplan_1_1_check_complete_interface_a44c14c99c22a0518ca0a53af088f8fc7}{concrete\+Callback}} (const rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em Callback of the check\+\_\+complete action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_check_complete_interface_a44c14c99c22a0518ca0a53af088f8fc7}\label{class_k_c_l__rosplan_1_1_check_complete_interface_a44c14c99c22a0518ca0a53af088f8fc7}} 
+\index{KCL\_rosplan::CheckCompleteInterface@{KCL\_rosplan::CheckCompleteInterface}!concreteCallback@{concreteCallback}}
+\index{concreteCallback@{concreteCallback}!KCL\_rosplan::CheckCompleteInterface@{KCL\_rosplan::CheckCompleteInterface}}
+\doxysubsubsection{\texorpdfstring{concreteCallback()}{concreteCallback()}}
+{\footnotesize\ttfamily bool K\+C\+L\+\_\+rosplan\+::\+Check\+Complete\+Interface\+::concrete\+Callback (\begin{DoxyParamCaption}\item[{const rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+Callback of the check\+\_\+complete action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & message from the plan\+\_\+dispatcher \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true
+\end{DoxyReturn}
+This function implements the beahvior of the robot when the action check\+\_\+complete is executed. This action is performed at every waypoint after the move\+\_\+arm action. To know if there are new complete hypothesis a client to the complete service is implemented. If the information given by the client is true then the plan can go on and can proceed with the check of the consistency, if insted the information given by the client is false, then a replanning is needed, and the robot will continue to explore the waypoints while collecting new hints. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/exprob\+\_\+ass2/check\+\_\+complete.\+h\item 
+src/\mbox{\hyperlink{check__complete_8cpp}{check\+\_\+complete.\+cpp}}\end{DoxyCompactItemize}

@@ -1,0 +1,57 @@
+\hypertarget{class_k_c_l__rosplan_1_1_go_oracle_interface}{}\doxysection{K\+C\+L\+\_\+rosplan\+::Go\+Oracle\+Interface Class Reference}
+\label{class_k_c_l__rosplan_1_1_go_oracle_interface}\index{KCL\_rosplan::GoOracleInterface@{KCL\_rosplan::GoOracleInterface}}
+
+
+Inheritance diagram for K\+C\+L\+\_\+rosplan\+::Go\+Oracle\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{class_k_c_l__rosplan_1_1_go_oracle_interface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for K\+C\+L\+\_\+rosplan\+::Go\+Oracle\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=250pt]{class_k_c_l__rosplan_1_1_go_oracle_interface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_go_oracle_interface_acee3376417bec5a311dc3aaaff2a7240}\label{class_k_c_l__rosplan_1_1_go_oracle_interface_acee3376417bec5a311dc3aaaff2a7240}} 
+{\bfseries Go\+Oracle\+Interface} (ros\+::\+Node\+Handle \&nh)
+\item 
+bool \mbox{\hyperlink{class_k_c_l__rosplan_1_1_go_oracle_interface_a91c16f17df551eaccf6125ab59a5047d}{concrete\+Callback}} (const rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em Callback of the go\+\_\+oracle action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_go_oracle_interface_a91c16f17df551eaccf6125ab59a5047d}\label{class_k_c_l__rosplan_1_1_go_oracle_interface_a91c16f17df551eaccf6125ab59a5047d}} 
+\index{KCL\_rosplan::GoOracleInterface@{KCL\_rosplan::GoOracleInterface}!concreteCallback@{concreteCallback}}
+\index{concreteCallback@{concreteCallback}!KCL\_rosplan::GoOracleInterface@{KCL\_rosplan::GoOracleInterface}}
+\doxysubsubsection{\texorpdfstring{concreteCallback()}{concreteCallback()}}
+{\footnotesize\ttfamily bool K\+C\+L\+\_\+rosplan\+::\+Go\+Oracle\+Interface\+::concrete\+Callback (\begin{DoxyParamCaption}\item[{const rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+Callback of the go\+\_\+oracle action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & message from the plan\+\_\+dispatcher \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true
+\end{DoxyReturn}
+This function implements the beahvior of the robot when the action go\+\_\+oracle is executed. This action allows the robot to move within the environment, in particular from one of the four waypoints to the oracle room. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/exprob\+\_\+ass2/go\+\_\+oracle.\+h\item 
+src/\mbox{\hyperlink{go__oracle_8cpp}{go\+\_\+oracle.\+cpp}}\end{DoxyCompactItemize}

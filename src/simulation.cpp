@@ -1,7 +1,7 @@
 /** @package exprob_ass2
 *
 * \file simulation.cpp
-* \brief this node implements
+* \brief this node implements the rviz configuration and it generates and pubblish the hints of the game.
 *
 * \author Serena Paneri
 * \version 1.0
@@ -88,6 +88,7 @@ std::vector<exprob_ass2::ErlOracle> oracle_msgs;
 * This function computes the distance between the actual 3D position and the 3D position of the target.
 */
 double distfromtarget (double x, double y, double z, double x1, double y1, double z1){
+
 	double dist = sqrt((x-x1)*(x-x1)+(y-y1)*(y-y1)+(z-z1)*(z-z1));
 	return dist;	
 }

@@ -1,0 +1,197 @@
+\hypertarget{simulation_8cpp}{}\doxysection{src/simulation.cpp File Reference}
+\label{simulation_8cpp}\index{src/simulation.cpp@{src/simulation.cpp}}
+
+
+this node implements the rviz configuration and it generates and pubblish the hints of the game.  
+
+
+{\ttfamily \#include $<$ros/ros.\+h$>$}\newline
+{\ttfamily \#include $<$gazebo\+\_\+msgs/\+Link\+States.\+h$>$}\newline
+{\ttfamily \#include $<$visualization\+\_\+msgs/\+Marker\+Array.\+h$>$}\newline
+{\ttfamily \#include $<$exprob\+\_\+ass2/\+Erl\+Oracle.\+h$>$}\newline
+{\ttfamily \#include $<$exprob\+\_\+ass2/\+Oracle.\+h$>$}\newline
+{\ttfamily \#include $<$iostream$>$}\newline
+{\ttfamily \#include $<$stdlib.\+h$>$}\newline
+{\ttfamily \#include $<$time.\+h$>$}\newline
+{\ttfamily \#include $<$vector$>$}\newline
+Include dependency graph for simulation.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{simulation_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+double \mbox{\hyperlink{simulation_8cpp_a7e333af55a708cf53de07126dcd3006b}{distfromtarget}} (double x, double y, double z, double x1, double y1, double z1)
+\begin{DoxyCompactList}\small\item\em compute the distance between 3D points \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{simulation_8cpp_a018a8b62df58344a7e1d62c6b3f6df30}{oracle\+Service}} (exprob\+\_\+ass2\+::\+Oracle\+::\+Request \&req, exprob\+\_\+ass2\+::\+Oracle\+::\+Response \&res)
+\begin{DoxyCompactList}\small\item\em provides a service to check the winning ID \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{simulation_8cpp_a876a1245db85a2bb87c08ae086f1eafa}{oracle\+Callback}} (const gazebo\+\_\+msgs\+::\+Link\+States\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em callback for the subscriber to gazebo/link\+\_\+states \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{simulation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em main function of the \mbox{\hyperlink{simulation_8cpp}{simulation.\+cpp}} node \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a32812fe000700d7aa8988d74e59471c7}\label{simulation_8cpp_a32812fe000700d7aa8988d74e59471c7}} 
+ros\+::\+Publisher {\bfseries oracle\+\_\+pub}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a36b0204cd96e3dc326a2adfa3d1dceda}\label{simulation_8cpp_a36b0204cd96e3dc326a2adfa3d1dceda}} 
+double {\bfseries markx} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a0bc4146f286fe42bd5e8fa1e53826447}\label{simulation_8cpp_a0bc4146f286fe42bd5e8fa1e53826447}} 
+double {\bfseries marky} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a8d90002e6a9c50028f184b22c380efc4}\label{simulation_8cpp_a8d90002e6a9c50028f184b22c380efc4}} 
+double {\bfseries markz} \mbox{[}4\mbox{]}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a412ed4d68a81f370cdcd20e3019db982}\label{simulation_8cpp_a412ed4d68a81f370cdcd20e3019db982}} 
+double {\bfseries lastmarkx} = 0.\+0
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a174c0dfc727a92493b03f7b0573f4f3e}\label{simulation_8cpp_a174c0dfc727a92493b03f7b0573f4f3e}} 
+double {\bfseries lastmarky} = 0.\+0
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a0049a8a39c319bf1470f36c9e0f75abd}\label{simulation_8cpp_a0049a8a39c319bf1470f36c9e0f75abd}} 
+const std\+::string {\bfseries key} \mbox{[}3\mbox{]} = \{\char`\"{}who\char`\"{}, \char`\"{}what\char`\"{}, \char`\"{}where\char`\"{}\}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a68fa6a0c7a1208892294604263e23d92}\label{simulation_8cpp_a68fa6a0c7a1208892294604263e23d92}} 
+const std\+::string {\bfseries person} \mbox{[}6\mbox{]} = \{\char`\"{}miss\+Scarlett\char`\"{}, \char`\"{}colonel\+Mustard\char`\"{}, \char`\"{}mrs\+White\char`\"{}, \char`\"{}mr\+Green\char`\"{}, \char`\"{}mrs\+Peacock\char`\"{}, \char`\"{}prof\+Plum\char`\"{}\}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a4368e40a20e72e62974037baf19dba80}\label{simulation_8cpp_a4368e40a20e72e62974037baf19dba80}} 
+const std\+::string {\bfseries object} \mbox{[}6\mbox{]} = \{\char`\"{}candlestick\char`\"{}, \char`\"{}dagger\char`\"{}, \char`\"{}lead\+Pipe\char`\"{}, \char`\"{}revolver\char`\"{}, \char`\"{}rope\char`\"{}, \char`\"{}spanner\char`\"{}\}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a5e5bd50ead53d20df3f8ede527f47ce7}\label{simulation_8cpp_a5e5bd50ead53d20df3f8ede527f47ce7}} 
+const std\+::string {\bfseries place} \mbox{[}9\mbox{]} = \{\char`\"{}conservatory\char`\"{}, \char`\"{}lounge\char`\"{}, \char`\"{}kitchen\char`\"{}, \char`\"{}library\char`\"{}, \char`\"{}hall\char`\"{}, \char`\"{}study\char`\"{}, \char`\"{}bathroom\char`\"{}, \char`\"{}dining\+Room\char`\"{}, \char`\"{}billiard\+Room\char`\"{}\}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a37d4a0b625b8b9583adf9362f5aae971}\label{simulation_8cpp_a37d4a0b625b8b9583adf9362f5aae971}} 
+int {\bfseries u\+I\+Ds} \mbox{[}3\mbox{]} =\{-\/1,-\/1,-\/1\}
+\item 
+\mbox{\Hypertarget{simulation_8cpp_a90c5d03e068ddae91702223f47eff712}\label{simulation_8cpp_a90c5d03e068ddae91702223f47eff712}} 
+int {\bfseries win\+ID} = -\/1
+\item 
+\mbox{\Hypertarget{simulation_8cpp_ab6ebafb401d03bc71a4611527ec644a0}\label{simulation_8cpp_ab6ebafb401d03bc71a4611527ec644a0}} 
+std\+::vector$<$ exprob\+\_\+ass2\+::\+Erl\+Oracle $>$ {\bfseries oracle\+\_\+msgs}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+this node implements the rviz configuration and it generates and pubblish the hints of the game. 
+
+\begin{DoxyAuthor}{Author}
+Serena Paneri 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+26/11/2022
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ /gazebo/link\+\_\+states
+
+Publishes to\+: ~\newline
+ /visualization\+\_\+marker /oracle\+\_\+hint
+
+Serivces\+: ~\newline
+ /oracle\+\_\+solution
+
+Client Services\+: ~\newline
+ None
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ In this node is implemented the behavior of the simulation environment. Indeed there is a subscriber to know the position of the robot\textquotesingle{}s links. There is a publisher that allows to visualize the spheric markers in the simulation environment, and those markers corresponds to the place where the hints are recieved. There is another publisher that sends the hint message if and only if the cluedo\+\_\+link of the robot is closed enough to the spheric marker. And finally there is a service whose aim is to check if the current ID coincides with the winning ID of the game. This node handles both the generation of hints, both malformed and correct one, that are generated randomly from arrays containing the individuals of the game, and also the creation of the simulated environment composed of spheric markers, that are places in four specific places in the simulation environment and that can be found (randomly) at two different z coordinates. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{simulation_8cpp_a7e333af55a708cf53de07126dcd3006b}\label{simulation_8cpp_a7e333af55a708cf53de07126dcd3006b}} 
+\index{simulation.cpp@{simulation.cpp}!distfromtarget@{distfromtarget}}
+\index{distfromtarget@{distfromtarget}!simulation.cpp@{simulation.cpp}}
+\doxysubsubsection{\texorpdfstring{distfromtarget()}{distfromtarget()}}
+{\footnotesize\ttfamily double distfromtarget (\begin{DoxyParamCaption}\item[{double}]{x,  }\item[{double}]{y,  }\item[{double}]{z,  }\item[{double}]{x1,  }\item[{double}]{y1,  }\item[{double}]{z1 }\end{DoxyParamCaption})}
+
+
+
+compute the distance between 3D points 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x} & x coordinate of the actual position \\
+\hline
+{\em y} & y coordinate of the actual position \\
+\hline
+{\em z} & z coordinate of the actual position \\
+\hline
+{\em x1} & x coordinate of the target position \\
+\hline
+{\em y1} & y coordinate of the target position \\
+\hline
+{\em z1} & z coordinate of the target position \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+dist\+: distance computed between 3D points
+\end{DoxyReturn}
+This function computes the distance between the actual 3D position and the 3D position of the target. \mbox{\Hypertarget{simulation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{simulation_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{simulation.cpp@{simulation.cpp}!main@{main}}
+\index{main@{main}!simulation.cpp@{simulation.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+main function of the \mbox{\hyperlink{simulation_8cpp}{simulation.\+cpp}} node 
+
+
+\begin{DoxyParams}{Parameters}
+{\em argc} & \\
+\hline
+{\em argv} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This is the main function of the node where the node itself is initialized. Moreover, here are implemented a publisher, in order to visualize through spheric markers the sources points where the hints are generated, another publisher which is in charge of publishing the hints of the game when the cluedo\+\_\+link of the robot approaches the spheric marker, a subscriber to know the links\textquotesingle{} position of the robot and a service that has top check if the ID of the current hypothesis coincides with the winning one. In addition the markers in the environment are imlplemented and displayed in the simulated enviornment, and the winning ID is chosen. \mbox{\Hypertarget{simulation_8cpp_a876a1245db85a2bb87c08ae086f1eafa}\label{simulation_8cpp_a876a1245db85a2bb87c08ae086f1eafa}} 
+\index{simulation.cpp@{simulation.cpp}!oracleCallback@{oracleCallback}}
+\index{oracleCallback@{oracleCallback}!simulation.cpp@{simulation.cpp}}
+\doxysubsubsection{\texorpdfstring{oracleCallback()}{oracleCallback()}}
+{\footnotesize\ttfamily void oracle\+Callback (\begin{DoxyParamCaption}\item[{const gazebo\+\_\+msgs\+::\+Link\+States\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+callback for the subscriber to gazebo/link\+\_\+states 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & message from the /gazebo/link\+\_\+states \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+None
+\end{DoxyReturn}
+This is the callback function for the subscriber to the gazebo/link\+\_\+states topic. If the link of the robot cluedo\+\_\+link is closed enough to the \textquotesingle{}hint generator\textquotesingle{}, so the distance between the cluedo\+\_\+link and the \textquotesingle{}hint generator\textquotesingle{} is less than a certain threshold, that in this case is of 0,25 m, it generates a random hint that could be a malformed hint, or it could contain a correct hint composed by the ID, the key (so, who, what, where), and the value (so, the individual). \mbox{\Hypertarget{simulation_8cpp_a018a8b62df58344a7e1d62c6b3f6df30}\label{simulation_8cpp_a018a8b62df58344a7e1d62c6b3f6df30}} 
+\index{simulation.cpp@{simulation.cpp}!oracleService@{oracleService}}
+\index{oracleService@{oracleService}!simulation.cpp@{simulation.cpp}}
+\doxysubsubsection{\texorpdfstring{oracleService()}{oracleService()}}
+{\footnotesize\ttfamily bool oracle\+Service (\begin{DoxyParamCaption}\item[{exprob\+\_\+ass2\+::\+Oracle\+::\+Request \&}]{req,  }\item[{exprob\+\_\+ass2\+::\+Oracle\+::\+Response \&}]{res }\end{DoxyParamCaption})}
+
+
+
+provides a service to check the winning ID 
+
+
+\begin{DoxyParams}{Parameters}
+{\em req} & request from the client \\
+\hline
+{\em res} & response from the service oracle\+\_\+solution \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true
+\end{DoxyReturn}
+This function checks if the ID of the current hypothesis is the winning one. 

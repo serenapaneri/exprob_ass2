@@ -1,0 +1,78 @@
+\hypertarget{go__home_8cpp}{}\doxysection{src/go\+\_\+home.cpp File Reference}
+\label{go__home_8cpp}\index{src/go\_home.cpp@{src/go\_home.cpp}}
+
+
+this node implements the go\+\_\+home action.  
+
+
+{\ttfamily \#include \char`\"{}exprob\+\_\+ass2/go\+\_\+home.\+h\char`\"{}}\newline
+{\ttfamily \#include $<$unistd.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/simple\+\_\+action\+\_\+client.\+h$>$}\newline
+{\ttfamily \#include $<$actionlib/client/terminal\+\_\+state.\+h$>$}\newline
+{\ttfamily \#include $<$exprob\+\_\+ass2/\+Target\+Action.\+h$>$}\newline
+{\ttfamily \#include $<$moveit/move\+\_\+group\+\_\+interface/move\+\_\+group\+\_\+interface.\+h$>$}\newline
+Include dependency graph for go\+\_\+home.\+cpp\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=350pt]{go__home_8cpp__incl}
+\end{center}
+\end{figure}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+int \mbox{\hyperlink{go__home_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}{main}} (int argc, char $\ast$$\ast$argv)
+\begin{DoxyCompactList}\small\item\em Main function of the go\+\_\+home action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+this node implements the go\+\_\+home action. 
+
+\begin{DoxyAuthor}{Author}
+Serena Paneri 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+5/1/2023
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ None
+
+Publishes to\+: ~\newline
+ None
+
+Serivces\+: ~\newline
+ None
+
+Client Services\+: ~\newline
+ None
+
+Action Client\+: ~\newline
+ /go\+\_\+to\+\_\+point
+
+Description\+: ~\newline
+ In this node is implemented the go\+\_\+home action of the rosplan. This node makes the robot move from one of the four waypoints in the simulation environement to home at the point (0.\+0, 0.\+0), and the movement is menaged thanks to an action client. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{go__home_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}\label{go__home_8cpp_a3c04138a5bfe5d72780bb7e82a18e627}} 
+\index{go\_home.cpp@{go\_home.cpp}!main@{main}}
+\index{main@{main}!go\_home.cpp@{go\_home.cpp}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily int main (\begin{DoxyParamCaption}\item[{int}]{argc,  }\item[{char $\ast$$\ast$}]{argv }\end{DoxyParamCaption})}
+
+
+
+Main function of the go\+\_\+home action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em None} & \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+0
+\end{DoxyReturn}
+This is the main function of the go\+\_\+home action, where the node is initialized. Moreover there is the Go\+Home\+Interface to execute the real action as an action of the rosplan. 

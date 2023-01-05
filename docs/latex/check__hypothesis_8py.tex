@@ -1,0 +1,201 @@
+\hypertarget{check__hypothesis_8py}{}\doxysection{scripts/check\+\_\+hypothesis.py File Reference}
+\label{check__hypothesis_8py}\index{scripts/check\_hypothesis.py@{scripts/check\_hypothesis.py}}
+
+
+script that checks the consistency of an hypothesis.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{check__hypothesis_8py_a3912b28ba4c505a6805d69f37915795c}{check\+\_\+hypothesis.\+com}} (req)
+\begin{DoxyCompactList}\small\item\em Callback of the comm\+\_\+service. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{check__hypothesis_8py_a789a7bafd95ddcb295a6b105f346fdea}{check\+\_\+hypothesis.\+cons\+\_\+handle}} (req)
+\begin{DoxyCompactList}\small\item\em Callback of the cons\+\_\+service service. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{check__hypothesis_8py_a584ea8b9c63566fd2d3b690bd028f5cc}{check\+\_\+hypothesis.\+winhypo\+\_\+handle}} (req)
+\begin{DoxyCompactList}\small\item\em Callback of the win\+\_\+hypo\+\_\+srv service. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{check__hypothesis_8py_a0fed86daa8a460be877ea8b7a90c7989}{check\+\_\+hypothesis.\+retrieve\+\_\+hypo}} (prop\+\_\+name, ind\+\_\+name)
+\begin{DoxyCompactList}\small\item\em Function that retrieves the object properties of an individual from the cluedo\+\_\+ontology. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{check__hypothesis_8py_a24fdecfc60930f1a16e61b154b79d1d6}{check\+\_\+hypothesis.\+find\+\_\+string}} (obj\+\_\+query)
+\begin{DoxyCompactList}\small\item\em Function that \char`\"{}cleans\char`\"{} the url recieved by the cluedo ontology. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{check__hypothesis_8py_a4f01bc98557b8798648c03c6b2d70497}{check\+\_\+hypothesis.\+main}} ()
+\begin{DoxyCompactList}\small\item\em Main function of the check\+\_\+hypothesis node where the node is initialized and the armor client, the hypo\+\_\+found\+\_\+client, the comm\+\_\+service, the win\+\_\+hypo\+\_\+srv and cons\+\_\+service are implemented. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_a125744a808e39b5cd7b9fc25c7af7710}\label{check__hypothesis_8py_a125744a808e39b5cd7b9fc25c7af7710}} 
+{\bfseries check\+\_\+hypothesis.\+armor\+\_\+interface} = None
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_a7d1a6b8ffcfe0f5e805ccdc00d2f664d}\label{check__hypothesis_8py_a7d1a6b8ffcfe0f5e805ccdc00d2f664d}} 
+{\bfseries check\+\_\+hypothesis.\+comm\+\_\+service} = None
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_a26092bc052d219d58c869e0b451e2efe}\label{check__hypothesis_8py_a26092bc052d219d58c869e0b451e2efe}} 
+{\bfseries check\+\_\+hypothesis.\+hypo\+\_\+found\+\_\+client} = None
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_a870423861c7d605aef4c301018832c8c}\label{check__hypothesis_8py_a870423861c7d605aef4c301018832c8c}} 
+{\bfseries check\+\_\+hypothesis.\+cons\+\_\+service} = None
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_acee232f9b0eb8fde5295db2d5dec547a}\label{check__hypothesis_8py_acee232f9b0eb8fde5295db2d5dec547a}} 
+{\bfseries check\+\_\+hypothesis.\+win\+\_\+hypo\+\_\+srv} = None
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_ac8e08407b172fa5cd6e130627412d689}\label{check__hypothesis_8py_ac8e08407b172fa5cd6e130627412d689}} 
+bool {\bfseries check\+\_\+hypothesis.\+start} = False
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_aa1b496ae4afab82dd30d851133ef4fe4}\label{check__hypothesis_8py_aa1b496ae4afab82dd30d851133ef4fe4}} 
+bool {\bfseries check\+\_\+hypothesis.\+consistent\+\_\+} = False
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_a85a0a64235e048f73e56c4817672daa8}\label{check__hypothesis_8py_a85a0a64235e048f73e56c4817672daa8}} 
+int {\bfseries check\+\_\+hypothesis.\+I\+Ds} = 0
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_aab8e2026e179ab3d1a06f69485c2655d}\label{check__hypothesis_8py_aab8e2026e179ab3d1a06f69485c2655d}} 
+string {\bfseries check\+\_\+hypothesis.\+who} = \textquotesingle{}\textquotesingle{}
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_af9be8adabc133ebee17cbb28e1f1cc2a}\label{check__hypothesis_8py_af9be8adabc133ebee17cbb28e1f1cc2a}} 
+string {\bfseries check\+\_\+hypothesis.\+what} = \textquotesingle{}\textquotesingle{}
+\item 
+\mbox{\Hypertarget{check__hypothesis_8py_ad00b932581c40576abcc7860c9cb5ede}\label{check__hypothesis_8py_ad00b932581c40576abcc7860c9cb5ede}} 
+string {\bfseries check\+\_\+hypothesis.\+where} = \textquotesingle{}\textquotesingle{}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+script that checks the consistency of an hypothesis. 
+
+\begin{DoxyAuthor}{Author}
+Serena Paneri 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+5/1/2023
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ None
+
+Publishes to\+: ~\newline
+ None
+
+Serivces\+: ~\newline
+ comm winhypo consistent
+
+Client Services\+: ~\newline
+ armor\+\_\+interface\+\_\+srv hypo\+\_\+\+ID
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ In this node are handled the armor client, the hypo\+\_\+found\+\_\+client, the comm\+\_\+service, the win\+\_\+hypo\+\_\+srv and cons\+\_\+service. In this node the consistency of the current hypothesis is checked and this is done first retrieving the ID of the current complete hypothesis from the hypo\+\_\+found service and then retrieving the list of object properties of a certain individual (that in this case is the current hypothesis), and evaluating the number of elements that composes that specific hypothesis to see if the hypothesis is consistent or not. If the hyothesis is complete and consistent the node check\+\_\+consistency is advertise and those elements are sent to the oracle node, if insead the hypothesis is incosistent, the check\+\_\+consistency node is advertise in order to perform a replanning. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{check__hypothesis_8py_a3912b28ba4c505a6805d69f37915795c}\label{check__hypothesis_8py_a3912b28ba4c505a6805d69f37915795c}} 
+\index{check\_hypothesis.py@{check\_hypothesis.py}!com@{com}}
+\index{com@{com}!check\_hypothesis.py@{check\_hypothesis.py}}
+\doxysubsubsection{\texorpdfstring{com()}{com()}}
+{\footnotesize\ttfamily def check\+\_\+hypothesis.\+com (\begin{DoxyParamCaption}\item[{}]{req }\end{DoxyParamCaption})}
+
+
+
+Callback of the comm\+\_\+service. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & req, Command\+Request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: start
+\end{DoxyReturn}
+This function recieves the command from the client in the \mbox{\hyperlink{check__consistency_8cpp}{check\+\_\+consistency.\+cpp}} node. When the client commands to start then the start variable is set to True and when it commands to stop the start variable is set to False. \mbox{\Hypertarget{check__hypothesis_8py_a789a7bafd95ddcb295a6b105f346fdea}\label{check__hypothesis_8py_a789a7bafd95ddcb295a6b105f346fdea}} 
+\index{check\_hypothesis.py@{check\_hypothesis.py}!cons\_handle@{cons\_handle}}
+\index{cons\_handle@{cons\_handle}!check\_hypothesis.py@{check\_hypothesis.py}}
+\doxysubsubsection{\texorpdfstring{cons\_handle()}{cons\_handle()}}
+{\footnotesize\ttfamily def check\+\_\+hypothesis.\+cons\+\_\+handle (\begin{DoxyParamCaption}\item[{}]{req }\end{DoxyParamCaption})}
+
+
+
+Callback of the cons\+\_\+service service. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & req, Consistent\+Request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: res, Consistent\+Responses
+\end{DoxyReturn}
+This function is the callback function of the cons\+\_\+service service. It simply send a boolean value everytime the consistency of an hypothesis is evaluated. If a new consisten hypothesis is found the value is set to true, instead when the hypothesis is inconsistent is set to false, communicating to the check\+\_\+consistency node that a replanning is needed. \mbox{\Hypertarget{check__hypothesis_8py_a24fdecfc60930f1a16e61b154b79d1d6}\label{check__hypothesis_8py_a24fdecfc60930f1a16e61b154b79d1d6}} 
+\index{check\_hypothesis.py@{check\_hypothesis.py}!find\_string@{find\_string}}
+\index{find\_string@{find\_string}!check\_hypothesis.py@{check\_hypothesis.py}}
+\doxysubsubsection{\texorpdfstring{find\_string()}{find\_string()}}
+{\footnotesize\ttfamily def check\+\_\+hypothesis.\+find\+\_\+string (\begin{DoxyParamCaption}\item[{}]{obj\+\_\+query }\end{DoxyParamCaption})}
+
+
+
+Function that \char`\"{}cleans\char`\"{} the url recieved by the cluedo ontology. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & obj\+\_\+query \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: res
+\end{DoxyReturn}
+This function takes the string that is written as an url and remove that parl only leaving a part of the string that is the string of interest. ~\newline
+ \mbox{\Hypertarget{check__hypothesis_8py_a4f01bc98557b8798648c03c6b2d70497}\label{check__hypothesis_8py_a4f01bc98557b8798648c03c6b2d70497}} 
+\index{check\_hypothesis.py@{check\_hypothesis.py}!main@{main}}
+\index{main@{main}!check\_hypothesis.py@{check\_hypothesis.py}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def check\+\_\+hypothesis.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main function of the check\+\_\+hypothesis node where the node is initialized and the armor client, the hypo\+\_\+found\+\_\+client, the comm\+\_\+service, the win\+\_\+hypo\+\_\+srv and cons\+\_\+service are implemented. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None
+\end{DoxyReturn}
+This is the main function of the check\+\_\+hypothesis node is initialized and the armor client, the hypo\+\_\+found\+\_\+client, the comm\+\_\+service, the win\+\_\+hypo\+\_\+srv and cons\+\_\+service are implemented. Here, when the comm client in the check\+\_\+consistency node gives the command to start, the node retrieves the ID of the current hypothesis and so evaluate the consistency of the current hypothesis. If the hypothesis is complete and consistent than the current plan can goes on, insted if the hypothesis found is inconsistent, the service consistent advertise the client in the check\+\_\+consistent node that a replanning is needed. \mbox{\Hypertarget{check__hypothesis_8py_a0fed86daa8a460be877ea8b7a90c7989}\label{check__hypothesis_8py_a0fed86daa8a460be877ea8b7a90c7989}} 
+\index{check\_hypothesis.py@{check\_hypothesis.py}!retrieve\_hypo@{retrieve\_hypo}}
+\index{retrieve\_hypo@{retrieve\_hypo}!check\_hypothesis.py@{check\_hypothesis.py}}
+\doxysubsubsection{\texorpdfstring{retrieve\_hypo()}{retrieve\_hypo()}}
+{\footnotesize\ttfamily def check\+\_\+hypothesis.\+retrieve\+\_\+hypo (\begin{DoxyParamCaption}\item[{}]{prop\+\_\+name,  }\item[{}]{ind\+\_\+name }\end{DoxyParamCaption})}
+
+
+
+Function that retrieves the object properties of an individual from the cluedo\+\_\+ontology. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & prop\+\_\+name, ind\+\_\+name \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: res
+\end{DoxyReturn}
+This function retrives the object property of an individual from the cluedo\+\_\+ontology. The ind\+\_\+name stands for the name of the individuals whose objects propetries (prop\+\_\+name) you want collect. \mbox{\Hypertarget{check__hypothesis_8py_a584ea8b9c63566fd2d3b690bd028f5cc}\label{check__hypothesis_8py_a584ea8b9c63566fd2d3b690bd028f5cc}} 
+\index{check\_hypothesis.py@{check\_hypothesis.py}!winhypo\_handle@{winhypo\_handle}}
+\index{winhypo\_handle@{winhypo\_handle}!check\_hypothesis.py@{check\_hypothesis.py}}
+\doxysubsubsection{\texorpdfstring{winhypo\_handle()}{winhypo\_handle()}}
+{\footnotesize\ttfamily def check\+\_\+hypothesis.\+winhypo\+\_\+handle (\begin{DoxyParamCaption}\item[{}]{req }\end{DoxyParamCaption})}
+
+
+
+Callback of the win\+\_\+hypo\+\_\+srv service. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & req, Win\+Hypot\+Request \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: res, Win\+Hypot\+Response
+\end{DoxyReturn}
+This function is the callback function of the win\+\_\+hypo\+\_\+srv service. When a new complete and consistent hypothesis is found then it sends to the oracle node the information concerning the possible person, the weapon and the place of the murder. 

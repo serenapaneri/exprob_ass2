@@ -1,0 +1,96 @@
+\hypertarget{plan__execution_8py}{}\doxysection{scripts/plan\+\_\+execution.py File Reference}
+\label{plan__execution_8py}\index{scripts/plan\_execution.py@{scripts/plan\_execution.py}}
+
+
+script that menages the execution of the rosplan.  
+
+
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{plan__execution_8py_aabad822379b9f0914ead45cef0993e4b}{plan\+\_\+execution.\+save}} ()
+\begin{DoxyCompactList}\small\item\em It saves the changes on a new ontology file. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{plan__execution_8py_ae1e791f4e2c5faf11c46e63e395c3f7e}{plan\+\_\+execution.\+main}} ()
+\begin{DoxyCompactList}\small\item\em Main function of the node in which the node is initialized and all the rosplan services are called. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{plan__execution_8py_a09d6a9837e9fb7ea456c8b8d1432cd41}\label{plan__execution_8py_a09d6a9837e9fb7ea456c8b8d1432cd41}} 
+{\bfseries plan\+\_\+execution.\+upd\+\_\+knowledge} = None
+\item 
+\mbox{\Hypertarget{plan__execution_8py_a2a3c11b6dffcd1985cd8cb82572c9814}\label{plan__execution_8py_a2a3c11b6dffcd1985cd8cb82572c9814}} 
+bool {\bfseries plan\+\_\+execution.\+rosplan\+\_\+success} = False
+\item 
+\mbox{\Hypertarget{plan__execution_8py_a02cf9164ac77105c1f74d3abe05de36a}\label{plan__execution_8py_a02cf9164ac77105c1f74d3abe05de36a}} 
+bool {\bfseries plan\+\_\+execution.\+rosplan\+\_\+goal} = False
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+script that menages the execution of the rosplan. 
+
+\begin{DoxyAuthor}{Author}
+Serena Paneri 
+\end{DoxyAuthor}
+\begin{DoxyVersion}{Version}
+1.\+0 
+\end{DoxyVersion}
+\begin{DoxyDate}{Date}
+5/1/2023
+\end{DoxyDate}
+Subscribes to\+: ~\newline
+ None
+
+Publishes to\+: ~\newline
+ None
+
+Serivces\+: ~\newline
+ None
+
+Client Services\+: ~\newline
+ armor\+\_\+interface\+\_\+srv /rosplan\+\_\+problem\+\_\+interface/problem\+\_\+generation\+\_\+server /rosplan\+\_\+planner\+\_\+interface/planning\+\_\+server /rosplan\+\_\+parsing\+\_\+interface/parse\+\_\+plan /rosplan\+\_\+plan\+\_\+dispatcher/dispatch\+\_\+plan
+
+Action Services\+: ~\newline
+ None
+
+Description\+: ~\newline
+ In this node all the services of the rosplan are called in order to execute the current plan generated automatically, thanks to those services, from the domain and the problem files provided. Since all those services are called within a loop, everytime that the plan\+\_\+dispatcher service returns that the plan has failed, the replanning is automatically started. 
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{plan__execution_8py_ae1e791f4e2c5faf11c46e63e395c3f7e}\label{plan__execution_8py_ae1e791f4e2c5faf11c46e63e395c3f7e}} 
+\index{plan\_execution.py@{plan\_execution.py}!main@{main}}
+\index{main@{main}!plan\_execution.py@{plan\_execution.py}}
+\doxysubsubsection{\texorpdfstring{main()}{main()}}
+{\footnotesize\ttfamily def plan\+\_\+execution.\+main (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+Main function of the node in which the node is initialized and all the rosplan services are called. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None
+\end{DoxyReturn}
+This is the main function of the node, where the node is initialized and all the rosplan services are called. In case of the fail of the plan, the replanning is automatically started. \mbox{\Hypertarget{plan__execution_8py_aabad822379b9f0914ead45cef0993e4b}\label{plan__execution_8py_aabad822379b9f0914ead45cef0993e4b}} 
+\index{plan\_execution.py@{plan\_execution.py}!save@{save}}
+\index{save@{save}!plan\_execution.py@{plan\_execution.py}}
+\doxysubsubsection{\texorpdfstring{save()}{save()}}
+{\footnotesize\ttfamily def plan\+\_\+execution.\+save (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+It saves the changes on a new ontology file. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em } & None \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: None
+\end{DoxyReturn}
+This functions saves the ontology in a new file, also saving the inferences. 

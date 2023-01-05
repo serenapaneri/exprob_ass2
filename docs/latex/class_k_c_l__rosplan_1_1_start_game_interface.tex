@@ -1,0 +1,57 @@
+\hypertarget{class_k_c_l__rosplan_1_1_start_game_interface}{}\doxysection{K\+C\+L\+\_\+rosplan\+::Start\+Game\+Interface Class Reference}
+\label{class_k_c_l__rosplan_1_1_start_game_interface}\index{KCL\_rosplan::StartGameInterface@{KCL\_rosplan::StartGameInterface}}
+
+
+Inheritance diagram for K\+C\+L\+\_\+rosplan\+::Start\+Game\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{class_k_c_l__rosplan_1_1_start_game_interface__inherit__graph}
+\end{center}
+\end{figure}
+
+
+Collaboration diagram for K\+C\+L\+\_\+rosplan\+::Start\+Game\+Interface\+:
+\nopagebreak
+\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[width=258pt]{class_k_c_l__rosplan_1_1_start_game_interface__coll__graph}
+\end{center}
+\end{figure}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_start_game_interface_a5540934a9a9983403b5764b837fc5925}\label{class_k_c_l__rosplan_1_1_start_game_interface_a5540934a9a9983403b5764b837fc5925}} 
+{\bfseries Start\+Game\+Interface} (ros\+::\+Node\+Handle \&nh)
+\item 
+bool \mbox{\hyperlink{class_k_c_l__rosplan_1_1_start_game_interface_a0358b96cd4df5690f29b2b76b1646e2e}{concrete\+Callback}} (const rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch\+::\+Const\+Ptr \&msg)
+\begin{DoxyCompactList}\small\item\em Callback of the start\+\_\+game action. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_k_c_l__rosplan_1_1_start_game_interface_a0358b96cd4df5690f29b2b76b1646e2e}\label{class_k_c_l__rosplan_1_1_start_game_interface_a0358b96cd4df5690f29b2b76b1646e2e}} 
+\index{KCL\_rosplan::StartGameInterface@{KCL\_rosplan::StartGameInterface}!concreteCallback@{concreteCallback}}
+\index{concreteCallback@{concreteCallback}!KCL\_rosplan::StartGameInterface@{KCL\_rosplan::StartGameInterface}}
+\doxysubsubsection{\texorpdfstring{concreteCallback()}{concreteCallback()}}
+{\footnotesize\ttfamily bool K\+C\+L\+\_\+rosplan\+::\+Start\+Game\+Interface\+::concrete\+Callback (\begin{DoxyParamCaption}\item[{const rosplan\+\_\+dispatch\+\_\+msgs\+::\+Action\+Dispatch\+::\+Const\+Ptr \&}]{msg }\end{DoxyParamCaption})}
+
+
+
+Callback of the start\+\_\+game action. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em msg} & message from the plan\+\_\+dispatcher \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true
+\end{DoxyReturn}
+This function implements the beahvior of the robot when the action start\+\_\+game is executed. In particular this action is only execute once at the beginning of the simulation, with the purpose of store in the parameter server the z position of the sphere in the environment. 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+include/exprob\+\_\+ass2/start\+\_\+game.\+h\item 
+src/\mbox{\hyperlink{start__game_8cpp}{start\+\_\+game.\+cpp}}\end{DoxyCompactItemize}

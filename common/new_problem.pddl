@@ -7,7 +7,7 @@
     oracle - oracle
 )
 (:init
-    (robot_at_wp cluedo_robot wp3)
+    (robot_at_wp cluedo_robot wp2)
 
 
 
