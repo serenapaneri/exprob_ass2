@@ -34,7 +34,7 @@
 #     complete hypothesis from the hypo_found service and then retrieving the list of object properties of a certain individual
 #     (that in this case is the current hypothesis), and evaluating the number of elements that composes that specific hypothesis
 #     to see if the hypothesis is consistent or not.
-#     If the hyothesis is complete and consistent the node check_consistency is advertise and those elements are sent to the oracle
+#     If the hypothesis is complete and consistent the node check_consistency is advertise and those elements are sent to the oracle
 #     node, if insead the hypothesis is incosistent, the check_consistency node is advertise in order to perform a replanning.
 
 import rospy
