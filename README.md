@@ -8,10 +8,45 @@ The purpose of that simulation is, just as in the game, the search for a murdere
 Indeed the robot navigates within these four waypoint with the purpose of collecting clues to solve the mistery. Indeed, collecting these hints, it is able to formulate ehypotheses, thus trying to find the winning one that will be revealed by the oracle of the game in the oracle room. 
 It was asked also to model the robot and create some poses to better reaach the hints (that can be found in floating spheres at two different heights randomly chosen) using the moveit setup assistant, and to implement the behavioral software architecture of the project. To menage all the knowledge concerning the hints and the hypotheses, an ontology has been used.
 
+## Robot model
+![Alt text](/images/rviz_robot.png?raw=true)
+![Alt text](/images/gazebo_robot.png?raw=true)
+
+The model of the robot is contained in the two files, contained in the urdf folder, [**cluedo_robot.gazebo**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/cluedo_robot.gazebo) and [**cluedo_robot.xacro**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/cluedo_robot.xacro). Moreover in the same folder you can find the [**materials.xacro**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/materials.xacro), where the different materials that can be used in the robot are created, and the [**cluedo_robot.urdf**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/cluedo_robot.urdf) that is the file automatically generate from the moveit package that is used to create poses for your robot model. 
+The overall structure of the robot model is descripted below:
+
+![Alt text](/images/graphix.png?raw=true) 
+
+## Moveit
+
+It is a robotic manipulation platform that allows to develop manipulation application. Thanks to the moveit setup assistant three different poses for the robotics arm have been developed:
+
+- Default pose
+
+![Alt text](/images/defaultpose.png?raw=true)
+
+This is the default pose in which the robotic arm is found during the execution of the game, except when it needs to collect an hint. In this last case the robot would assume one of the following pose, depending if the floating sphere is positioned at a heigh of 1.25 or 0.75 
+
+- High pose
+
+![Alt text](/images/highpose.png?raw=true)
+
+This is the pose assumend by the robot when the floating sphere is located at 1.25.
+
+- Low pose
+
+![Alt text](/images/lowpose.png?raw=true)
+
+This is the pose assumend by the robot when the floating sphere is located at 0.75.
+
+
 ## Software architecture
+### PDDL
+The execution of the whole package is handled by the ROSPLAN, that allows to execute the various action described in the [**domain**](https://github.com/serenapaneri/exprob_ass2/tree/main/common/domain.pddl) file, and then implemented as c++ nodes, starting from the init condition contained in the [**problem**](https://github.com/serenapaneri/exprob_ass2/tree/main/common/problem.pddl) file, which also contains the goal of the plan. The actions written as c++ nodes are described in the following section. 
+
 ### Component diagram
 
-HERE GOES THE DIAGRAM
+![Alt text](/images/componentdiagram.png?raw=true)
 
 With the component diagram it is possible to see the overall behavior and how the whole architecture is organized.
 In this diagrams are shown, besides the armor service, the four nodes of which the package is composed.
@@ -38,24 +73,42 @@ If the hypothesis is complete and consistent the node check_consistency is adver
 #### C++ Nodes
 All the c++ nodes corresponds to a specific action of the ROSPLAN, except the simulation node.
 
-- [**simulation**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/simulation.cpp): In this node the hints of the game are generated randomly, taking elements of the lists person, object and place and associating to them an ID. This hints are published on the topic /oracle_hint and they also comprehend malformed hints, that are hints where some field are missing or wrong. In addition, it is also chosen the ID of the winning hypothesis and this values is stored in the /oracle_solution topic. Finally also the setting of the environment is implemented, indeed some floating sphere are published in the environment and, right in these sphere, the robot can percieved the hints of the game.
+- [**simulation**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/simulation.cpp): In this node the hints of the game are generated randomly, taking elements of the lists person, object and place and associating to them an ID. This hints are published on the topic /oracle_hint and they also comprehend malformed hints, that are hints where some field are missing or wrong. In addition, it is also chosen the ID of the winning hypothesis and this values is stored in the /oracle_solution topic. Finally also the setting of the environment is implemented, indeed some floating sphere are published in the environment and, right in these sphere, the robot can percieved the hints of the game. Moreover the arm of the robot is set to the default pose, mimiking the powering on of the robot.
 
-- [**start_game**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/start_game.cpp): This node represents the first action executed by the plan when all the ROSPLAN services are called. This node is execute only once at the beginning of the simulation since the goal of this node is to make a first tour of the waypoints of the environment, at where the floating sphered are located, in order to store the z coordinates of the sphere in a parameter server. Doing that it makes more efficient the search of new hints in the following rounds, since the robot would already know in which pose it should place its arm in order to collect a new hint. 
+- [**start_game**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/start_game.cpp): This node represents the first action executed by the plan when all the ROSPLAN services are called. This node is execute only once at the beginning of the simulation since the goal of this node is to make a first tour of the waypoints of the environment, at where the floating sphered are located, in order to store the z coordinates of the sphere in a parameter server. Doing that it makes more efficient the search of new hints in the following rounds, since the robot would already know in which pose it should place its arm in order to collect a new hint. 
 
-- [**leave_home**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/leave_home.cpp):
+- [**leave_home**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/leave_home.cpp): In this node is implemented an action client that allows the robot to move from the home, that is positioned at the centre of the simulation environment, to one of the four waypoints in the game. This node can be executed at the beginning of the simulation, after the start_game action, or when the robot find an hypothesis that is inconsistent and needs to continue its research of a complete and consistent hypothesis collecting more hints.
 
-- [**go_to_waypoint**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/go_to_waypoint.cpp):
+- [**go_to_waypoint**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/go_to_waypoint.cpp): In this node is implemented an action client that allows the robot to move from a waypoints to another one in order to collect hints. And this action is repeatetd until the robot finds a complete hypothesis and can go then to home to check the consistency of the new complete hypothesis just found. Moreover at the beginning of this action the robot arm is set to the default pose from the high or low one, set in the previous action.
 
-- [**move_arm**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/move_arm.cpp):
+- [**move_arm**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/move_arm.cpp): In this node it is performed the motion of the arm when the robot is in a waypoint of the simulation environment. The z coordinates, previously store in the start_game action are retrieved, in a way that the robot already know which pose of the arm to use to reach the floating sphere in order to collect an hint. The to avaiable poses done with the moveit setup assistant are the high pose, for reaching the floating sphere with a heigh of 1.25, and the low pose, for reaching the floating sphere with heigh 0.75.
 
-- [**check_complete**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/check_complete.cpp):
+- [**check_complete**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/check_complete.cpp): In this node is checked if a complete hypothesis has been found or not. This action is executed at every waypoint, indeed if a new complete hypothesis is found then the plan can proceed, instead if no new complete hypotheses have been found then this action can fail, causing a replanning.
 
-- [**go_home**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/go_home.cpp):
+- [**go_home**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/go_home.cpp): In this node is implemented an action client that allows the robot to move from one of the waypoints to home, which is located at the centre of the simulation environment. This action is executed only when a new complete hypothesis has been found and the robot, according to the current plan, needs to go home to check the consistency of that hypothesis.
 
-- [**check_consistency**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/check_consistency.cpp):
+- [**check_consistency**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/check_consistency.cpp): In this node is checked if the last complete hypothesis found is also consistent, this action is performed at home. If the hypothesis just found is complete and consistent, the current plan can proceed with its execution, if instead the hypothesis is inconsistent, this will cause a failure in the action and a replanning is performed.
 
-- [**go_oracle**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/go_oracle.cpp):
+- [**go_oracle**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/go_oracle.cpp): In this node is implemented an action client that allows the robot to move from home, that is at the center of the simulation environment, to the oracle room, that is located in the lower right corner of the simulation environment. This action is performed only when a complete and consistent hypothesis has been found. 
 
-- [**oracle**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/oracle.cpp):
+- [**oracle**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/oracle.cpp): In this node is checked if the current complete and consistend hypothesis is the winning one. This is done by comparing the ID of the winning hypothesis with the ID of the current hypothesis. If the two IDs matches, then the plan is fully executed and the game is finished, if not the action would fail and there would be a replanning.
 
-- [**leave_oracle**](https://github.com/serenapaneri/exprob_ass2/tree/main/scripts/leave_oracle.cpp):
+- [**leave_oracle**](https://github.com/serenapaneri/exprob_ass2/tree/main/src/leave_oracle.cpp): In this node is implemented an action client that allows the robot to move from the oracle room to one of the four waypoints of the simulation environment. This action is performed only when the last complete and consistent hypothesis found is not the winning one, to allow the robot to continue its investigation collecting new hints. 
+
+### State diagram
+
+![Alt text](/images/statediagram.png?raw=true)
+
+In this repository is not implemented a real state machine, but the execution of the various nodes, which for the most part represent actions, is handled by the ROSPLAN. All those nodes are executing calling four main services of the rosplan, that are recursively called by the plan_execution node, that are: 
+
+- /rosplan_problem_interface/problem_generation_server: It is used to generate a problem instance.
+- /rosplan_planner_interface/planning_server: It takes the domain file and the problem instance in order to genrate a plan. 
+- /rosplan_parsing_interface/parse_plan: It is used to convert the planner output into a plan representation that can be executed. 
+- /rosplan_plan_dispatcher/dispatch_plan: It is used to execute the plan.
+
+When the dispatch plan return false, meaning that the plan failed for some reason, all the services are called again in order to see the actual state of the knowledge base and create, based on that state, a new plan that will be executed until the plan fails again or it completes its execution. 
+In this case only three action of the plan can cause a failure, and thus the need of a replanning. These action are:
+- check_complete: That is false until a new complete hypothesis is found.
+- check_consistency : That returns true, thus the action succedes, when the current complete hypothesis is also consistent, otherwise it returns false causing a replanning.
+- oracle : If the ID of the current complete and consistent hypothesis and the ID of the winning one coincides then the action returns true and the plan finished its execution, if not it returns false causing a replanning.
+
