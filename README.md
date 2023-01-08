@@ -222,7 +222,7 @@ The expected behavior of the robot is executed thanks to the ROSPLAN and it is t
 
 The robot starts its inspection making a first tour of the simulation environment, exploing the various waypoint. At each waypoint the robot moves its arm both in the high pose and in the low pose, since the floating balls, from which the robot can collect the hint, are randomly spawned at the beginning of the simulation at a height that could be 0.75 or 1.25. After collecting the hint, the height of the floating ball at the specific waypoint, is store in a parameter server, in order to be retrieved in the following rounds. This behavior can be clearly seen in the following video:
 
-https://www.youtube.com/embed/yDTMu_mHKYM
+https://www.youtube.com/embed/_IgGGL0txHw
 
 After that, at each waypoint, the robot compute the consistency. This is done at each waypoint in  order to make the research more efficient, and when a new complete hypothesis has been found, the robot can go home and check also the consistecy. If the current hypothesis is both complete and consistent, then the robot goes to the oracle room to test its hypothesis and see if it is the correct one.
 In this plan there are three action that can lead to a replanning, so these actions can fail, and those actions are, check_complete, check_consistency and oracle. Of course, since check_complete is computed at each waypoint, is the one that can fail the most, indeed at almost every waypoits, a replanning is needed.
