@@ -2,17 +2,17 @@
 
 ## Brief introduction
 This ROS package contains the implementation of the second assignment of the Experimental Robotics Laboratory course. 
-The aim of this project is to implement a vanilla version of the cluedo game with and all the procedure can be seen thanks to a simulation environment both in gazebo and rviz.
+The aim of this project is to implement a vanilla version of the cluedo game and all the procedure can be seen thanks to a simulation environment both in gazebo and rviz.
 Indeed during the execution of the simulation there is a robot that navigates between 6 different point of the environment, which four of them are waypoints in which the robot can collect hints moving its own arm, and the other two points are the home and the oracle room.
 The purpose of that simulation is, just as in the game, the search for a murderer, the murder weapon and the crime scene.
-Indeed the robot navigates within these four waypoint with the purpose of collecting clues to solve the mistery. Indeed, collecting these hints, it is able to formulate ehypotheses, thus trying to find the winning one that will be revealed by the oracle of the game in the oracle room. 
-It was asked also to model the robot and create some poses to better reaach the hints (that can be found in floating spheres at two different heights randomly chosen) using the moveit setup assistant, and to implement the behavioral software architecture of the project. To menage all the knowledge concerning the hints and the hypotheses, an ontology has been used.
+Indeed the robot navigates within these four waypoint with the purpose of collecting clues to solve the mistery. Indeed, collecting these hints, it is able to formulate hypotheses, thus trying to find the winning one that will be revealed by the oracle of the game in the oracle room. 
+It was asked also to model the robot and create some poses to better reach the hints (that can be found in floating spheres at two different heights randomly chosen) using the moveit setup assistant, and to implement the behavioral software architecture of the project. To menage all the knowledge concerning the hints and the hypotheses, an ontology has been used.
 
 ## Robot model
 ![Alt text](/images/rviz_robot.png?raw=true)
 ![Alt text](/images/gazebo_robot.png?raw=true)
 
-The model of the robot is contained in the two files, contained in the urdf folder, [**cluedo_robot.gazebo**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/cluedo_robot.gazebo) and [**cluedo_robot.xacro**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/cluedo_robot.xacro). Moreover in the same folder you can find the [**materials.xacro**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/materials.xacro), where the different materials that can be used in the robot are created, and the [**cluedo_robot.urdf**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/cluedo_robot.urdf) that is the file automatically generate from the moveit package that is used to create poses for your robot model. 
+The model of the robot is contained in the two files, contained in the urdf folder, [**cluedo_robot.gazebo**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/cluedo_robot.gazebo) and [**cluedo_robot.xacro**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/cluedo_robot.xacro). Moreover in the same folder you can find the [**materials.xacro**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/materials.xacro), where the different materials that can be used in the robot are created, and the [**cluedo_robot.urdf**](https://github.com/serenapaneri/exprob_ass2/tree/main/urdf/cluedo_robot.urdf) that is the file automatically generated from the moveit package that is used to create poses for your robot model. 
 The overall structure of the robot model is descripted below:
 
 ![Alt text](/images/cluedo_robot_graphix.png?raw=true) 
@@ -218,10 +218,11 @@ If you also want to visualise the current plan, you can use the command:
 ## Behavior of the package
 The expected behavior of the robot is executed thanks to the ROSPLAN and it is the following:
 
+![Alt text](/images/rosgraph.png?raw=true)
+
 The robot starts its inspection making a first tour of the simulation environment, exploing the various waypoint. At each waypoint the robot moves its arm both in the high pose and in the low pose, since the floating balls, from which the robot can collect the hint, are randomly spawned at the beginning of the simulation at a height that could be 0.75 or 1.25. After collecting the hint, the height of the floating ball at the specific waypoint, is store in a parameter server, in order to be retrieved in the following rounds. This behavior can be clearly seen in the following video:
 
-<iframe width="560" height="315" src="https://www.youtube.com/embed/yDTMu_mHKYM" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+https://www.youtube.com/embed/yDTMu_mHKYM
 
 After that, at each waypoint, the robot compute the consistency. This is done at each waypoint in  order to make the research more efficient, and when a new complete hypothesis has been found, the robot can go home and check also the consistecy. If the current hypothesis is both complete and consistent, then the robot goes to the oracle room to test its hypothesis and see if it is the correct one.
 In this plan there are three action that can lead to a replanning, so these actions can fail, and those actions are, check_complete, check_consistency and oracle. Of course, since check_complete is computed at each waypoint, is the one that can fail the most, indeed at almost every waypoits, a replanning is needed.
