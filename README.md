@@ -175,17 +175,21 @@ Within the code, you can notice the use of the ROS parameter server. In this cas
 
 ## Installation and running procedures
 ### Installation
-To install the package you just need to clone the repository by typing in the terminal:
-```
-  git clone https://github.com/serenapaneri/exprob_ass2.git
-```
-Remember that you also need to clone the package generated with the moveit setup assistant in the branch "moveit", by typing in the terminal:
+To install the package you first need to clone the package generated with the moveit setup assistant in the branch "moveit", by typing in the terminal:
 ```
   git clone -b moveit https://github.com/serenapaneri/exprob_ass2.git
 ```
-and then simply run the catkin make in your ROS workspace:
+Then run in your ROS worspace:
 ```
   catkin_make
+```
+Then you can clone the package, by typing in the terminal:
+```
+  git clone -b moveit https://github.com/serenapaneri/exprob_ass2.git
+```
+and then simply run in your ROS workspace:
+```
+  catkin_make --only-pkg-with-deps exprob_ass2
 ```
 Before executing the project you should install, if they are not already installed, the following packages:
 - [**ARMOR**](https://github.com/EmaroLab/armor.git)
