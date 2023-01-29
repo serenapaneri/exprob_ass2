@@ -185,7 +185,7 @@ Then run in your ROS worspace:
 ```
 Then you can clone the package, by typing in the terminal:
 ```
-  git clone -b moveit https://github.com/serenapaneri/exprob_ass2.git
+  git clone https://github.com/serenapaneri/exprob_ass2.git
 ```
 and then simply run in your ROS workspace:
 ```
